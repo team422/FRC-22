@@ -25,6 +25,7 @@ public class RobotMap {
     // Subsystem motor ports
     public static int leftFlywheel;
     public static int rightFlywheel;
+    public static int hoodRoller;
     public static int transversalMotor;
     public static int feederWheel;
     public static int succMotor;
@@ -51,6 +52,7 @@ public class RobotMap {
 
         leftFlywheel = 422;
         rightFlywheel = 422;
+        hoodRoller = 422;
         transversalMotor = 422;
         succMotor = 422;
         upyDownyMotor = 422;

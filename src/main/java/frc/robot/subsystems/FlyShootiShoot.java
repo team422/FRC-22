@@ -2,14 +2,17 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+// import com.revrobotics.CANSparkMax;
+// import com.revrobotics.CANSparkMaxLowLevel;
 
 
 public class FlyShootiShoot extends SubsystemBase{
     
-    private CANSparkMax shooterLeftMotor;
-    private CANSparkMax shooterRightMotor;
+    private WPI_VictorSPX shooterLeftMotor;
+    private WPI_VictorSPX shooterRightMotor;
+    private WPI_VictorSPX hoodRoller;
 
     double speed = 0.5;
 
@@ -17,16 +20,30 @@ public class FlyShootiShoot extends SubsystemBase{
 
     public FlyShootiShoot(){
         
-        this.shooterLeftMotor = new CANSparkMax(RobotMap.leftFlywheel, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.shooterRightMotor = new CANSparkMax(RobotMap.rightFlywheel,  CANSparkMaxLowLevel.MotorType.kBrushless);
+        this.shooterLeftMotor = new WPI_VictorSPX(RobotMap.leftFlywheel);
+        this.shooterRightMotor = new WPI_VictorSPX(RobotMap.rightFlywheel);
+        this.hoodRoller = new WPI_VictorSPX(RobotMap.hoodRoller);
     }
 
-    public void bothWheelSpin(double speed){
+    public void wheelSpin(double speed, boolean left, boolean right){
         //set the speed of the flywheels to 0.8 or whatever speed from robotmap.java
-        shooterLeftMotor.set(-speed);
-        shooterRightMotor.set(speed);
+        if (left == true) {
+            shooterLeftMotor.set(-speed);
+        } else {
+            shooterLeftMotor.set(0);
+        }
+        
+        if (right == true) {
+            shooterRightMotor.set(speed);
+        } else {
+            shooterRightMotor.set(0);
+        }
         // set the speed of one of these is negative
         // when robot have fix it
+    }
+
+    public void hoodRollerSpin (double speed) {
+        hoodRoller.set(speed);
     }
     
     public void bothWheelStop(){
@@ -36,7 +53,8 @@ public class FlyShootiShoot extends SubsystemBase{
     }
 
     public double getVelocity () {
-        return shooterLeftMotor.getEncoder().getVelocity()/5600;
+        //return shooterLeftMotor.getEncoder().getVelocity()/5600;
+        return 0;
     }
 
     // Fun Fact: Neos are conncted in order to double the power, so below does not work

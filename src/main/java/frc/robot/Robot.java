@@ -7,9 +7,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 // import frc.robot.commands.*;
 // import frc.robot.userinterface.UserInterface;
 // import frc.robot.subsystems.*;
+import frc.robot.subsystems.FlyShootiShoot;
+import frc.robot.subsystems.Subsystems;
 
 /**
  * The main Robot class whence all things come.
@@ -20,16 +23,29 @@ public class Robot extends TimedRobot {
     // private boolean oldRightTriggerOn = false;
     // private RobotLogger logger = new RobotLogger();
 
+    private boolean left;
+    private boolean right;
+    private double flySpeed;
+    private double hoodSpeed;
+
     public Robot() {
         super(0.06);
     }
 
     public void robotInit() {
         //TODO
+        ShuffleboardControl.layoutShuffleboard();
     }
 
     public void robotPeriodic() {
         //TODO
+        left = ShuffleboardControl.getLeft();
+        right = ShuffleboardControl.getRight();
+        flySpeed = ShuffleboardControl.getFlywheelSpeed();
+        hoodSpeed = ShuffleboardControl.getHoodSpeed();
+
+        Subsystems.flyShootiShoot.wheelSpin(flySpeed, left, right);
+        Subsystems.flyShootiShoot.hoodRollerSpin(hoodSpeed);
     }
 
     public void disabledInit() {
