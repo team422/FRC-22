@@ -28,11 +28,14 @@ public class RobotMap {
     public static int transversalMotor;
     public static int feederWheel;
     public static int succMotor;
-    public static int upyDownyMotor;
     public static int topFlyWheel;
+    public static int upyDownyMotorRight;
+    public static int upyDownyMotorLeft;
+
 
     public static int leftClimber;
     public static int rightClimber;
+    public static int highClimber;
 
     // Sensor ports 
 
@@ -61,8 +64,13 @@ public class RobotMap {
         topFlyWheel = 422;
         transversalMotor = 422;
         succMotor = 422;
-        upyDownyMotor = 422;
+        upyDownyMotorRight = 422;
+        upyDownyMotorLeft = 422;
         feederWheel = 422;
+
+        leftClimber = 422;
+        rightClimber = 422;
+        highClimber = 422;
     }
 }
 

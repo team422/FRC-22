@@ -1,25 +1,28 @@
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
+
 // import frc.robot.RobotMap;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 public class Transversal extends SubsystemBase{
-    public WPI_TalonSRX motor1;
-    public WPI_TalonSRX motor2;
+    public CANSparkMax transversalMotor;
     
     // POSSIBLY NOT USING TALONS ON THIS PART
     // THIS COULD BE VICTORS
+
+    //LMAO JK ITS NEOS KILL MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE - Aaron
     public Transversal(){
         setSubsystem("Transversal");
-        // int deviceNumber = 10; // This is currently a random 
+        this.transversalMotor = new CANSparkMax(RobotMap.transversalMotor, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     public void setTransversalSpeed (double speed){
-        motor1.set(speed);
-        motor2.set(speed);
+        transversalMotor.set(speed);
     }
     public void stopTransversal(){
-        motor1.set(0);
-        motor2.set(0);
+        transversalMotor.stopMotor();
     }
 }

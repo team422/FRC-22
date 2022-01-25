@@ -13,7 +13,7 @@ public class CellStop extends SubsystemBase {
         this.stopBoi = new CANSparkMax(RobotMap.feederWheel, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
-    public void setStoppiStop(double speed) {
+    public void setStop(double speed) {
         stopBoi.set(speed);
     }
 

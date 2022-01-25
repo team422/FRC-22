@@ -11,7 +11,6 @@ package frc.robot.subsystems;
  * Contains instances of all subsystems on the robot.
  */
 public class Subsystems {
-    //TODO: Drive Base (Devesh), Shooter(Minh-Thu?), Transversal(Lydia), Intake, Climbing (Yash), Visual(Sean), Aiming
     public static final Intake intake = new Intake();
     public static final Climber climber = new Climber();
     public static final DriveBase driveBase = new DriveBase();

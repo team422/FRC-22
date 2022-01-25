@@ -6,19 +6,19 @@ import frc.robot.userinterface.UserInterface;
 
 public class ShootSequence extends CommandBase {
     public double Speed = 422.00;
+    public double Speedtwo = 422.0;
     public ShootSequence() {
         setName("ShootSequence");
         addRequirements(Subsystems.flyBoi, Subsystems.cellStop, Subsystems.transversal);
     }
     
     public void initialize () {
-        Subsystems.flyBoi.bothWheelSpin(Speed);
+        Subsystems.flyBoi.Spin(Speed, Speedtwo);
     }
     
     public void execute () {
-        Subsystems.flyBoi.bothWheelSpin(Speed);
         if (Subsystems.flyBoi.getVelocity()>=422) {
-            Subsystems.cellStop.setStoppiStop(0.8);
+            Subsystems.cellStop.setStop(0.8);
             Subsystems.transversal.setTransversalSpeed(0.8);    
         } else {
             Subsystems.cellStop.stopStoppiStop();

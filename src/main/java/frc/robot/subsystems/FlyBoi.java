@@ -3,14 +3,15 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-// import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 
 
 public class FlyBoi extends SubsystemBase{
     
     private WPI_TalonFX shooterLeftMotor;
     private WPI_TalonFX shooterRightMotor;
+    private CANSparkMax shooterTopMotor;
 
     double speed = 0.5;
 
@@ -20,12 +21,14 @@ public class FlyBoi extends SubsystemBase{
         setSubsystem("FlyBoi");
         this.shooterLeftMotor = new WPI_TalonFX(RobotMap.leftFlywheel);
         this.shooterRightMotor = new WPI_TalonFX(RobotMap.rightFlywheel);
+        this.shooterTopMotor = new CANSparkMax(RobotMap.topFlyWheel, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
-    public void bothWheelSpin(double speed){
+    public void Spin(double speed, double topSpeed){
         //set the speed of the flywheels to 0.8 or whatever speed from robotmap.java
         shooterLeftMotor.set(-speed);
         shooterRightMotor.set(speed);
+        shooterTopMotor.set(topSpeed);
         // set the speed of one of these is negative
         // when robot have fix it
     }

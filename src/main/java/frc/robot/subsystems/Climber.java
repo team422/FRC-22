@@ -4,6 +4,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import frc.robot.Robot;
 // import edu.wpi.first.wpilibj.*;
 // The above import isn't used yet. Uncomment it if you need it and delete this comment later.
 import frc.robot.RobotMap;
@@ -49,15 +52,15 @@ import frc.robot.RobotMap;
  */ 
 
 public class Climber extends SubsystemBase {
-    public WPI_VictorSPX LeftClimber;
-    public WPI_VictorSPX RightClimber;
+    public WPI_TalonFX LeftClimber;
+    public WPI_TalonFX RightClimber;
+    public WPI_TalonFX HighClimb;
     public double speed = 0.8;
     public Climber(){
         setSubsystem("Climber");
-        int WPI_LEFT_PORT = RobotMap.leftClimber; // We dont know what this value will be "channel - The value will be set in Robotmap.java"
-        int WPI_RIGHT_PORT = RobotMap.rightClimber; // We dont know what this value will be "channel - The value will be set in Robotmap.java"
-        this.LeftClimber = new WPI_VictorSPX(WPI_LEFT_PORT);
-        this.RightClimber = new WPI_VictorSPX(WPI_RIGHT_PORT);
+        this.LeftClimber = new WPI_TalonFX(RobotMap.leftClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
+        this.RightClimber = new WPI_TalonFX(RobotMap.rightClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
+        this.HighClimb = new WPI_TalonFX(RobotMap.highClimber);
         // find speed in 2021 code and give it a real value or change it later on in the code
         // @param speed The speed at which to extend (0 to 1).
     }
@@ -81,11 +84,17 @@ public class Climber extends SubsystemBase {
         RightClimber.set(speed);
         LeftClimber.set(speed);
     }
+
+    public void climberExtendHigh() { //High rung climber hook for 2022 season
+        HighClimb.set(speed);
+    }
     /**
      * Retracts the climber. This raises the robot if the climber is attached to something. This is according to 2021 code. The new lifter arms may be different
      * so we may need to make changes to this code in order for it to stay relevant. The comments may not remain accurate if the new lifter arm is diffrent
      * from the 2021 arm
      */
+
+
  
     public void climberRetractRight(){
         RightClimber.set(-speed);
@@ -98,6 +107,10 @@ public class Climber extends SubsystemBase {
     public void climberRetractBoth(){
         RightClimber.set(-speed);
         LeftClimber.set(-speed);
+    }
+
+    public void climberRetractHigh(){
+        HighClimb.set(-speed);
     }
 
     /**
@@ -113,6 +126,9 @@ public class Climber extends SubsystemBase {
     public void stopClimberLeft() {
         LeftClimber.stopMotor();
         // Stops the climber from moving up or down by stopping the left motor.
+    }
+    public void stopClimberHigh() {
+        HighClimb.stopMotor();
     }
     public void stopClimberBoth(){
         RightClimber.stopMotor();
