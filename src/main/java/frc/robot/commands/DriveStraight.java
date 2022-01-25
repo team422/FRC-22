@@ -3,7 +3,6 @@ package frc.robot.commands;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
-import frc.robot.userinterface.*;
 /*
 This is the AUTO command to drive straight.
 Syntax:
@@ -14,42 +13,53 @@ time: the time in seconds that the command should run
 
 
 public class DriveStraight extends CommandBase {
-    private double speed; //remember types exist lol
-    public double inchestraveled; // in inches
-    public double inches;
-    private int ticks;
-    public double angle;
-    
-    public DriveStraight(double Speed, double inches) {
+    private double ticks;
+    private boolean forward;
+    private double speed;
+
+    public DriveStraight(double inches, double speed){
         setName("DriveStraight");
         addRequirements(Subsystems.driveBase);
-        this.speed = Speed;
-        this.inches = inches;
+        this.ticks = RobotMap.convertToTicks(inches);
+        if(inches>0) {
+            this.forward = true;
+        }
+        this.speed = speed;
     }
 
-    public void initialize() {
+    public void initialize(){
+        Subsystems.driveBase.zeroEncoderPosition();
         Subsystems.driveBase.zeroGyroAngle();
-    }
- 
-    public void execute() {
-        // sets both right and left motor 
-        Subsystems.driveBase.setMotors(this.speed, this.speed);
-        angle = Subsystems.driveBase.gyro.getAngle();
-        // this.ticks += 1;
-         
+        System.out.println("starting drive straight");
     }
 
-    public void end () {
-        Subsystems.driveBase.stopMotors();
+    public void execute(){
+        //Find correction to represent how far off robot is from straight line
+        double correction = Subsystems.driveBase.getGyroAngle();
+        correction *= 0.05;
+        correction += 1.0;
+
+        if (forward) {
+            Subsystems.driveBase.setMotors(-this.speed, -this.speed * correction);
+        } else {
+            Subsystems.driveBase.setMotors(this.speed * correction, this.speed);
+        }
+        System.out.println(this.ticks);
+        System.out.println(Subsystems.driveBase.getLeftPosition());
+        System.out.println(Subsystems.driveBase.getRightPosition());
     }
 
     public boolean isFinished() {
-        // if (this.time <= (ticks/.02)){
-        //     return false;
-        // }
-        // else {
-        //     return true;
-        // }
-        return true;
+        double leftPosition = Subsystems.driveBase.getLeftPosition();
+        double rightPosition = Subsystems.driveBase.getRightPosition();
+        if (forward) {
+            return (leftPosition > this.ticks) || (rightPosition > this.ticks);
+        } else {
+            return (leftPosition < this.ticks) || (rightPosition < this.ticks);
+        }
+    }
+
+    public void end(boolean interrupted) {
+        Subsystems.driveBase.setMotors(0,0);
     }
 }

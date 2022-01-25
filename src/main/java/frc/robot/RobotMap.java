@@ -29,6 +29,7 @@ public class RobotMap {
     public static int feederWheel;
     public static int succMotor;
     public static int upyDownyMotor;
+    public static int topFlyWheel;
 
     public static int leftClimber;
     public static int rightClimber;
@@ -48,9 +49,16 @@ public class RobotMap {
     public static void setBot(BotNames bot) {
         botName = bot;
     if (bot == BotNames.FALCON) {
+        leftFollower = 2;
+        leftLeader = 4;
+        rightFollower = 1;
+        rightLeader = 3;
+
+        wheelDiameter = 4;
 
         leftFlywheel = 422;
         rightFlywheel = 422;
+        topFlyWheel = 422;
         transversalMotor = 422;
         succMotor = 422;
         upyDownyMotor = 422;
@@ -82,4 +90,7 @@ public class RobotMap {
         rotationCap = (newRotationCap > 1) ? 1 : newRotationCap;
     }
 
+    public static double convertToTicks(double inches) {
+        return (4096 / (wheelDiameter * Math.PI) * inches);
+    }
 }

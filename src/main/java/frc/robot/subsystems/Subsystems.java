@@ -15,7 +15,7 @@ public class Subsystems {
     public static final Intake intake = new Intake();
     public static final Climber climber = new Climber();
     public static final DriveBase driveBase = new DriveBase();
-    public static final FlyShootiShoot flyShootiShoot = new FlyShootiShoot();
-    public static final CellStoppiStop cellStoppiStop = new CellStoppiStop();
+    public static final FlyBoi flyBoi = new FlyBoi();
+    public static final CellStop cellStop = new CellStop();
     public static final Transversal transversal = new Transversal();
 } 

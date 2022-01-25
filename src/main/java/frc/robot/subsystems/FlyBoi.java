@@ -2,23 +2,24 @@ package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+// import com.revrobotics.CANSparkMax;
+// import com.revrobotics.CANSparkMaxLowLevel;
 
 
-public class FlyShootiShoot extends SubsystemBase{
+public class FlyBoi extends SubsystemBase{
     
-    private CANSparkMax shooterLeftMotor;
-    private CANSparkMax shooterRightMotor;
+    private WPI_TalonFX shooterLeftMotor;
+    private WPI_TalonFX shooterRightMotor;
 
     double speed = 0.5;
 
     // temp vaiable you can change. the speed as needed later
 
-    public FlyShootiShoot(){
-        
-        this.shooterLeftMotor = new CANSparkMax(RobotMap.leftFlywheel, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.shooterRightMotor = new CANSparkMax(RobotMap.rightFlywheel,  CANSparkMaxLowLevel.MotorType.kBrushless);
+    public FlyBoi(){
+        setSubsystem("FlyBoi");
+        this.shooterLeftMotor = new WPI_TalonFX(RobotMap.leftFlywheel);
+        this.shooterRightMotor = new WPI_TalonFX(RobotMap.rightFlywheel);
     }
 
     public void bothWheelSpin(double speed){
@@ -36,7 +37,8 @@ public class FlyShootiShoot extends SubsystemBase{
     }
 
     public double getVelocity () {
-        return shooterLeftMotor.getEncoder().getVelocity()/5600;
+        return (shooterLeftMotor.getSelectedSensorVelocity()/2048);
+        //this is in RPM
     }
 
     // Fun Fact: Neos are conncted in order to double the power, so below does not work

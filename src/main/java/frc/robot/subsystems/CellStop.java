@@ -6,10 +6,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import frc.robot.RobotMap;
 
-public class CellStoppiStop extends SubsystemBase {
+public class CellStop extends SubsystemBase {
     private CANSparkMax stopBoi;
-    public CellStoppiStop() {
-        setSubsystem("CellStoppiStop");
+    public CellStop() {
+        setSubsystem("CellStop");
         this.stopBoi = new CANSparkMax(RobotMap.feederWheel, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 

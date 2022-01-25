@@ -8,20 +8,20 @@ public class ShootSequence extends CommandBase {
     public double Speed = 422.00;
     public ShootSequence() {
         setName("ShootSequence");
-        addRequirements(Subsystems.flyShootiShoot, Subsystems.cellStoppiStop, Subsystems.transversal);
+        addRequirements(Subsystems.flyBoi, Subsystems.cellStop, Subsystems.transversal);
     }
     
     public void initialize () {
-        Subsystems.flyShootiShoot.bothWheelSpin(Speed);
+        Subsystems.flyBoi.bothWheelSpin(Speed);
     }
     
     public void execute () {
-        Subsystems.flyShootiShoot.bothWheelSpin(Speed);
-        if (Subsystems.flyShootiShoot.getVelocity()>=422) {
-            Subsystems.cellStoppiStop.setStoppiStop(0.8);
+        Subsystems.flyBoi.bothWheelSpin(Speed);
+        if (Subsystems.flyBoi.getVelocity()>=422) {
+            Subsystems.cellStop.setStoppiStop(0.8);
             Subsystems.transversal.setTransversalSpeed(0.8);    
         } else {
-            Subsystems.cellStoppiStop.stopStoppiStop();
+            Subsystems.cellStop.stopStoppiStop();
             Subsystems.transversal.stopTransversal();           
         }
     }
@@ -31,8 +31,8 @@ public class ShootSequence extends CommandBase {
     }
 
     public void end () {
-        Subsystems.flyShootiShoot.bothWheelStop();
-        Subsystems.cellStoppiStop.stopStoppiStop();
+        Subsystems.flyBoi.bothWheelStop();
+        Subsystems.cellStop.stopStoppiStop();
         Subsystems.transversal.stopTransversal(); 
     }
 }

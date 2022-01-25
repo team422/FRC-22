@@ -15,7 +15,7 @@ public class Vomit extends CommandBase {
 
     public Vomit() {
         setName("Vomit");
-        addRequirements(Subsystems.intake, Subsystems.flyShootiShoot, Subsystems.cellStoppiStop, Subsystems.transversal);
+        addRequirements(Subsystems.intake, Subsystems.flyBoi, Subsystems.cellStop, Subsystems.transversal);
     }
 
 
@@ -29,16 +29,16 @@ public class Vomit extends CommandBase {
         
         /* This is necessary for WPILIB */
         Subsystems.intake.setSucc(outtakespeed); 
-        Subsystems.flyShootiShoot.bothWheelSpin(outtakespeed);
+        Subsystems.flyBoi.bothWheelSpin(outtakespeed);
         Subsystems.transversal.setTransversalSpeed(outtakespeed);
-        Subsystems.cellStoppiStop.setStoppiStop(outtakespeed);
+        Subsystems.cellStop.setStoppiStop(outtakespeed);
     }
 
     public void end() {
         Subsystems.intake.stopSucc();
-        Subsystems.flyShootiShoot.bothWheelStop();
+        Subsystems.flyBoi.bothWheelStop();
         Subsystems.transversal.stopTransversal();
-        Subsystems.cellStoppiStop.stopStoppiStop();
+        Subsystems.cellStop.stopStoppiStop();
     }
     
     
