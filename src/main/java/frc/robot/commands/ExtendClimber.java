@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotMap;
 
 public class ExtendClimber extends CommandBase {
     /*
