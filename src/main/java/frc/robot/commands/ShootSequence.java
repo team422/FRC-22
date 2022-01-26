@@ -1,8 +1,10 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.userinterface.UserInterface;
+import frc.robot.userinterface.*;
+import edu.wpi.first.wpilibj.DriverStation;
 
 public class ShootSequence extends CommandBase {
     public double Speed = 422.00;
@@ -27,7 +29,11 @@ public class ShootSequence extends CommandBase {
     }
 
     public boolean isFinished () {
-        return true;
+        if (DriverStation.isAutonomous()) {
+            return false;
+        } else {
+            return UserInterface.operatorController.getRightTrigger() < 0.4;
+        }
     }
 
     public void end () {
