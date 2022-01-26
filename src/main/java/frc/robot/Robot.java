@@ -7,9 +7,13 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-// import frc.robot.commands.*;
-// import frc.robot.userinterface.UserInterface;
-// import frc.robot.subsystems.*;
+import frc.robot.commands.*;
+import frc.robot.commands.SpeedModes.ChangeSpeed;
+import frc.robot.commands.SpeedModes.HoldFast;
+import frc.robot.commands.SpeedModes.ReleaseSlow;
+import frc.robot.userinterface.UserInterface;
+import frc.robot.subsystems.*;
+import frc.robot.RobotMap.BotNames;
 
 /**
  * The main Robot class whence all things come.
@@ -25,7 +29,15 @@ public class Robot extends TimedRobot {
     }
 
     public void robotInit() {
-        //TODO
+        //initializing things
+        RobotMap.setBot(RobotMap.BotNames.FALCON);
+        Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
+        Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
+
+        //driver controls (buttons)
+        UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+        UserInterface.driverController.LB.whenPressed(new HoldFast());
+        UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
     }
 
     public void robotPeriodic() {
