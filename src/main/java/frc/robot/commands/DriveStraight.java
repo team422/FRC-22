@@ -58,8 +58,7 @@ public class DriveStraight extends CommandBase {
             return (leftPosition < this.ticks) || (rightPosition < this.ticks);
         }
     }
-
-    public void end(boolean interrupted) {
+    public void end() {
         Subsystems.driveBase.setMotors(0,0);
     }
 }
