@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class PlayStationController extends PS4Controller {
 
     private Joystick joystick;
-    public final JoystickButton A, B, X, Y, LB, RB, LS, RS; //_B = bumper, _S = small button near center
+    public final JoystickButton A, B, X, Y, L1, R1, L2, R2; //_B = bumper, _S = small button near center
 
     /**
      * @param port The port the joystick is plugged into (usually 1 or 2)
@@ -22,10 +22,10 @@ public class PlayStationController extends PS4Controller {
         this.B = new JoystickButton(joystick, 2);
         this.X = new JoystickButton(joystick, 3);
         this.Y = new JoystickButton(joystick, 4);
-        this.LB = new JoystickButton(joystick, 5);
-        this.RB = new JoystickButton(joystick, 6);
-        this.LS = new JoystickButton(joystick, 7);
-        this.RS = new JoystickButton(joystick, 8);
+        this.L1 = new JoystickButton(joystick, 5);
+        this.R1 = new JoystickButton(joystick, 6);
+        this.L2 = new JoystickButton(joystick, 7);
+        this.R2 = new JoystickButton(joystick, 8);
     }
 
     /**

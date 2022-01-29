@@ -6,6 +6,8 @@ import frc.robot.userinterface.UserInterface;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import java.lang.Math;
+
 public class TankDrive extends CommandBase{
 
     public double leftSpeed;
@@ -40,8 +42,8 @@ public class TankDrive extends CommandBase{
         // System.out.println("break");
 
         // minimium speed is the same for any speed cap right now, but if placed under conditionals, then different
-        leftSpeed *= RobotMap.getSpeedCap();
-        rightSpeed *= RobotMap.getSpeedCap();
+        // leftSpeed *= RobotMap.speedCap;
+        // rightSpeed *= RobotMap.speedCap;
         
         if(Math.abs(leftSpeed) < 0.1){
             leftSpeed = 0;
@@ -67,8 +69,10 @@ public class TankDrive extends CommandBase{
         leftLastSpeed = leftSpeed;
         rightLastSpeed = rightSpeed;
 
-        System.out.println(leftSpeed);
-        Subsystems.driveBase.cheesyDrive.tankDrive(-leftSpeed, -rightSpeed);
+        // System.out.println(leftSpeed);
+        // System.out.println(rightSpeed);
+
+        Subsystems.driveBase.tank.tankDrive(leftSpeed, rightSpeed);
     }
 
 }

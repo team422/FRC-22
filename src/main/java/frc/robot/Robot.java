@@ -1,73 +1,85 @@
-//  THINGS TO REMEMBER:
-//  If a function is not labeled to do so it should not be able to do things to the outside world like print stuff, log stuff, and change robot values
-//  Paramaters of each method and function should be labeled in a comment as well as what the function does
-//  Write what the output of a function will be and exactly how it will be
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.commands.*;
-import frc.robot.commands.SpeedModes.ChangeSpeed;
-import frc.robot.commands.SpeedModes.HoldFast;
-import frc.robot.commands.SpeedModes.ReleaseSlow;
+import frc.robot.commands.SpeedModes.*;
+// import frc.robot.commands.vision.*;
+import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
-import frc.robot.subsystems.*;
-import frc.robot.RobotMap.BotNames;
 
 /**
- * The main Robot class whence all things come.
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
+ * project.
  */
 public class Robot extends TimedRobot {
-    
-    // private boolean oldLeftTriggerOn = false;
-    // private boolean oldRightTriggerOn = false;
-    // private RobotLogger logger = new RobotLogger();
+  
+	public Robot(){
+    	super(0.08);
+	}
 
-    public Robot() {
-        super(0.06);
-    }
+  /**
+   * This function is run when the robot is first started up and should be used for any
+   * initialization code.
+   */
+  	@Override
+	public void robotInit() {    
+		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
 
-    public void robotInit() {
-        //initializing things
-        RobotMap.setBot(RobotMap.BotNames.FALCON);
-        Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
-        Subsystems.driveBase.cheesyDrive.setSafetyEnabled(false);
-
-        //driver controls (buttons)
-        UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+		UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
         UserInterface.driverController.LB.whenPressed(new HoldFast());
         UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
-    }
 
-    public void robotPeriodic() {
-        //TODO
-    }
+		// Might need to be moved to teleopPeriodic in order to function, but it might also work here.
+		// UserInterface.driverController.A.whenPressed(new RotateToBall());
+		// UserInterface.driverController.X.whenPressed(new FollowBall());
+  	}
 
-    public void disabledInit() {
-        //TODO
-    }
+	@Override
+  	public void robotPeriodic() {
+    	CommandScheduler.getInstance().run();
+  	}
 
-    public void disabledPeriodic() {}
+	@Override
+	public void autonomousInit() {
+		System.out.println("Autonomous Initalized");
+    	CommandScheduler.getInstance().cancelAll();
+	}
 
-    public void autonomousInit() {
-        System.out.println("Autonomous Initalized");
-        CommandScheduler.getInstance().cancelAll();
-        // this.logger.logInfoMessage("Autonomous Initalized");
-        // Schedule autonomous command to run
-    }
+	@Override
+	public void autonomousPeriodic() {
 
-    public void autonomousPeriodic() {
-        // TODO
-    }
+	}
 
-    public void teleopInit() { 
-        // TODO
-        ShuffleboardControl.layoutShuffleboard();
-    }
+	@Override
+	public void teleopInit() {
+		System.out.println("TeleOp Initalized");
+		CommandScheduler.getInstance().cancelAll();
+	}
 
-    public void teleopPeriodic() {
-        // TODO
-        ShuffleboardControl.updateShuffleboard();
-    }
+  @Override
+	public void teleopPeriodic() {
+	}
+
+  @Override
+	public void disabledInit() {
+		System.out.println("Disabled Initialized");
+	    CommandScheduler.getInstance().cancelAll();
+	}
+
+	@Override
+	public void disabledPeriodic() {}
+
+	@Override
+	public void testInit() {}
+
+	@Override
+	public void testPeriodic() {}
 }

@@ -1,21 +1,15 @@
 package frc.robot.userinterface;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-/**
- * An Xbox controller with added vibrational capabilities.
- */
-public class RumbleXboxController extends XboxController {
-
-    private Joystick joystick;
-    public final JoystickButton A, B, X, Y, LB, RB, LS, RS; //_B = bumper, _S = small button near center
-
-    /**
-     * @param port The port the joystick is plugged into (usually 1 or 2)
-     */
-    public RumbleXboxController(int port) {
+public class RumbleXboxController extends XboxController{
+    
+    public Joystick joystick;
+    public final JoystickButton A, B, X, Y, LB, RB, LS, RS;
+    
+    public RumbleXboxController(int port){
         super(port);
         this.joystick = new Joystick(port);
         this.A = new JoystickButton(joystick, 1);

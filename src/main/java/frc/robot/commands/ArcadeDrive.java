@@ -20,12 +20,14 @@ public class ArcadeDrive extends CommandBase {
     }
 
     public void execute() {
+        // updatedSpeed = UserInterface.driverController.getLeftJoystickY();
+        // updatedRotation = UserInterface.driverController.getRightJoystickX();
         double speed;
         double rotation;
 
-        if (UserInterface.driverController.getLeftJoystickY() < -0.1) {
+        if (UserInterface.driverController.getLeftJoystickY() < -0.05) {
             speed = -(Math.pow(UserInterface.driverController.getLeftJoystickY(), 2));
-        } else if (UserInterface.driverController.getLeftJoystickY() > 0.1) {
+        } else if (UserInterface.driverController.getLeftJoystickY() > 0.05) {
             speed = (Math.pow(UserInterface.driverController.getLeftJoystickY(), 2));
         } else {
             speed = 0;
@@ -53,6 +55,6 @@ public class ArcadeDrive extends CommandBase {
         updatedSpeed = speed;
         updatedRotation = rotation;
 
-        Subsystems.driveBase.cheesyDrive.curvatureDrive(RobotMap.getRotationCap() * rotation, RobotMap.getSpeedCap() * speed, true);
+        Subsystems.driveBase.tank.curvatureDrive(rotation, speed, true);
     }
 }
