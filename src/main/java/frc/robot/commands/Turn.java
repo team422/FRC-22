@@ -12,12 +12,15 @@ speed - b/w 0 and 1, used as the speed for the motors. if you put in a negative 
 */
 
 public class Turn extends CommandBase{
-    private int turn; //amount to turn
+    private double turn; //amount to turn
     private double turned; // amount already turned
     private double speed; // speed of turn (between -1 and 1)
     
     
-    public Turn(int uTurn, double uSpeed) {
+    public Turn(double uTurn, double uSpeed) {
+        /*
+        
+        */
         setName("Turn");
         addRequirements(Subsystems.driveBase);
         this.speed = Math.abs(uSpeed);
@@ -38,8 +41,8 @@ public class Turn extends CommandBase{
     public void execute() {
         //figure out how to turn the approprate amount
         this.turned = Subsystems.driveBase.getGyroAngle();
-        Subsystems.driveBase.setLeftMotors(this.speed*Integer.signum(this.turn));
-        Subsystems.driveBase.setRightMotors(-1*this.speed*Integer.signum(this.turn));
+        Subsystems.driveBase.setLeftMotors(this.speed*Math.signum(this.turn));
+        Subsystems.driveBase.setRightMotors(-1*this.speed*Math.signum(this.turn));
     }
 
     public boolean isFinished() {
