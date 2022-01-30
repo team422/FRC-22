@@ -1,6 +1,6 @@
 package frc.robot;
 
-import javax.crypto.interfaces.PBEKey;
+// import javax.crypto.interfaces.PBEKey;
 
 public class RobotMap {
     // Robot Map is a centralized location at which all the numbers (ports, set speeds, etc) for the Robot can be placed
@@ -9,8 +9,8 @@ public class RobotMap {
     // Speed controls
     public static double speedCap = 0.6;
     public static double rotationCap = 0.5;
-    public static double slowSpeedCap = 0.4;
-    public static double slowRotCap = 0.3;
+    public static double slowSpeedCap = 0.2;
+    public static double slowRotCap = 0.1;
     public static double fastSpeedCap = 0.6;
     public static double fastRotCap = 0.5;
 

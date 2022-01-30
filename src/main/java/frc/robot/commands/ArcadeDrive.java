@@ -1,6 +1,6 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+// import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.Subsystems;
@@ -55,6 +55,6 @@ public class ArcadeDrive extends CommandBase {
         updatedSpeed = speed;
         updatedRotation = rotation;
 
-        Subsystems.driveBase.tank.curvatureDrive(rotation, speed, true);
+        Subsystems.driveBase.tank.curvatureDrive(rotation * RobotMap.rotationCap, speed * RobotMap.speedCap, true);
     }
 }
