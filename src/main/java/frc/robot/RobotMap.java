@@ -27,27 +27,6 @@ public class RobotMap {
     public static int FlykS = 0;
     public static int FlykV = 0;
     public static int FlykA = 0;
-
-    
-    
-    // Left side motor port numbers
-    public static int leftMiddleMasterPort = 2;
-
-    public static int leftFrontFollower = 3;
-    public static int leftBackFollower = 6;
-    
-    // Right side motor port numbers
-    public static int rightMiddleMasterPort = 14;
-    
-    public static int rightFrontFollower = 5;
-    public static int rightBackFollower = 4;
-
-    // Falcon drive ports
-    public static int leftFront = 4;
-    public static int rightFront = 3;
-    public static int leftBack = 2;
-    public static int rightBack = 1;
-
     
     // Intake stuff
     // public static int intakePivot = 46;

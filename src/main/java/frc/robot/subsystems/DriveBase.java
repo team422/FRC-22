@@ -1,21 +1,17 @@
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
-import frc.robot.RobotMap;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.robot.RobotMap;
 
 /**
  * Drivebase interface for all drivebases
  */
 public abstract class DriveBase extends SubsystemBase {
 
-    private MotorControllerGroup leftSide;
-    private MotorControllerGroup rightSide;
-    public DifferentialDrive cheesyDrive;
+    public MotorControllerGroup leftSide;
+    public MotorControllerGroup rightSide;
+    public DifferentialDrive tank;
 
     public double leftMotorTicks = 0;
     public double rightMotorTicks = 0;
@@ -23,7 +19,7 @@ public abstract class DriveBase extends SubsystemBase {
     public DriveBase() {
         setSubsystem("DriveBase");
 
-        this.cheesyDrive = new DifferentialDrive(leftSide, rightSide);
+        this.tank = new DifferentialDrive(leftSide, rightSide);
     }
 
     /**
