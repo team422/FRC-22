@@ -16,7 +16,7 @@ public class Autonomous {
           Rotation2d.fromDegrees(0));
       var crossScale = new Pose2d(Units.feetToMeters(5), Units.feetToMeters(5),
           Rotation2d.fromDegrees(0));
-  //these are the initial and final locations in (x,y) format as well as the initial and final headings in degrees)
+  //these are the initial and final locations in (x,y) format as well as the initial and final headings in degrees
      
       ArrayList <Translation2d> interiorWaypoints = new ArrayList <Translation2d>();
       interiorWaypoints.add(new Translation2d(Units.feetToMeters(3), Units.feetToMeters(2)));
