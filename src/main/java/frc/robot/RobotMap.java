@@ -48,17 +48,17 @@ public class RobotMap {
      */
     public static void setBot(BotNames bot) {
         botName = bot;
-    if (bot == BotNames.FALCON) {
 
-        leftFlywheel = 422;
-        rightFlywheel = 422;
-        hoodRoller = 422;
-        transversalMotor = 422;
-        succMotor = 422;
-        upyDownyMotor = 422;
-        feederWheel = 422;
+        if (bot == BotNames.FALCON) {
+            leftFlywheel = 6;
+            rightFlywheel = 0;
+            hoodRoller = 3;
+            transversalMotor = 422;
+            succMotor = 422;
+            upyDownyMotor = 422;
+            feederWheel = 422;
+        }
     }
-}
 
     /**
      * @return The speed cap for the drive base in teleop.

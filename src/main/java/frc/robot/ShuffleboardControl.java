@@ -21,30 +21,30 @@ public class ShuffleboardControl {
 
         ShuffleboardLayout flywheelMotors =  shooterTab.getLayout("Which flywheel motors are on?", BuiltInLayouts.kList)
             .withPosition(0, 0)
-            .withSize(1, 3);
+            .withSize(2, 3);
         ShuffleboardLayout speeds = shooterTab.getLayout("Motor speeds", BuiltInLayouts.kList)
-            .withPosition(0, 5)
-            .withSize(1, 3);
+            .withPosition(4, 0)
+            .withSize(2, 3);
 
         leftFlywheel = flywheelMotors.add("Left Flywheel", false)
-            .withWidget(BuiltInWidgets.kBooleanBox)
-            .withPosition(2, 0)
-            .withSize(1, 3).getEntry();
+            .withWidget(BuiltInWidgets.kToggleButton)
+            .withPosition(0, 2)
+            .withSize(2, 3).getEntry();
         rightFlywheel = flywheelMotors.add("Right Flywheel", false)
-            .withWidget(BuiltInWidgets.kBooleanBox)
-            .withPosition(4, 0)
-            .withSize(1, 3).getEntry();
+            .withWidget(BuiltInWidgets.kToggleButton)
+            .withPosition(0, 4)
+            .withSize(2, 3).getEntry();
 
         flywheelSpeed = speeds.add("Flywheel(s) Speed", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 1))
-            .withPosition(2, 5)
-            .withSize(1, 3).getEntry();
+            .withPosition(4, 2)
+            .withSize(2, 3).getEntry();
         hoodRollerSpeed = speeds.add("Hood Roller Speed", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 1))
-            .withPosition(4, 5)
-            .withSize(1, 3).getEntry();
+            .withPosition(4, 4)
+            .withSize(2, 3).getEntry();
     }
 
     public static boolean getLeft() {

@@ -29,7 +29,7 @@ public class Vomit extends CommandBase {
         
         /* This is necessary for WPILIB */
         Subsystems.intake.setSucc(outtakespeed); 
-        Subsystems.flyShootiShoot.bothWheelSpin(outtakespeed);
+        // Subsystems.flyShootiShoot.bothWheelSpin(outtakespeed);
         Subsystems.transversal.setTransversalSpeed(outtakespeed);
         Subsystems.cellStoppiStop.setStoppiStop(outtakespeed);
     }

@@ -34,18 +34,13 @@ public class Robot extends TimedRobot {
 
     public void robotInit() {
         //TODO
+		RobotMap.setBot(RobotMap.BotNames.FALCON);
+
         ShuffleboardControl.layoutShuffleboard();
     }
 
     public void robotPeriodic() {
         //TODO
-        left = ShuffleboardControl.getLeft();
-        right = ShuffleboardControl.getRight();
-        flySpeed = ShuffleboardControl.getFlywheelSpeed();
-        hoodSpeed = ShuffleboardControl.getHoodSpeed();
-
-        Subsystems.flyShootiShoot.wheelSpin(flySpeed, left, right);
-        Subsystems.flyShootiShoot.hoodRollerSpin(hoodSpeed);
     }
 
     public void disabledInit() {
@@ -67,11 +62,16 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() { 
         // TODO
-        ShuffleboardControl.layoutShuffleboard();
     }
 
     public void teleopPeriodic() {
         // TODO
-        ShuffleboardControl.updateShuffleboard();
+        left = ShuffleboardControl.getLeft();
+        right = ShuffleboardControl.getRight();
+        flySpeed = ShuffleboardControl.getFlywheelSpeed();
+        hoodSpeed = ShuffleboardControl.getHoodSpeed();
+
+        Subsystems.flyShootiShoot.wheelSpin(flySpeed, left, right);
+        Subsystems.flyShootiShoot.hoodRollerSpin(hoodSpeed);
     }
 }

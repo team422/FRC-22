@@ -28,7 +28,7 @@ public class FlyShootiShoot extends SubsystemBase{
     public void wheelSpin(double speed, boolean left, boolean right){
         //set the speed of the flywheels to 0.8 or whatever speed from robotmap.java
         if (left == true) {
-            shooterLeftMotor.set(-speed);
+            shooterLeftMotor.set(speed);
         } else {
             shooterLeftMotor.set(0);
         }
