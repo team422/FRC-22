@@ -24,6 +24,7 @@ public class ChangeSpeed extends CommandBase {
       }  
     }
 
+
     public boolean isFinished() { // and lo it is complete
         return true;
     }
