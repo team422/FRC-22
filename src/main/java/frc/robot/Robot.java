@@ -11,7 +11,9 @@ import frc.robot.commands.*;
 import frc.robot.commands.SpeedModes.*;
 // import frc.robot.commands.vision.*;
 import frc.robot.subsystems.Subsystems;
+import frc.robot.userinterface.ControllerSwitcher;
 import frc.robot.userinterface.UserInterface;
+import frc.robot.userinterface.ControllerSwitcher.ControllerType;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,10 +34,16 @@ public class Robot extends TimedRobot {
   	@Override
 	public void robotInit() {    
 		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
-
-		UserInterface.driverController.R1.whenPressed(new ChangeSpeed());
-        // UserInterface.driverController.LB.whenPressed(new HoldFast());
-        // UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+		ControllerSwitcher.setControllerType(ControllerSwitcher.ControllerType.onePlaystationController);
+		if (ControllerSwitcher.controllertype == ControllerType.onePlaystationController) {
+			UserInterface.matthewDriverController.R1.whenPressed(new ChangeSpeed());
+			UserInterface.matthewDriverController.L1.whenPressed(new HoldFast());
+			UserInterface.matthewDriverController.L1.whenReleased(new ReleaseSlow());
+		} else if (ControllerSwitcher.controllertype == ControllerType.twoXboxControllers) {
+			UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+    	    UserInterface.driverController.LB.whenPressed(new HoldFast());
+        	UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+		}
 
 		// Might need to be moved to teleopPeriodic in order to function, but it might also work here.
 		// UserInterface.driverController.A.whenPressed(new RotateToBall());
