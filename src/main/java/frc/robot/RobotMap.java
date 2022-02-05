@@ -50,9 +50,9 @@ public class RobotMap {
         botName = bot;
 
         if (bot == BotNames.FALCON) {
-            leftFlywheel = 6;
-            rightFlywheel = 0;
-            hoodRoller = 3;
+            leftFlywheel = 7;
+            rightFlywheel = 5;
+            hoodRoller = 6;
             transversalMotor = 422;
             succMotor = 422;
             upyDownyMotor = 422;
