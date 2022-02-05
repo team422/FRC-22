@@ -55,6 +55,6 @@ public class ArcadeDrive extends CommandBase {
         updatedSpeed = speed;
         updatedRotation = rotation;
 
-        Subsystems.driveBase.tank.curvatureDrive(rotation * RobotMap.rotationCap, speed * RobotMap.speedCap, true);
+        Subsystems.driveBase.tank.curvatureDrive(-rotation * RobotMap.rotationCap, speed * RobotMap.speedCap, true);
     }
 }

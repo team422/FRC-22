@@ -7,12 +7,12 @@ public class RobotMap {
     // so that it can be replaced easily later if need be. 
     
     // Speed controls
-    public static double speedCap = 0.6;
-    public static double rotationCap = 0.5;
-    public static double slowSpeedCap = 0.2;
-    public static double slowRotCap = 0.1;
-    public static double fastSpeedCap = 0.6;
-    public static double fastRotCap = 0.5;
+    public static double speedCap = 0.7;
+    public static double rotationCap = 0.3;
+    public static double slowSpeedCap = 0.4;
+    public static double slowRotCap = 0.3;
+    public static double fastSpeedCap = 0.7;
+    public static double fastRotCap = 0.3;
 
     public static boolean isSpeedMode = true;
     
