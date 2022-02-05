@@ -8,6 +8,11 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import java.util.ArrayList;
 
+/**
+ * This here is the Trajectory Generation Code Skeleton
+ * It can't really work yet, but its convenient that its here
+ */
+
 public class Autonomous {
     
     public void generateTrajectory() {
