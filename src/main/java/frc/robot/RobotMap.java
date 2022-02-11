@@ -104,6 +104,6 @@ public class RobotMap {
     }
 
     public static double convertToTicks(double inches) {
-        return (TicksPerRevolution / (wheelDiameter * Math.PI) * inches);
+        return (ticksPerRevolution / (wheelDiameter * Math.PI) * inches);
     }
 }
