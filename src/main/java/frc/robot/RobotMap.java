@@ -25,7 +25,7 @@ public class RobotMap {
  
 
     public static int wheelDiameter;
-
+    public static int ticksPerRevolution;
     // Subsystem motor ports
     public static int leftFlywheel;
     public static int rightFlywheel;
@@ -35,7 +35,7 @@ public class RobotMap {
     public static int topFlyWheel;
     public static int upyDownyMotorRight;
     public static int upyDownyMotorLeft;
-
+    
 
     public static int leftClimber;
     public static int rightClimber;
@@ -62,6 +62,7 @@ public class RobotMap {
         rightLeader = 3;
 
         wheelDiameter = 4;
+        ticksPerRevolution = 2048;
 
         leftFlywheel = 422;
         rightFlywheel = 422;
@@ -103,6 +104,6 @@ public class RobotMap {
     }
 
     public static double convertToTicks(double inches) {
-        return (4096 / (wheelDiameter * Math.PI) * inches);
+        return (TicksPerRevolution / (wheelDiameter * Math.PI) * inches);
     }
 }

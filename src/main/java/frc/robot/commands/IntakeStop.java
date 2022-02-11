@@ -12,7 +12,7 @@ public class IntakeStop extends CommandBase {
 
     //wpilib looks for initialize, execute, and end!
     public void initialize() {
-        Subsystem.intake.stopSucc();
+        Subsystems.intake.stopSucc();
     }
 
     public boolean isFinished() {
