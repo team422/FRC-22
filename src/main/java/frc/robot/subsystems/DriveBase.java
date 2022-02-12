@@ -44,6 +44,12 @@ public class DriveBase extends SubsystemBase {
 	public WPI_TalonFX leftBack;
 	public WPI_TalonFX rightBack;
 
+	// Ports for Anti mech
+	public WPI_TalonSRX leftLeader;
+	public WPI_TalonSRX leftFollower;
+	public WPI_TalonSRX rightLeader;
+	public WPI_TalonSRX rightFollower;
+
     public MotorControllerGroup leftMotorGroup;
 	public MotorControllerGroup rightMotorGroup;
 	
@@ -77,10 +83,10 @@ public class DriveBase extends SubsystemBase {
         // this.rightFrontMotor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
 		// this.rightBackMotor = new WPI_VictorSPX(RobotMap.rightBackFollower);
 
-		this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
-		this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
-		this.rightFront = new WPI_TalonFX(RobotMap.rightFront);
-		this.rightBack = new WPI_TalonFX(RobotMap.rightBack);
+		// this.leftLeader = new WPI_TalonSRX(RobotMap.leftLeader);
+		// this.leftFollower = new WPI_TalonSRX(RobotMap.leftFollower);
+		// this.rightLeader = new WPI_TalonSRX(RobotMap.rightLeader);
+		// this.rightFollower = new WPI_TalonSRX(RobotMap.rightFollower);
 		
 		// Since we use the same type of motors, both think that front is clockwise,
 		// but on the left side, the clockwise rotation causes it to move backward,
@@ -89,18 +95,18 @@ public class DriveBase extends SubsystemBase {
 		// leftFrontMotor.setInverted(true);
 		// leftBackMotor.setInverted(true);
         
-        this.leftMotorGroup = new MotorControllerGroup(leftFront, leftBack);
-        this.rightMotorGroup = new MotorControllerGroup(rightFront, rightBack);
+        // this.leftMotorGroup = new MotorControllerGroup(leftLeader, leftFollower);
+        // this.rightMotorGroup = new MotorControllerGroup(rightLeader, rightFollower);
 
 		// For Falcon
 
-		// this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
-		// this.rightFront = new WPI_TalonFX(RobotMap.rightFront);
-		// this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
-		// this.rightBack = new WPI_TalonFX(RobotMap.rightBack);
+		this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
+		this.rightFront = new WPI_TalonFX(RobotMap.rightFront);
+		this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
+		this.rightBack = new WPI_TalonFX(RobotMap.rightBack);
 
-		// this.leftMotorGroup = new MotorControllerGroup(leftFront, leftBack);
-		// this.rightMotorGroup = new MotorControllerGroup(rightFront, rightBack);
+		this.leftMotorGroup = new MotorControllerGroup(leftFront, leftBack);
+		this.rightMotorGroup = new MotorControllerGroup(rightFront, rightBack);
 		// Building the actual robot drive train
 		this.tank = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 		

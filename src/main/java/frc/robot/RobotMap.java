@@ -48,6 +48,12 @@ public class RobotMap {
     public static int leftBack = 2;
     public static int rightBack = 1;
 
+    //anti mech ports
+    public static int leftLeader = 3;
+    public static int leftFollower= 1;
+    public static int rightLeader = 4; 
+    public static int rightFollower = 2;
+
     
     // Intake stuff
     // public static int intakePivot = 46;
