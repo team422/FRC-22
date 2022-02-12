@@ -7,35 +7,105 @@ public class RobotMap {
 
     // Robot settings & toggles (mutable)
 
-    private static double speedCap = 0.6;
-    private static double rotationCap = 0.5;
+    // The speed cap that the robot defaults
+    private static double speedCap = 0.8;
+    private static double rotationCap = 0.3;
+
+    // The speed cap after slow mode is enabled
     public static double slowSpeedCap = 0.4;
     public static double slowRotCap = 0.3;
+
+    // The rotation cap after fast mode is enabled
     public static double fastSpeedCap = 0.6;
     public static double fastRotCap = 0.5;
-
+    
+    // the speed mode
     public static boolean isSpeedMode = true;
 
     // Drive base ports
-
     public static int leftFollower;
     public static int leftLeader;
     public static int rightFollower;
     public static int rightLeader;
  
-
+    // drive speed calculation ports
     public static int wheelDiameter;
     public static int ticksPerRevolution;
-    // Subsystem motor ports
+
+    // Flyboi
     public static int leftFlywheel;
     public static int rightFlywheel;
-    public static int transversalMotor;
-    public static int feederWheel;
-    public static int succMotor;
     public static int topFlyWheel;
-    public static int upyDownyMotorRight;
-    public static int upyDownyMotorLeft;
+
+    // Transversal - 1 neo
+    public static final int transversalPort = 423;
+
+    // Cell Stop - 1 neo
+    public static final int cellStopPort = 1086;
+
+    // Intake stuff
+    // public static int lift = 11;
+    public static final int extensionInPort = 424;
+    public static final int extensionOutPort = 427;
+    public static final int intakeMotorPort = 420;
+    public static final int beamBreakPort = 429;
     
+    // Shooter
+    public static final int rightFlyPort = 6;
+    public static final int leftFlyPort = 3;
+    public static final int flyRolliRoll = 0;
+
+    // Dimensions for Vision Calculations
+    public static final double ballCameraHeightMeters = 0.75;
+    public static final double ballHeightMeters = 0.1;
+    public static final double ballCameraDegreesHoriz = -25;
+    
+    public static final double targetCameraHeightMeters = 0.79;
+    public static final double targetHeightMeters = 2.642;
+    public static final double hubCameraDegreesHoriz = 15;
+
+    public static final int maxNoTargetCounter = 9;
+    
+    public static final int blueBallPipelineIndex = 0;
+    public static final int redBallPipelineIndex = 1;
+    
+    //PIDFollowBall params for PIDController
+    public static double kP = 1;
+    public static double kI = 1;
+    public static double kD = 1;
+    
+    //PIDFlyboi params for PIDController
+    public static double FlykP = 1;
+    public static double FlykI = 1;
+    public static double FlykD = 1;
+
+    // Shooter feedforward
+    public static int FlykS = 0;
+    public static int FlykV = 0;
+    public static int FlykA = 0;
+
+    // Shooter Expected Velocities in ticks
+    public static double leftVelocity = 0;
+    public static double rightVelocity = 0;
+    public static double topVelocity = 0;
+
+    //Transversal and CellStop speeds during shooter sequence
+    public static final double transversalSpeed = 0.15;
+    public static final double cellStopSpeed = 0.3;
+
+    //Ball Counter
+    public static int ballCounter = 1;
+
+    //Shooter Speed and offsets, as used in ShootBall.java
+    public static final double speedCheckOffset = -0.5;
+    public static final double speedCheckRange = 5;
+        
+    
+    public enum TeamColor{
+        RED,BLUE;
+    }
+
+    public static final TeamColor teamColor = TeamColor.RED;
 
     public static int leftClimber;
     public static int rightClimber;
@@ -55,6 +125,7 @@ public class RobotMap {
      */
     public static void setBot(BotNames bot) {
         botName = bot;
+        
     if (bot == BotNames.FALCON) {
         leftFollower = 2;
         leftLeader = 4;
@@ -67,11 +138,13 @@ public class RobotMap {
         leftFlywheel = 422;
         rightFlywheel = 422;
         topFlyWheel = 422;
-        transversalMotor = 422;
-        succMotor = 422;
-        upyDownyMotorRight = 422;
-        upyDownyMotorLeft = 422;
-        feederWheel = 422;
+
+        // Ports probably unused
+        // transversalMotor = 422;
+        // succMotor = 422;
+        // upyDownyMotorRight = 422;
+        // upyDownyMotorLeft = 422;
+        // feederWheel = 422;
 
         leftClimber = 422;
         rightClimber = 422;
@@ -105,5 +178,14 @@ public class RobotMap {
 
     public static double convertToTicks(double inches) {
         return (ticksPerRevolution / (wheelDiameter * Math.PI) * inches);
+    }
+
+    public static double cap(double value, double min, double max){
+        if(value < min){
+            return min;
+        } else if (value > max){
+            return max;
+        }
+        return value;
     }
 }

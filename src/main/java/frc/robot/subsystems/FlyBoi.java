@@ -1,101 +1,120 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
+
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.controller.PIDController;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
 
+public class FlyShootiShoot extends SubsystemBase {
 
-public class FlyBoi extends SubsystemBase{
+    // For BangBangController, need velocity of current motor and the desired velocity
+    // https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/controller/BangBangController.html#getSetpoint()
+    // https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/bang-bang.html
+
+    WPI_TalonFX leftShoot;
+    WPI_TalonFX rightShoot;
+    WPI_TalonFX topRoller;
+    SimpleMotorFeedforward feedForward;
+    PIDController leftPID;
+    PIDController rightPID;
+    PIDController topPID;
     
-    private WPI_TalonFX shooterLeftMotor;
-    private WPI_TalonFX shooterRightMotor;
-    private CANSparkMax shooterTopMotor;
-
-    double speed = 0.5;
-
-    // temp vaiable you can change. the speed as needed later
-
-    public FlyBoi(){
-        setSubsystem("FlyBoi");
-        this.shooterLeftMotor = new WPI_TalonFX(RobotMap.leftFlywheel);
-        this.shooterRightMotor = new WPI_TalonFX(RobotMap.rightFlywheel);
-        this.shooterTopMotor = new CANSparkMax(RobotMap.topFlyWheel, CANSparkMaxLowLevel.MotorType.kBrushless);
+    public FlyShootiShoot(){
+        setSubsystem("FlyShootiShoot");
+        this.leftShoot = new WPI_TalonFX(RobotMap.leftFlyPort);
+        this.rightShoot = new WPI_TalonFX(RobotMap.rightFlyPort);
+        this.topRoller = new WPI_TalonFX(RobotMap.flyRolliRoll);
+        this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV);
+        this.leftPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
+        this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
+        this.topPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
     }
 
-    public void Spin(double speed, double topSpeed){
-        //set the speed of the flywheels to 0.8 or whatever speed from robotmap.java
-        shooterLeftMotor.set(-speed);
-        shooterRightMotor.set(speed);
-        shooterTopMotor.set(topSpeed);
-        // set the speed of one of these is negative
-        // when robot have fix it
+
+    /**
+    * Function to set the shoot speed (-1, 1)
+    * @param mainSpeed speed to set left and right roller (-1, 1)
+    * @param topSpeed speed for the top (-1, 1)
+    */
+    public void setShootSpeed(double mainSpeed, double topSpeed){
+        leftShoot.set(mainSpeed);
+        rightShoot.set(-mainSpeed);
+        topRoller.set(topSpeed);
     }
     
-    public void bothWheelStop(){
-        //set the speed of the flywheels to 0
-        shooterRightMotor.set(0);
-        shooterRightMotor.set(0);
+    /**
+    * Function to stop the shooter.
+    */
+    public void stopShoot(){
+        leftShoot.stopMotor();
+        rightShoot.stopMotor();
+        topRoller.stopMotor();
+    }
+    
+    /**
+    * Function to get speed of left Motor (-1, 1).
+    * @return returns Speed of of left motor (-1, 1).
+    */
+    public double getLeft(){
+        return leftShoot.get();
     }
 
-    public double getVelocity () {
-        return (shooterLeftMotor.getSelectedSensorVelocity()/2048);
-        //this is in RPM
+    /**
+    * Function To get spEed of right motor (-1, 1).
+    * @return returns speed of Right motor (-1, 1).
+    */
+    public double getRight(){
+        return rightShoot.get();
+    }
+    
+    /**
+    * Function to get speed of top motor (-1, 1).
+    * @return returns speed Of Top motor (-1, 1).
+    */
+    public double getTop(){
+        return topRoller.get();
     }
 
-    // Fun Fact: Neos are conncted in order to double the power, so below does not work
-    // DONT EVEN TRY TO USE IT
-    // You've been warned
+    /**
+    * Function to get velocity Of left motor (raw sensor units/ticks).
+    * @return Returns velocity Of left motor (raw Sensor units/ticks).
+    */
+    public double getLeftVelocity(){
+        return leftShoot.getSelectedSensorVelocity();
+    }   
 
-    // Hey there, justing testing if you can change the shooting angle (left and right) of the ball - yash
-    // also, I'm bored
-    // For the Future: experiment with speeds of the flywheels (left and right) by changing the relative speed of both
-    // If one flywheel has a higher speed than the other, then the ball will fly in a certain direction
-    // flywheels to make the robot able to launch the balls at an angle
-    // Visualization:
-    // . . . . . . . . 
-    //   . . . . . .
-    //     . . . .
-    //       ...
-    //        .
-    //       -ˆ-
-    //      |   | 
-    //       ---
+    /**
+     * Function to Get velocity of Right motor (raw Sensor units/ticks).
+     * @return returns velocity of right Motor (raw sensor units/Ticks).
+     */
+    public double getRightVelocity(){
+        return rightShoot.getSelectedSensorVelocity();
+    }
+    
+    /**
+    * function to get Velocity of top motor (Raw sensor units/ticks).
+    * @return Returns Velocity Of Top Motor (Raw Sensor Units/Ticks).
+    */
+    public double getTopVelocity(){
+        return topRoller.getSelectedSensorVelocity();
+    }
 
-    /*public void ballAngleShoot(double speed, double angle){
-        // set the speed of one of these is negative
-        // when robot have fix it because we dont want to suck the ball in when trying to shoot it
+    public void voltageShootiShoot(double leftVelocity, double rightVelocity, double topVelocity) {
 
-        double adjustedangle;
-        double otherwheeladjustedangle;
+        System.out.println(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
+        // leftShoot.setVoltage(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
+        // rightShoot.setVoltage(rightPID.calculate(getRightVelocity(), rightVelocity) + feedForward.calculate(rightVelocity));
+        // topRoller.setVoltage(topPID.calculate(getTopVelocity(), topVelocity) + feedForward.calculate(topVelocity));
+    }
 
-        // is the relationship between the angle of shooting and flywheel speed linear, quadratic or something else?
-        // not currently known will test when given robot - yash
-        // going to assume that its linear and that left motor need -speed and right motor needs speed to shoot the ball out. might be wrong
-
-        // going to try a linear relationship
-        // angle in degrees between 0 and 180 where 0 is the positive x axis and 180 is the negative x axis
-
-        if (angle < 90){
-            adjustedangle = angle/90;
-            otherwheeladjustedangle = (angle-90)/90;
-            shooterLeftMotor.set(adjustedangle);
-            shooterRightMotor.set(otherwheeladjustedangle);
-        } else if (angle > 90){
-            adjustedangle = (angle-90)/90;
-            otherwheeladjustedangle = (angle-180)/90;
-            shooterLeftMotor.set(otherwheeladjustedangle);
-            shooterRightMotor.set(adjustedangle);
-        } else if (angle = 90){
-            shooterLeftMotor.set(-speed);
-            shooterRightMotor.set(speed);
-        }
-
-        shooterRightMotor.set(0);
-        shooterRightMotor.set(0);
-        */
-    // }
-
+    public void speedShootiShoot(double leftSetpoint, double rightSetpoint, double topSetpoint) {
+        
+        System.out.println(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
+        // leftShoot.set(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
+        // rightShoot.set(rightPID.calculate(getRight(), rightSetpoint) + feedForward.calculate(rightSetpoint));
+        // topRoller.set(topPID.calculate(getTop(), topSetpoint) + feedForward.calculate(topSetpoint));
+    }
 }
-

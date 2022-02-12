@@ -1,45 +1,45 @@
-package frc.robot.commands;
+// package frc.robot.commands;
 
-import frc.robot.subsystems.*;
-import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.userinterface.UserInterface;
-
-
-public class RunIntake extends CommandBase {
-
-    public double angle = 0;
-
-    //runs intake in either direction depending on left joystick!
-
-    public RunIntake() {
-        setName("RunIntake");
-        addRequirements(Subsystems.intake);
-    }
+// import frc.robot.subsystems.*;
+// import frc.robot.RobotMap;
+// import edu.wpi.first.wpilibj2.command.CommandBase;
+// import frc.robot.userinterface.UserInterface;
 
 
-    //wpilib looks for initialize, execute, and end!
+// public class RunIntake extends CommandBase {
 
-    public void initialize() {
-    }
+//     public double angle = 0;
 
-    public void execute() {
+//     //runs intake in either direction depending on left joystick!
+
+//     public RunIntake() {
+//         setName("RunIntake");
+//         addRequirements(Subsystems.intake);
+//     }
+
+
+//     //wpilib looks for initialize, execute, and end!
+
+//     public void initialize() {
+//     }
+
+//     public void execute() {
         
-        /* This is necessary for WPILIB */
-        Subsystems.intake.setSucc(UserInterface.operatorController.getLeftJoystickY()); 
+//         /* This is necessary for WPILIB */
+//         Subsystems.intake.engageIntake(UserInterface.operatorController.getLeftJoystickY()); 
 
         
-    }
+//     }
 
-    public void end() {
-        Subsystems.intake.stopSucc();
-    }
+//     public void end() {
+//         Subsystems.intake.stopIntake();
+//     }
 
-    //allows it to stop automatically once it is finished
-    // is also necessary for WPILIB
-    public boolean isFinished() {
-        return true; 
-    }
+//     //allows it to stop automatically once it is finished
+//     // is also necessary for WPILIB
+//     public boolean isFinished() {
+//         return true; 
+//     }
     
-}
+// }
 

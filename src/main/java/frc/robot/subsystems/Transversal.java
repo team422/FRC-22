@@ -16,7 +16,7 @@ public class Transversal extends SubsystemBase{
     //LMAO JK ITS NEOS KILL MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE - Aaron
     public Transversal(){
         setSubsystem("Transversal");
-        this.transversalMotor = new CANSparkMax(RobotMap.transversalMotor, CANSparkMaxLowLevel.MotorType.kBrushless);
+        this.transversalMotor = new CANSparkMax(RobotMap.transversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     public void setTransversalSpeed (double speed){
