@@ -12,7 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-public class DriveBaseTest extends SubsystemBase {
+public class DriveBase extends SubsystemBase {
     // A class that creates the Drivebase
     /* Drivebase Diagram
       ___________
@@ -59,8 +59,8 @@ public class DriveBaseTest extends SubsystemBase {
 	// In case declaring the enum doesn't work directly in the gyro contructor:
 	// public static final SPI.Port gyroPort = SPI.Port.kOnboardCS0;
 
-    public DriveBaseTest(){
-		// required for Subsystems and commands as a way to tell program who do communicate with
+    public DriveBase(){
+		// required for Subsystems and commands as a way to tell program who to communicate with
 		setSubsystem("DriveBase");
 
 		// For the Toaster

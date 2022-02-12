@@ -8,7 +8,7 @@ import edu.wpi.first.math.controller.PIDController;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-public class FlyShootiShoot extends SubsystemBase {
+public class FlyBoi extends SubsystemBase {
 
     // For BangBangController, need velocity of current motor and the desired velocity
     // https://first.wpi.edu/wpilib/allwpilib/docs/release/java/edu/wpi/first/math/controller/BangBangController.html#getSetpoint()
@@ -22,8 +22,8 @@ public class FlyShootiShoot extends SubsystemBase {
     PIDController rightPID;
     PIDController topPID;
     
-    public FlyShootiShoot(){
-        setSubsystem("FlyShootiShoot");
+    public FlyBoi(){
+        setSubsystem("FlyBoi");
         this.leftShoot = new WPI_TalonFX(RobotMap.leftFlyPort);
         this.rightShoot = new WPI_TalonFX(RobotMap.rightFlyPort);
         this.topRoller = new WPI_TalonFX(RobotMap.flyRolliRoll);
