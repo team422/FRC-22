@@ -3,16 +3,16 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 // import com.revrobotics.CANSparkMax;
 // import com.revrobotics.CANSparkMaxLowLevel;
 
 
 public class FlyShootiShoot extends SubsystemBase{
     
-    private WPI_VictorSPX shooterLeftMotor;
-    private WPI_VictorSPX shooterRightMotor;
-    private WPI_VictorSPX hoodRoller;
+    private WPI_TalonFX shooterLeftMotor;
+    private WPI_TalonFX shooterRightMotor;
+    private WPI_TalonFX hoodRoller;
 
     double speed = 0.5;
 
@@ -20,9 +20,10 @@ public class FlyShootiShoot extends SubsystemBase{
 
     public FlyShootiShoot(){
         
-        this.shooterLeftMotor = new WPI_VictorSPX(RobotMap.leftFlywheel);
-        this.shooterRightMotor = new WPI_VictorSPX(RobotMap.rightFlywheel);
-        this.hoodRoller = new WPI_VictorSPX(RobotMap.hoodRoller);
+        this.shooterLeftMotor = new WPI_TalonFX(RobotMap.leftFlywheel);
+        this.shooterRightMotor = new WPI_TalonFX(RobotMap.rightFlywheel);
+        shooterRightMotor.setInverted(true);
+        this.hoodRoller = new WPI_TalonFX(RobotMap.hoodRoller);
     }
 
     public void wheelSpin(double speed, boolean left, boolean right){
