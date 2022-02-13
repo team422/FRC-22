@@ -6,12 +6,18 @@ import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-// import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-// import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.SPI;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveBase extends SubsystemBase {
     // A class that creates the Drivebase
@@ -52,7 +58,9 @@ public class DriveBase extends SubsystemBase {
 	public double rightEncoderValue;
 
 	// Gyro initializing
-	// public ADXRS450_Gyro gyroBoi;
+	public ADXRS450_Gyro gyro;
+	private final DifferentialDriveOdometry m_odometry;
+
 
 	// Creating tankDrive instance
 	public DifferentialDrive tank;
@@ -60,22 +68,9 @@ public class DriveBase extends SubsystemBase {
 	// In case declaring the enum doesn't work directly in the gyro contructor:
 	// public static final SPI.Port gyroPort = SPI.Port.kOnboardCS0;
 
-    public DriveBase(){
+    public DriveBase() {
 		// required for Subsystems and commands as a way to tell program who do communicate with
 		setSubsystem("DriveBase");
-
-		// For the Toaster
-
-		// Declares the instantiated variables that store the motor controller objects
-		// Setting left motors to their respective motor objects
-        // this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMasterPort);
-        // this.leftFrontMotor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
-        // this.leftBackMotor = new WPI_VictorSPX(RobotMap.leftBackFollower);
-		
-		// // Setting right motors to their respective motor objects
-        // this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMasterPort);        
-        // this.rightFrontMotor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
-		// this.rightBackMotor = new WPI_VictorSPX(RobotMap.rightBackFollower);
 
 		this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
 		this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
@@ -109,13 +104,37 @@ public class DriveBase extends SubsystemBase {
 		// this.rightEncoderValue = rightMiddleMaster.getSelectedSensorPosition(0);
 		
 		// Gyro with SPI.Port.kOnboardCS0 being the port enum that is provided by WPILib
-		// this.gyroBoi = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+		this.gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 		
 		// Built in check if the gyro is the correct one and it is connected
 		// System.out.println(gyroBoi.isConnected)
 		// Might not work, check when working with robot
-		// gyroBoi.calibrate();
+		// gyro.calibrate();
+
+
+		m_odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+
     }
+
+	@Override
+	public void periodic() {
+		m_odometry.update(
+			gyro.getRotation2d(), RobotMap.convertTicksToMeters(this.getLeftEncoder()), RobotMap.convertTicksToMeters(this.getRightEncoder())
+		);
+	}
+
+	public Pose2d getPose() {
+		return m_odometry.getPoseMeters();
+	}
+
+	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		return new DifferentialDriveWheelSpeeds(RobotMap.convertTicksToMeters(leftFront.getSelectedSensorVelocity(0) * 10), RobotMap.convertTicksToMeters(rightFront.getSelectedSensorVelocity(0) * 10));
+	}
+
+	public void resetOdometry(Pose2d pose) {
+		zeroEncoders();
+		m_odometry.resetPosition(pose, gyro.getRotation2d());
+	  }
 
 	/**
 	 * A manual way to set the motor speeds on the drivetrain
@@ -139,7 +158,7 @@ public class DriveBase extends SubsystemBase {
 	 * resets the Gyro to 0
 	 */
 	public void resetGyroAngle(){
-		// gyroBoi.reset();
+		gyro.reset();
 	}
 	
 	/**
@@ -147,16 +166,19 @@ public class DriveBase extends SubsystemBase {
 	 * @return Returns the angle deviating from the last reset angle
 	 */
 	public double getGyroAngle(){
-		// return gyroBoi.getAngle();
-        return 422;
+		return gyro.getAngle();
+	}
+
+	public double getTurnRate() {
+		return -gyro.getRate();
 	}
 	
 	/**
 	 * Recalibrates both encoders to compare with future encoder positions
 	 */
-	public void reCalibrateEncoders(){
-		this.leftEncoderValue = leftMiddleMaster.getSelectedSensorPosition(0);
-		this.rightEncoderValue = rightMiddleMaster.getSelectedSensorPosition(0);		
+	public void zeroEncoders(){
+		this.leftEncoderValue = leftFront.getSelectedSensorPosition(0);
+		this.rightEncoderValue = rightFront.getSelectedSensorPosition(0);		
 	}
 
 	/**

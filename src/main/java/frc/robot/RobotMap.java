@@ -1,10 +1,29 @@
 package frc.robot;
 
 // import javax.crypto.interfaces.PBEKey;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 
 public class RobotMap {
     // Robot Map is a centralized location at which all the numbers (ports, set speeds, etc) for the Robot can be placed
     // so that it can be replaced easily later if need be. 
+    
+    // THESE ARE ALL TRAJECTORY VALUES
+    // Drive Station Constants
+    public static final double kS = 0.66569;
+    public static final double kV = 0.050387;
+    public static final double kA = 0.0051628;
+    
+    public static final double kPDriveVel = 0.064039;
+    public static final double kTrack = 0.61;
+    public static final DifferentialDriveKinematics kKinematics = new DifferentialDriveKinematics(kTrack);
+    
+    public static final double kMaxSpeed = 20;
+    public static final double kMaxAcceleration = 3;
+
+    // Ramsete Controller Gains
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
+
     
     // Speed controls
     public static double speedCap = 0.7;
@@ -74,8 +93,13 @@ public class RobotMap {
         return (4096 / (wheelDiameter * 3.1415926) * inches); // Math.PI
     }
 
-        /**
-     * @return The speed cap for the drive base in teleop.
+    public static double convertTicksToMeters(double ticks) {
+        return ((ticks * (wheelDiameter) * (3.1415926)) / 104.0384 ); // Math.PI
+    }
+
+    
+    /** 
+    * @return The speed cap for the drive base in teleop.
      */
     public static double getSpeedCap() {
         return speedCap;
