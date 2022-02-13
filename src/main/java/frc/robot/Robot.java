@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   	@Override
 	public void robotInit() {    
 		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
+
 		ControllerSwitcher.setControllerType(ControllerSwitcher.ControllerType.onePlaystationController);
 		if (ControllerSwitcher.controllertype == ControllerType.onePlaystationController) {
 			UserInterface.matthewDriverController.R1.whenPressed(new ChangeSpeed());
@@ -44,6 +45,10 @@ public class Robot extends TimedRobot {
     	    UserInterface.driverController.LB.whenPressed(new HoldFast());
         	UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
 		}
+
+		UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+        UserInterface.driverController.LB.whenPressed(new HoldFast());
+        UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
 
 		// Might need to be moved to teleopPeriodic in order to function, but it might also work here.
 		// UserInterface.driverController.A.whenPressed(new RotateToBall());
