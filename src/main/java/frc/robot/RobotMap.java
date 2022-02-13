@@ -66,6 +66,9 @@ public class RobotMap {
     public static double ballHeightMeters = 0.1;
     public static double cameraDegreesHoriz = -25;
 
+    public static int leftBelt = 422;
+    public static int rightBelt = 422;
+
     /**
      * @param inches Inches to convert.
      * @return The equivalent distance in ticks (units for Talon Encoders).
