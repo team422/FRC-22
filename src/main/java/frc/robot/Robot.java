@@ -11,7 +11,9 @@ import frc.robot.commands.*;
 import frc.robot.commands.SpeedModes.*;
 // import frc.robot.commands.vision.*;
 import frc.robot.subsystems.Subsystems;
+import frc.robot.userinterface.ControllerSwitcher;
 import frc.robot.userinterface.UserInterface;
+import frc.robot.userinterface.ControllerSwitcher.ControllerType;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
