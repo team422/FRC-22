@@ -30,7 +30,7 @@ public class FlyBoi extends SubsystemBase {
         this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV);
         this.leftPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
         this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
-        this.topPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
+        this.topPID = new PIDController(RobotMap.HoodFlykP, RobotMap.HoodFlykI, RobotMap.HoodFlykD);
     }
 
 

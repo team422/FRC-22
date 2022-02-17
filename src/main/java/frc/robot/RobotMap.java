@@ -78,6 +78,9 @@ public class RobotMap {
     public static double FlykP = 1;
     public static double FlykI = 1;
     public static double FlykD = 1;
+    public static double HoodFlykD = 1;
+    public static double HoodFlykI = 1;
+    public static double HoodFlykP = 1;
 
     // Shooter feedforward
     public static int FlykS = 0;
