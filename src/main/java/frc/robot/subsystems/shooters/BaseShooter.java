@@ -24,7 +24,7 @@ public abstract class BaseShooter extends SubsystemBase{
     * @param mainSpeed speed to set left and right roller (-1, 1)
     * @param topSpeed speed for the top (-1, 1)
     */
-    public void setShootSpeeds(double... motorSpeeds){
+    public void setShootSpeeds(double mainSpeed, double topSpeed){
     }
     
     /**

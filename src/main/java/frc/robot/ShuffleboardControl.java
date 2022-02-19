@@ -1,30 +1,106 @@
-// package frc.robot;
+package frc.robot;
 
-// import java.util.AbstractMap;
-// import java.util.Map;
-// import edu.wpi.first.networktables.NetworkTableEntry;
-// import edu.wpi.first.wpilibj.DriverStation;
-// import edu.wpi.first.wpilibj.shuffleboard.*;
-// import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-// import frc.robot.subsystems.Subsystems;
-// import frc.robot.userinterface.UserInterface;
-// import edu.wpi.first.wpilibj2.command.InstantCommand;
+import java.util.AbstractMap;
+import java.util.Map;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.shuffleboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.Subsystems;
+import frc.robot.userinterface.UserInterface;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-// public class ShuffleboardControl {
-//     private static ShuffleboardTab firstTab;
-    
-//     private static NetworkTableEntry leftEncoderValue;
-//     private static NetworkTableEntry rightEncoderValue;
+public class ShuffleboardControl {
+    private static NetworkTableEntry leftFlywheel;
+    private static NetworkTableEntry rightFlywheel;
+    private static NetworkTableEntry flywheelSpeed;
+    private static NetworkTableEntry hoodRollerSpeed;
 
-//     public static void layoutShuffleboard() {
-//         firstTab = Shuffleboard.getTab("Testing");
+    private static NetworkTableEntry kP;
+    private static NetworkTableEntry kI;
+    private static NetworkTableEntry kD;
+    private static NetworkTableEntry motorVelocity;
 
-//         leftEncoderValue = firstTab.add("Left Encoder Value", Subsystems.driveBase.getLeftPosition()).withSize(2, 1).withPosition(0, 0).getEntry();
-//         rightEncoderValue = firstTab.add("Right Encoder Value", Subsystems.driveBase.getRightPosition()).withSize(2, 1).withPosition(0, 3).getEntry();
-//     }
+    public static void layoutShuffleboard() {
+        ShuffleboardTab shooterTab = Shuffleboard.getTab("Scintillating Shooting Stuff");
 
-//     public static void updateShuffleboard() {
-//         leftEncoderValue.setDouble(Subsystems.driveBase.getLeftPosition());
-//         rightEncoderValue.setDouble(Subsystems.driveBase.getRightPosition());
-//     }
-// }
+        ShuffleboardLayout flywheelMotors =  shooterTab.getLayout("Which flywheel motors are on?", BuiltInLayouts.kList)
+            .withPosition(0, 0)
+            .withSize(2, 3);
+        ShuffleboardLayout speeds = shooterTab.getLayout("Motor speeds", BuiltInLayouts.kList)
+            .withPosition(4, 0)
+            .withSize(2, 3);
+        
+        ShuffleboardLayout PID = shooterTab.getLayout("PID values", BuiltInLayouts.kList)
+            .withPosition(8, 0)
+            .withSize(2, 3);
+
+        leftFlywheel = flywheelMotors.add("Left Flywheel", false)
+            .withWidget(BuiltInWidgets.kToggleButton)
+            .withPosition(0, 2)
+            .withSize(2, 3).getEntry();
+        rightFlywheel = flywheelMotors.add("Right Flywheel", false)
+            .withWidget(BuiltInWidgets.kToggleButton)
+            .withPosition(0, 4)
+            .withSize(2, 3).getEntry();
+
+        flywheelSpeed = speeds.add("Flywheel(s) Speed", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 1))
+            .withPosition(4, 2)
+            .withSize(2, 3).getEntry();
+        hoodRollerSpeed = speeds.add("Hood Roller Speed", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 1))
+            .withPosition(4, 4)
+            .withSize(2, 3).getEntry();
+        
+        kP = PID.add("P Constant", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withSize(2, 3).getEntry();
+        kI = PID.add("I Constant", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withSize(2, 3).getEntry();
+        kD = PID.add("D Constant", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withSize(2, 3).getEntry();
+        motorVelocity = speeds.add("Motor Velocity", 0)
+            .withWidget(BuiltInWidgets.kTextView)
+            .withSize(2, 3).getEntry();
+    }
+
+    public static boolean getLeft() {
+        return leftFlywheel.getBoolean(false);
+    }
+
+    public static boolean getRight() {
+        return rightFlywheel.getBoolean(false);
+    }
+
+    public static double getFlywheelSpeed() {
+        return flywheelSpeed.getDouble(0.0);
+    }
+
+    public static double getHoodSpeed() {
+        return hoodRollerSpeed.getDouble(0.0);
+    }
+
+    public static double getP() {
+        return kP.getDouble(0.0);
+    }
+
+    public static double getI() {
+        return kI.getDouble(0.0);
+    }
+
+    public static double getD() {
+        return kD.getDouble(0.0);
+    }
+
+    public static void setMotorSpeed(double value) {
+        motorVelocity.setDouble(value);
+    }
+}

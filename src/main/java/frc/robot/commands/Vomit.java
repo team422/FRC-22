@@ -22,12 +22,17 @@
 //     //wpilib looks for initialize, execute, and end!
 
 //     public void initialize() {    
-//         // Subsystems.flyShootiShoot.bothWheelSpin(outtakespeed);
+//         // Subsystems.flyBoi.bothWheelSpin(outtakespeed);
 //     }
 
 //     public void execute() {
         
-//         /* This is necessary for WPILIB */
+        /* This is necessary for WPILIB */
+//      Subsystems.intake.setSucc(outtakespeed); 
+        // Subsystems.flyBoi.bothWheelSpin(outtakespeed);
+//      Subsystems.transversal.setTransversalSpeed(outtakespeed);
+//      Subsystems.cellStoppiStop.setStoppiStop(outtakespeed);
+//      }
 
 //         // Please don't use the flyboi reverse
 //         Subsystems.intake.engageIntake(outtakespeed); 

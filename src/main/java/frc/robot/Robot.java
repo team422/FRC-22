@@ -15,6 +15,12 @@ import frc.robot.subsystems.*;
 // import frc.robot.userinterface.UserInterface;
 // import frc.robot.RobotMap.BotNames;
 import frc.robot.userinterface.UserInterface;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+// import frc.robot.commands.*;
+// import frc.robot.userinterface.UserInterface;
+// import frc.robot.subsystems.*;
+//import frc.robot.subsystems.flyBoi;
+import frc.robot.subsystems.Subsystems;
 
 /**
  * The main Robot class whence all things come.
@@ -25,6 +31,11 @@ public class Robot extends TimedRobot {
     // private boolean oldRightTriggerOn = false;
     // private RobotLogger logger = new RobotLogger();
     private boolean oldTriggerOn = false;
+
+    private boolean left;
+    private boolean right;
+    private double flySpeed;
+    private double hoodSpeed;
 
     public Robot() {
         super(0.06);
@@ -42,6 +53,8 @@ public class Robot extends TimedRobot {
         // UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
         // UserInterface.driverController.LB.whenPressed(new HoldFast());
         // UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+        //TODO
+        ShuffleboardControl.layoutShuffleboard();
     }
 
     @Override
@@ -84,6 +97,16 @@ public class Robot extends TimedRobot {
             Subsystems.flyBoi.stopShoot();
         }
         oldTriggerOn = isTriggerOn;
+        left = ShuffleboardControl.getLeft();
+        right = ShuffleboardControl.getRight();
+        flySpeed = ShuffleboardControl.getFlywheelSpeed();
+        hoodSpeed = ShuffleboardControl.getHoodSpeed();
+        
+        Subsystems.flyBoi.setShootSpeeds(flySpeed, hoodSpeed);
+        // Subsystems.cellStoppiStop.setStoppiStop(0.5);
+
+        Subsystems.flyBoi.setMainPID(ShuffleboardControl.getP(), ShuffleboardControl.getI(), ShuffleboardControl.getD());
+        ShuffleboardControl.setMotorSpeed(Subsystems.flyBoi.getAverageVelocity());
     }
 
     @Override
