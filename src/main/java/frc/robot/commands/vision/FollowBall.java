@@ -58,7 +58,7 @@ public class FollowBall extends CommandBase{
         if(Math.abs(xPos) < 5){
             turnSpeed = 0;
         }
-        Subsystems.driveBase.cheesyDrive.curvatureDrive(-travelSpeed, -turnSpeed, true);
+        Subsystems.driveBase.curvatureDrive(-travelSpeed, -turnSpeed, true);
         
     }
     

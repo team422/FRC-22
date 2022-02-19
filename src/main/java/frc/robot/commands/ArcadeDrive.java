@@ -76,7 +76,7 @@ public class ArcadeDrive extends CommandBase{
         // System.out.println("Speed: " + leftSpeed);
         // System.out.println(rightSpeed);
 
-        Subsystems.driveBase.cheesyDrive.curvatureDrive(speed, -rotation, true);
+        Subsystems.driveBase.curvatureDrive(speed, -rotation, true);
     }
 
 }

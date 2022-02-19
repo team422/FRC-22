@@ -11,7 +11,7 @@ public abstract class DriveBase extends SubsystemBase {
 
     public MotorControllerGroup leftSide;
     public MotorControllerGroup rightSide;
-    public DifferentialDrive tank;
+    public DifferentialDrive driveBase;
 
     public double leftMotorTicks = 0;
     public double rightMotorTicks = 0;
@@ -19,7 +19,7 @@ public abstract class DriveBase extends SubsystemBase {
     public DriveBase() {
         setSubsystem("DriveBase");
 
-        this.tank = new DifferentialDrive(leftSide, rightSide);
+        this.driveBase = new DifferentialDrive(leftSide, rightSide);
     }
 
     /**
@@ -54,6 +54,18 @@ public abstract class DriveBase extends SubsystemBase {
     public void stopMotors() {
         leftSide.stopMotor();
         rightSide.stopMotor(); //better apparently according to Yash (stopMotor instead of set(0))
+    }
+
+    public void curvatureDrive(double xSpeed, double zRotation, boolean allowTurnInPlace){
+        driveBase.curvatureDrive(xSpeed, zRotation, allowTurnInPlace);
+    }
+
+    public void tankDrive(double leftSpeed, double rightSpeed, boolean squareInputs){
+        driveBase.tankDrive(leftSpeed, rightSpeed, squareInputs);
+    }
+
+    public void arcadeDrive(double xSpeed, double zRotation, boolean squareInputs){
+        driveBase.arcadeDrive(xSpeed, zRotation, squareInputs);
     }
 
     /**
