@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -14,6 +15,9 @@ public class FlyShootiShoot extends SubsystemBase{
     private WPI_TalonFX shooterRightMotor;
     private WPI_TalonFX hoodRoller;
 
+    public PIDController mainPID;
+    public PIDController topPID;
+
     double speed = 0.5;
 
     // temp vaiable you can change. the speed as needed later
@@ -24,6 +28,9 @@ public class FlyShootiShoot extends SubsystemBase{
         this.shooterRightMotor = new WPI_TalonFX(RobotMap.rightFlywheel);
         shooterRightMotor.setInverted(true);
         this.hoodRoller = new WPI_TalonFX(RobotMap.hoodRoller);
+        this.mainPID = new PIDController(0, 0, 0);
+        this.topPID = new PIDController(0, 0, 0);
+        this.hoodRoller.setInverted(true);
     }
 
     public void wheelSpin(double speed, boolean left, boolean right){
@@ -41,6 +48,10 @@ public class FlyShootiShoot extends SubsystemBase{
         }
         // set the speed of one of these is negative
         // when robot have fix it
+    }
+
+    public void setMainPID(double P, double I, double D) {
+        mainPID.setPID(P, I, D);
     }
 
     public void hoodRollerSpin (double speed) {

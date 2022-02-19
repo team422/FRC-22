@@ -70,8 +70,10 @@ public class Robot extends TimedRobot {
         right = ShuffleboardControl.getRight();
         flySpeed = ShuffleboardControl.getFlywheelSpeed();
         hoodSpeed = ShuffleboardControl.getHoodSpeed();
-
+        
         Subsystems.flyShootiShoot.wheelSpin(flySpeed, left, right);
         Subsystems.flyShootiShoot.hoodRollerSpin(hoodSpeed);
+
+        Subsystems.flyShootiShoot.setMainPID(ShuffleboardControl.getP(),ShuffleboardControl.getI(),ShuffleboardControl.getD());
     }
 }

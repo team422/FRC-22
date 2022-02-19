@@ -16,6 +16,10 @@ public class ShuffleboardControl {
     private static NetworkTableEntry flywheelSpeed;
     private static NetworkTableEntry hoodRollerSpeed;
 
+    private static NetworkTableEntry kP;
+    private static NetworkTableEntry kI;
+    private static NetworkTableEntry kD;
+
     public static void layoutShuffleboard() {
         ShuffleboardTab shooterTab = Shuffleboard.getTab("Scintillating Shooting Stuff");
 
@@ -24,6 +28,10 @@ public class ShuffleboardControl {
             .withSize(2, 3);
         ShuffleboardLayout speeds = shooterTab.getLayout("Motor speeds", BuiltInLayouts.kList)
             .withPosition(4, 0)
+            .withSize(2, 3);
+        
+        ShuffleboardLayout PID = shooterTab.getLayout("PID values", BuiltInLayouts.kList)
+            .withPosition(8, 0)
             .withSize(2, 3);
 
         leftFlywheel = flywheelMotors.add("Left Flywheel", false)
@@ -45,6 +53,22 @@ public class ShuffleboardControl {
             .withProperties(Map.of("min", 0, "max", 1))
             .withPosition(4, 4)
             .withSize(2, 3).getEntry();
+        
+        kP = speeds.add("P Constant", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withPosition(4, 4)
+            .withSize(2, 3).getEntry();
+        kI = speeds.add("I Constant", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withPosition(4, 8)
+            .withSize(2, 3).getEntry();
+        kD = speeds.add("D Constant", 0)
+            .withWidget(BuiltInWidgets.kNumberSlider)
+            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withPosition(4, 8)
+            .withSize(2, 3).getEntry();
     }
 
     public static boolean getLeft() {
@@ -61,5 +85,17 @@ public class ShuffleboardControl {
 
     public static double getHoodSpeed() {
         return hoodRollerSpeed.getDouble(0.0);
+    }
+
+    public static double getP() {
+        return kP.getDouble(0.0);
+    }
+
+    public static double getI() {
+        return kI.getDouble(0.0);
+    }
+
+    public static double getD() {
+        return kD.getDouble(0.0);
     }
 }
