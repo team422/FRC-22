@@ -23,10 +23,12 @@ public class ShootDistance extends CommandBase{
         addRequirements(Subsystems.driveBase);
     }
 
+    @Override
     public void initialize(){
 
     }
 
+    @Override
     public void execute(){
         target = targetCamera.getLatestResult().getBestTarget();
         if (target == null){

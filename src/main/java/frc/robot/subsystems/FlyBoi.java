@@ -103,7 +103,7 @@ public class FlyBoi extends SubsystemBase {
     }
 
     public void voltageShootiShoot(double leftVelocity, double rightVelocity, double topVelocity) {
-
+        //PID Method using voltage to get to a set point.
         System.out.println(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
         leftShoot.setVoltage(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
         rightShoot.setVoltage(rightPID.calculate(getRightVelocity(), rightVelocity) + feedForward.calculate(rightVelocity));
@@ -111,7 +111,7 @@ public class FlyBoi extends SubsystemBase {
     }
 
     public void speedShootiShoot(double leftSetpoint, double rightSetpoint, double topSetpoint) {
-        
+        //PID Method using velocities to get to a set point
         System.out.println(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
         leftShoot.set(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
         rightShoot.set(rightPID.calculate(getRight(), rightSetpoint) + feedForward.calculate(rightSetpoint));

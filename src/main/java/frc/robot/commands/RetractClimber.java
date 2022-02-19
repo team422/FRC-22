@@ -13,21 +13,23 @@ public class RetractClimber extends CommandBase {
     }
 
     //wpilib looks for initialize, execute, and end!
-
+    @Override
     public void initialize() {
 
     }
     
-    public void end () {
+    public void end() {
         Subsystems.climber.stopClimberBoth();
     }
     
     //speed is set in Climber.java!
+    @Override
     public void execute() {
         Subsystems.climber.climberRetractBoth();
     }
 
     //allows it to stop automatically once it is finished!
+    @Override
     public boolean isFinished() {
         return true;
     }

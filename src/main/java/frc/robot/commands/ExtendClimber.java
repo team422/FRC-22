@@ -17,7 +17,6 @@ public class ExtendClimber extends CommandBase {
     public void initialize() {
 
     }
-
     
     public void execute() {
         Subsystems.climber.climberExtendBoth();
@@ -28,7 +27,7 @@ public class ExtendClimber extends CommandBase {
     }
     
 
-
+    //wpilib looks for this to automattically end the command
     public boolean isFinished() {
         return true;
     }
