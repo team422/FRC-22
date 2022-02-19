@@ -19,6 +19,7 @@ public class ShuffleboardControl {
     private static NetworkTableEntry kP;
     private static NetworkTableEntry kI;
     private static NetworkTableEntry kD;
+    private static NetworkTableEntry motorVelocity;
 
     public static void layoutShuffleboard() {
         ShuffleboardTab shooterTab = Shuffleboard.getTab("Scintillating Shooting Stuff");
@@ -54,20 +55,20 @@ public class ShuffleboardControl {
             .withPosition(4, 4)
             .withSize(2, 3).getEntry();
         
-        kP = speeds.add("P Constant", 0)
+        kP = PID.add("P Constant", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(4, 4)
             .withSize(2, 3).getEntry();
-        kI = speeds.add("I Constant", 0)
+        kI = PID.add("I Constant", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(4, 8)
             .withSize(2, 3).getEntry();
-        kD = speeds.add("D Constant", 0)
+        kD = PID.add("D Constant", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(4, 8)
+            .withSize(2, 3).getEntry();
+        motorVelocity = speeds.add("Motor Velocity", 0)
+            .withWidget(BuiltInWidgets.kTextView)
             .withSize(2, 3).getEntry();
     }
 
@@ -97,5 +98,9 @@ public class ShuffleboardControl {
 
     public static double getD() {
         return kD.getDouble(0.0);
+    }
+
+    public static void setMotorSpeed(double value) {
+        motorVelocity.setDouble(value);
     }
 }

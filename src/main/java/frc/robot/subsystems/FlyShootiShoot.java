@@ -36,15 +36,19 @@ public class FlyShootiShoot extends SubsystemBase{
     public void wheelSpin(double speed, boolean left, boolean right){
         //set the speed of the flywheels to 0.8 or whatever speed from robotmap.java
         if (left == true) {
-            shooterLeftMotor.set(speed);
+            mainPID.setSetpoint(speed);
+            shooterLeftMotor.set(mainPID.calculate(getVelocity()));
         } else {
-            shooterLeftMotor.set(0);
+            mainPID.setSetpoint(0);
+            shooterLeftMotor.set(mainPID.calculate(getVelocity()));
         }
         
         if (right == true) {
-            shooterRightMotor.set(speed);
+            mainPID.setSetpoint(speed);
+            shooterLeftMotor.set(mainPID.calculate(getVelocity()));
         } else {
-            shooterRightMotor.set(0);
+            mainPID.setSetpoint(0);
+            shooterLeftMotor.set(mainPID.calculate(getVelocity()));
         }
         // set the speed of one of these is negative
         // when robot have fix it
@@ -65,8 +69,7 @@ public class FlyShootiShoot extends SubsystemBase{
     }
 
     public double getVelocity () {
-        //return shooterLeftMotor.getEncoder().getVelocity()/5600;
-        return 0;
+        return (shooterLeftMotor.getSelectedSensorVelocity() + shooterRightMotor.getSelectedSensorVelocity()) / 2;
     }
 
     // Fun Fact: Neos are conncted in order to double the power, so below does not work

@@ -73,7 +73,9 @@ public class Robot extends TimedRobot {
         
         Subsystems.flyShootiShoot.wheelSpin(flySpeed, left, right);
         Subsystems.flyShootiShoot.hoodRollerSpin(hoodSpeed);
+        Subsystems.cellStoppiStop.setStoppiStop(0.5);
 
         Subsystems.flyShootiShoot.setMainPID(ShuffleboardControl.getP(),ShuffleboardControl.getI(),ShuffleboardControl.getD());
+        ShuffleboardControl.setMotorSpeed(Subsystems.flyShootiShoot.getVelocity());
     }
 }
