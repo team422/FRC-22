@@ -14,6 +14,7 @@ import frc.robot.subsystems.*;
 // import frc.robot.commands.SpeedModes.ReleaseSlow;
 // import frc.robot.userinterface.UserInterface;
 // import frc.robot.RobotMap.BotNames;
+import frc.robot.userinterface.UserInterface;
 
 /**
  * The main Robot class whence all things come.
@@ -23,6 +24,7 @@ public class Robot extends TimedRobot {
     // private boolean oldLeftTriggerOn = false;
     // private boolean oldRightTriggerOn = false;
     // private RobotLogger logger = new RobotLogger();
+    private boolean oldTriggerOn = false;
 
     public Robot() {
         super(0.06);
@@ -75,6 +77,13 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         // TODO
         // ShuffleboardControl.updateShuffleboard();
+        boolean isTriggerOn = UserInterface.operatorController.getRightTrigger() >= 0.4;
+        if (isTriggerOn && !oldTriggerOn) { //if trigger was just pressed
+            new ShootBall().schedule();
+        } else if (!isTriggerOn && oldTriggerOn) { //if trigger was just released
+            Subsystems.flyBoi.stopShoot();
+        }
+        oldTriggerOn = isTriggerOn;
     }
 
     @Override
