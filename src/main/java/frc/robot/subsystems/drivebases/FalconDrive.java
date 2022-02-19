@@ -1,6 +1,5 @@
 package frc.robot.subsystems.drivebases;
 
-import frc.robot.subsystems.DriveBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
