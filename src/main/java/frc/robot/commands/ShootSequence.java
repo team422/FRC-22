@@ -17,7 +17,7 @@ public class ShootSequence extends CommandBase {
     
     public void execute () {
         // Subsystems.flyShootiShoot.bothWheelSpin(Speed);
-        if (Subsystems.flyShootiShoot.getVelocity()>=422) {
+        if (Subsystems.flyShootiShoot.getLeft()>=422) {
             Subsystems.cellStoppiStop.setStoppiStop(0.8);
             Subsystems.transversal.setTransversalSpeed(0.8);    
         } else {

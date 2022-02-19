@@ -63,64 +63,81 @@ public class FlyShootiShoot extends SubsystemBase{
         shooterRightMotor.set(0);
         shooterRightMotor.set(0);
     }
-
-    public double getVelocity () {
-        //return shooterLeftMotor.getEncoder().getVelocity()/5600;
-        return 0;
+    
+    /**
+    * Function to get speed of left Motor (-1, 1).
+    * @return returns Speed of of left motor (-1, 1).
+    */
+    public double getLeft(){
+        return shooterLeftMotor.get();
     }
 
-    // Fun Fact: Neos are conncted in order to double the power, so below does not work
-    // DONT EVEN TRY TO USE IT
-    // You've been warned
+    /**
+    * Function To get spEed of right motor (-1, 1).
+    * @return returns speed of Right motor (-1, 1).
+    */
+    public double getRight(){
+        return shooterRightMotor.get();
+    }
+    
+    /**
+    * Function to get speed of top motor (-1, 1).
+    * @return returns speed Of Top motor (-1, 1).
+    */
+    public double getTop(){
+        return hoodRoller.get();
+    }
 
-    // Hey there, justing testing if you can change the shooting angle (left and right) of the ball - yash
-    // also, I'm bored
-    // For the Future: experiment with speeds of the flywheels (left and right) by changing the relative speed of both
-    // If one flywheel has a higher speed than the other, then the ball will fly in a certain direction
-    // flywheels to make the robot able to launch the balls at an angle
-    // Visualization:
-    // . . . . . . . . 
-    //   . . . . . .
-    //     . . . .
-    //       ...
-    //        .
-    //       -ˆ-
-    //      |   | 
-    //       ---
+    /**
+    * Function to get velocity Of left motor (raw sensor units/ticks).
+    * @return Returns velocity Of left motor (raw Sensor units/ticks).
+    */
+    public double getLeftVelocity(){
+        return shooterLeftMotor.getSelectedSensorVelocity();
+    }   
 
-    /*public void ballAngleShoot(double speed, double angle){
-        // set the speed of one of these is negative
-        // when robot have fix it because we dont want to suck the ball in when trying to shoot it
+    /**
+     * Function to Get velocity of Right motor (raw Sensor units/ticks).
+     * @return returns velocity of right Motor (raw sensor units/Ticks).
+     */
+    public double getRightVelocity(){
+        return shooterRightMotor.getSelectedSensorVelocity();
+    }
+    
+    /**
+    * function to get Velocity of top motor (Raw sensor units/ticks).
+    * @return Returns Velocity Of Top Motor (Raw Sensor Units/Ticks).
+    */
+    public double getTopVelocity(){
+        return hoodRoller.getSelectedSensorVelocity();
+    }
 
-        double adjustedangle;
-        double otherwheeladjustedangle;
+    /**
+     * Sets motor voltage to spin a certain velocity
+     * @param motorVelocities expects 3 double values for the leftVelocity, rightVelocity, and topVelocity in that order
+     */
+    public void voltageShootiShoot(double leftVelocity, double rightVelocity) {
+        // double topVelocity = motorVelocities[2];
+        //PID Method using voltage to get to a set point.
+        // System.out.println(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
+        shooterLeftMotor.setVoltage(mainPID.calculate(getLeftVelocity(), leftVelocity));
+        shooterRightMotor.setVoltage(mainPID.calculate(getRightVelocity(), rightVelocity));
+        // hoodRoller.set(0);
+    }
 
-        // is the relationship between the angle of shooting and flywheel speed linear, quadratic or something else?
-        // not currently known will test when given robot - yash
-        // going to assume that its linear and that left motor need -speed and right motor needs speed to shoot the ball out. might be wrong
-
-        // going to try a linear relationship
-        // angle in degrees between 0 and 180 where 0 is the positive x axis and 180 is the negative x axis
-
-        if (angle < 90){
-            adjustedangle = angle/90;
-            otherwheeladjustedangle = (angle-90)/90;
-            shooterLeftMotor.set(adjustedangle);
-            shooterRightMotor.set(otherwheeladjustedangle);
-        } else if (angle > 90){
-            adjustedangle = (angle-90)/90;
-            otherwheeladjustedangle = (angle-180)/90;
-            shooterLeftMotor.set(otherwheeladjustedangle);
-            shooterRightMotor.set(adjustedangle);
-        } else if (angle = 90){
-            shooterLeftMotor.set(-speed);
-            shooterRightMotor.set(speed);
-        }
-
-        shooterRightMotor.set(0);
-        shooterRightMotor.set(0);
-        */
+    /**
+     * Sets motor speed based on desired speeds
+     * @param setpoints for the velocities of the left, right, and top motors respectively
+     */
+    // public void speedShootiShoot(double... setpoints) {
+    //     double leftSetpoint = setpoints[0];
+    //     double rightSetpoint = setpoints[1];
+    //     double topSetpoint = setpoints[2];
+    //     //PID Method using velocities to get to a set point
+    //     System.out.println(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
+    //     leftShoot.set(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
+    //     rightShoot.set(rightPID.calculate(getRight(), rightSetpoint) + feedForward.calculate(rightSetpoint));
+    //     topRoller.set(topPID.calculate(getTop(), topSetpoint) + feedForward.calculate(topSetpoint));
     // }
-
 }
 

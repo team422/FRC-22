@@ -6,6 +6,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.FlyShootiShoot;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -19,6 +20,7 @@ public class ShuffleboardControl {
     private static NetworkTableEntry kP;
     private static NetworkTableEntry kI;
     private static NetworkTableEntry kD;
+    private static NetworkTableEntry VeloGraph;
 
     public static void layoutShuffleboard() {
         ShuffleboardTab shooterTab = Shuffleboard.getTab("Scintillating Shooting Stuff");
@@ -54,24 +56,30 @@ public class ShuffleboardControl {
             .withPosition(4, 4)
             .withSize(2, 3).getEntry();
         
-        kP = speeds.add("P Constant", 0)
+        kP = PID.add("P Constant", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(4, 4)
+            .withPosition(8, 2)
             .withSize(2, 3).getEntry();
-        kI = speeds.add("I Constant", 0)
+        kI = PID.add("I Constant", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(4, 8)
+            .withPosition(8, 4)
             .withSize(2, 3).getEntry();
-        kD = speeds.add("D Constant", 0)
+        kD = PID.add("D Constant", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
             .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(4, 8)
+            .withPosition(8, 6)
             .withSize(2, 3).getEntry();
+        VeloGraph = shooterTab.add("Velocity Graph", 0)
+            .getEntry();
+        }
+    
+    public static void setVelocity(){
+        VeloGraph.setDouble(Subsystems.flyShootiShoot.getLeftVelocity());
     }
 
-    public static boolean getLeft() {
+        public static boolean getLeft() {
         return leftFlywheel.getBoolean(false);
     }
 
