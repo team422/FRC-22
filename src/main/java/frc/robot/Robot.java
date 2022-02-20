@@ -34,8 +34,8 @@ public class Robot extends TimedRobot {
 		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
 
 		UserInterface.driverController.R1.whenPressed(new ChangeSpeed());
-        // UserInterface.driverController.LB.whenPressed(new HoldFast());
-        // UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+        UserInterface.driverController.L1.whenPressed(new HoldFast());
+        UserInterface.driverController.L1.whenReleased(new ReleaseSlow());
 
 		// Might need to be moved to teleopPeriodic in order to function, but it might also work here.
 		// UserInterface.driverController.A.whenPressed(new RotateToBall());

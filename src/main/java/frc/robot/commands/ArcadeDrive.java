@@ -33,9 +33,9 @@ public class ArcadeDrive extends CommandBase {
             speed = 0;
         }
         if (UserInterface.driverController.getRightJoystickX() < -0.05) {
-            rotation = (Math.pow(UserInterface.driverController.getRightJoystickX(), 5));
+            rotation = -(Math.pow(UserInterface.driverController.getRightJoystickX(), 5));
         } else if (UserInterface.driverController.getRightJoystickX() > 0.05) {
-            rotation = (Math.pow(UserInterface.driverController.getRightJoystickX(), 5));
+            rotation = -(Math.pow(UserInterface.driverController.getRightJoystickX(), 5));
         } else {
             rotation = 0;
         }
