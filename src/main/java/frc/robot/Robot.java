@@ -102,11 +102,21 @@ public class Robot extends TimedRobot {
         flySpeed = ShuffleboardControl.getFlywheelSpeed();
         hoodSpeed = ShuffleboardControl.getHoodSpeed();
         
-        Subsystems.flyBoi.setShootSpeeds(flySpeed, hoodSpeed);
+        // Subsystems.flyBoi.setShootSpeeds(flySpeed, hoodSpeed);
         // Subsystems.cellStoppiStop.setStoppiStop(0.5);
 
         Subsystems.flyBoi.setMainPID(ShuffleboardControl.getP(), ShuffleboardControl.getI(), ShuffleboardControl.getD());
         ShuffleboardControl.setMotorSpeed(Subsystems.flyBoi.getAverageVelocity());
+
+        if (left && right) {
+            Subsystems.flyBoi.voltageShootiShoot(flySpeed, flySpeed, hoodSpeed);
+        } else if (left) {
+            Subsystems.flyBoi.voltageShootiShoot(flySpeed, 0, hoodSpeed);
+        } else if (right) {
+            Subsystems.flyBoi.voltageShootiShoot(0, flySpeed, hoodSpeed);
+        } else {
+            Subsystems.flyBoi.voltageShootiShoot(0, 0, hoodSpeed);
+        }
     }
 
     @Override

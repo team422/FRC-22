@@ -69,7 +69,7 @@ public abstract class BaseShooter extends SubsystemBase{
     */
     public abstract double getTopVelocity();
 
-    public void voltageShootiShoot(double... setVelocities) {
+    public void voltageShootiShoot(double leftVelocity, double rightVelocity, double topVelocity) {
     }
 
     public void speedShootiShoot(double... setpoints) {

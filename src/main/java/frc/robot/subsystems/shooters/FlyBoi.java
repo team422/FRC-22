@@ -115,15 +115,13 @@ public class FlyBoi extends BaseShooter {
      * @param motorVelocities expects 3 double values for the leftVelocity, rightVelocity, and topVelocity in that order
      */
     @Override
-    public void voltageShootiShoot(double... motorVelocities) {
-        double leftVelocity = motorVelocities[0];
-        double rightVelocity = motorVelocities[1];
-        double topVelocity = motorVelocities[2];
+    public void voltageShootiShoot(double leftVelocity, double rightVelocity, double topVelocity) {
         //PID Method using voltage to get to a set point.
         System.out.println(mainPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
         leftShoot.setVoltage(mainPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
         rightShoot.setVoltage(mainPID.calculate(getRightVelocity(), rightVelocity) + feedForward.calculate(rightVelocity));
-        topRoller.setVoltage(topPID.calculate(getTopVelocity(), topVelocity) + feedForward.calculate(topVelocity));
+        // topRoller.setVoltage(topPID.calculate(getTopVelocity(), topVelocity) + feedForward.calculate(topVelocity));
+        topRoller.set(topVelocity);
     }
 
     /**
