@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.commands.*;
@@ -12,6 +13,7 @@ import frc.robot.commands.SpeedModes.*;
 // import frc.robot.commands.vision.*;
 import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserInterface;
+import frc.robot.commands.autonomous.TrajectoryGeneration;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,6 +22,8 @@ import frc.robot.userinterface.UserInterface;
  * project.
  */
 public class Robot extends TimedRobot {
+
+	private Command trajectoryMotion;
   
 	public Robot(){
     	super(0.08);
@@ -40,6 +44,8 @@ public class Robot extends TimedRobot {
 		// Might need to be moved to teleopPeriodic in order to function, but it might also work here.
 		// UserInterface.driverController.A.whenPressed(new RotateToBall());
 		// UserInterface.driverController.X.whenPressed(new FollowBall());
+
+		trajectoryMotion = TrajectoryGeneration.trajectoryGenerate(Subsystems.driveBase);
   	}
 
 	@Override
@@ -51,6 +57,8 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		System.out.println("Autonomous Initalized");
     	CommandScheduler.getInstance().cancelAll();
+
+		trajectoryMotion.schedule(true);
 	}
 
 	@Override

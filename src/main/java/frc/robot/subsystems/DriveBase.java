@@ -119,7 +119,9 @@ public class DriveBase extends SubsystemBase {
 	@Override
 	public void periodic() {
 		m_odometry.update(
-			gyro.getRotation2d(), RobotMap.convertTicksToMeters(this.getLeftEncoder()), RobotMap.convertTicksToMeters(this.getRightEncoder())
+			gyro.getRotation2d(),
+			RobotMap.convertTicksToMeters(this.getLeftEncoder()),
+			RobotMap.convertTicksToMeters(this.getRightEncoder())
 		);
 	}
 
@@ -128,7 +130,10 @@ public class DriveBase extends SubsystemBase {
 	}
 
 	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-		return new DifferentialDriveWheelSpeeds(RobotMap.convertTicksToMeters(leftFront.getSelectedSensorVelocity(0) * 10), RobotMap.convertTicksToMeters(rightFront.getSelectedSensorVelocity(0) * 10));
+		return new DifferentialDriveWheelSpeeds(
+			RobotMap.convertTicksToMeters(leftFront.getSelectedSensorVelocity(0) * 10),
+			RobotMap.convertTicksToMeters(rightFront.getSelectedSensorVelocity(0) * 10)
+		);
 	}
 
 	public void resetOdometry(Pose2d pose) {
@@ -153,6 +158,12 @@ public class DriveBase extends SubsystemBase {
 		leftMotorGroup.set(0);
 		rightMotorGroup.set(0);
 	}	
+
+	public void tankDriveVoltage(double leftVolts, double rightVolts) {
+		leftMotorGroup.setVoltage(leftVolts);
+		rightMotorGroup.setVoltage(rightVolts);
+		tank.feed();
+	}
 	
 	/**
 	 * resets the Gyro to 0
