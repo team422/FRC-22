@@ -10,9 +10,9 @@ public class RobotMap {
     public static double speedCap = 0.7;
     public static double rotationCap = 0.5;
     public static double slowSpeedCap = 0.4;
-    public static double slowRotCap = 0.3;
+    public static double slowRotCap = 0.25;
     public static double fastSpeedCap = 0.7;
-    public static double fastRotCap = 0.3;
+    public static double fastRotCap = 0.25;
 
     public static boolean isSpeedMode = true;
     
