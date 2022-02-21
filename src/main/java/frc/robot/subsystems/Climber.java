@@ -3,10 +3,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+// import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import frc.robot.Robot;
+// import frc.robot.Robot;
 // import edu.wpi.first.wpilibj.*;
 // The above import isn't used yet. Uncomment it if you need it and delete this comment later.
 import frc.robot.RobotMap;

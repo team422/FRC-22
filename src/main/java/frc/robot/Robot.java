@@ -6,8 +6,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
+import frc.robot.commands.autonomous.TrajectoryGeneration;
 import frc.robot.subsystems.*;
 // import frc.robot.commands.SpeedModes.ChangeSpeed;
 // import frc.robot.commands.SpeedModes.HoldFast;
@@ -26,6 +28,8 @@ public class Robot extends TimedRobot {
     // private RobotLogger logger = new RobotLogger();
     private boolean oldTriggerOn = false;
 
+    private Command trajectoryCommand;
+
     public Robot() {
         super(0.06);
     }
@@ -42,11 +46,14 @@ public class Robot extends TimedRobot {
         // UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
         // UserInterface.driverController.LB.whenPressed(new HoldFast());
         // UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+
+        trajectoryCommand = TrajectoryGeneration.trajectoryGenerate(Subsystems.driveBase);
     }
 
     @Override
     public void robotPeriodic() {
         //TODO
+        CommandScheduler.getInstance().run();
     }
 
     @Override
@@ -58,11 +65,15 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
         // this.logger.logInfoMessage("Autonomous Initalized");
         // Schedule autonomous command to run
+
+        trajectoryCommand.schedule();
     }
 
     @Override
     public void autonomousPeriodic() {
         // TODO
+
+        System.out.println(Subsystems.driveBase.getWheelSpeeds());
     }
 
     @Override

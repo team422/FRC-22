@@ -1,8 +1,13 @@
 package frc.robot.subsystems.drivebases;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * Drivebase interface for all drivebases
@@ -11,7 +16,13 @@ public abstract class DriveBase extends SubsystemBase {
 
     public MotorControllerGroup leftSide;
     public MotorControllerGroup rightSide;
-    public DifferentialDrive driveBase;
+    public DifferentialDrive drive;
+
+    public DifferentialDriveOdometry odometry;
+
+    public Gyro gyro;
+
+    public int wheelDiameter;
 
     public double leftMotorTicks = 0;
     public double rightMotorTicks = 0;
@@ -19,7 +30,32 @@ public abstract class DriveBase extends SubsystemBase {
     public DriveBase() {
         setSubsystem("DriveBase");
 
-        this.driveBase = new DifferentialDrive(leftSide, rightSide);
+        this.defineMotors();
+        this.drive = new DifferentialDrive(leftSide, rightSide);
+
+        this.odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+    }
+
+    public abstract void defineMotors();
+
+    @Override
+    public void periodic() {
+        odometry.update(
+            gyro.getRotation2d(), 
+            RobotMap.convertTicksToMeters(this.getLeftPosition(), wheelDiameter),
+            RobotMap.convertTicksToMeters(this.getRightPosition(), wheelDiameter)
+        );
+    }
+
+    public Pose2d getPose() {
+        return odometry.getPoseMeters();
+    }
+
+    public abstract DifferentialDriveWheelSpeeds getWheelSpeeds();
+
+    public void resetOdometry(Pose2d pose) {
+        zeroEncoderPosition();
+        odometry.resetPosition(pose, gyro.getRotation2d());
     }
 
     /**
@@ -57,15 +93,21 @@ public abstract class DriveBase extends SubsystemBase {
     }
 
     public void curvatureDrive(double xSpeed, double zRotation, boolean allowTurnInPlace){
-        driveBase.curvatureDrive(xSpeed, zRotation, allowTurnInPlace);
+        drive.curvatureDrive(xSpeed, zRotation, allowTurnInPlace);
     }
 
     public void tankDrive(double leftSpeed, double rightSpeed, boolean squareInputs){
-        driveBase.tankDrive(leftSpeed, rightSpeed, squareInputs);
+        drive.tankDrive(leftSpeed, rightSpeed, squareInputs);
+    }
+
+    public void tankDriveVoltage(double leftVolts, double rightVolts) {
+        leftSide.setVoltage(leftVolts);
+        rightSide.setVoltage(rightVolts);
+        drive.feed();
     }
 
     public void arcadeDrive(double xSpeed, double zRotation, boolean squareInputs){
-        driveBase.arcadeDrive(xSpeed, zRotation, squareInputs);
+        drive.arcadeDrive(xSpeed, zRotation, squareInputs);
     }
 
     /**
@@ -82,7 +124,16 @@ public abstract class DriveBase extends SubsystemBase {
     /**
      * @return Angle at which the robot is positioned in degrees
      */
-    public abstract double getGyroAngle();
+    public double getGyroAngle() {
+        return gyro.getAngle();
+    }
+
+    /**
+     * @return Rate at which the angle turns
+     */
+    public double getTurnRate() {
+        return -gyro.getRate();
+    }
 
     /**
      * Resets the reference point used to calculate distance traveled. Does not physically change the encoder value.
@@ -92,5 +143,7 @@ public abstract class DriveBase extends SubsystemBase {
     /**
      * Sets the gyro angle to zero.
      */
-    public abstract void zeroGyroAngle();
+    public void zeroGyroAngle() {
+        gyro.reset();
+    }
 }

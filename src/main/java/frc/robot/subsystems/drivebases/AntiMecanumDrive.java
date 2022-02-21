@@ -1,7 +1,10 @@
 package frc.robot.subsystems.drivebases;
 
+import frc.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -21,6 +24,13 @@ public class AntiMecanumDrive extends DriveBase {
     private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
         
     public AntiMecanumDrive() {
+        this.wheelDiameter = 6;
+    }
+
+    @Override
+    public void defineMotors() {
+        this.gyro = new ADXRS450_Gyro(kGyroPort);
+
         this.leftFront = new WPI_TalonSRX(leftFrontPort);
         this.leftRear = new WPI_TalonSRX(leftRearPort);
         this.rightFront = new WPI_TalonSRX(rightFrontPort);
@@ -28,9 +38,14 @@ public class AntiMecanumDrive extends DriveBase {
 
         this.leftSide = new MotorControllerGroup(leftFront, leftRear);
         this.rightSide = new MotorControllerGroup(rightFront, rightRear);
-
-        this.gyro = new ADXRS450_Gyro(kGyroPort);
     }
+
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		return new DifferentialDriveWheelSpeeds(
+			RobotMap.convertTicksToMeters(leftFront.getSelectedSensorVelocity(0) * 10, wheelDiameter),
+			RobotMap.convertTicksToMeters(rightFront.getSelectedSensorVelocity(0) * 10, wheelDiameter)
+		);
+	}
 
     public double getLeftPosition() {
         return leftFront.getSelectedSensorPosition(0) - leftMotorTicks;

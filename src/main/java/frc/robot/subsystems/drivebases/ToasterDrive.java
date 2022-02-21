@@ -1,7 +1,9 @@
 package frc.robot.subsystems.drivebases;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -23,10 +25,15 @@ public class ToasterDrive extends DriveBase {
     private WPI_TalonSRX rightFront;
     private WPI_TalonSRX rightRear;
 
-    private ADXRS450_Gyro gyro;
     private static final SPI.Port kGyroPort = SPI.Port.kOnboardCS0;
         
     public ToasterDrive() {
+        this.wheelDiameter = 6;
+    }
+
+    public void defineMotors() {
+        this.gyro = new ADXRS450_Gyro(kGyroPort);
+
         this.leftMiddle = new WPI_TalonSRX(leftMiddlePort);
         this.leftFront = new WPI_TalonSRX(leftFrontPort);
         this.leftRear = new WPI_TalonSRX(leftRearPort);
@@ -41,9 +48,14 @@ public class ToasterDrive extends DriveBase {
 
         this.leftSide = new MotorControllerGroup(leftMiddle, leftFront, leftRear);
         this.rightSide = new MotorControllerGroup(rightMiddle, rightFront, rightRear);
-
-        this.gyro = new ADXRS450_Gyro(kGyroPort);
     }
+
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		return new DifferentialDriveWheelSpeeds(
+			RobotMap.convertTicksToMeters(leftMiddle.getSelectedSensorVelocity(0) * 10, wheelDiameter),
+			RobotMap.convertTicksToMeters(rightMiddle.getSelectedSensorVelocity(0) * 10, wheelDiameter)
+		);
+	}
 
     public double getLeftPosition() {
         return leftMiddle.getSelectedSensorPosition(0) - leftMotorTicks;

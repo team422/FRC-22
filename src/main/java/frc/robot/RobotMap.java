@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 /**
  * Ports for motor controllers, caps for speed and rotation, booleans for toggles, and turn direction.
  */
@@ -29,13 +31,29 @@ public class RobotMap {
     public static int rightLeader;
  
     // drive speed calculation ports
-    public static int wheelDiameter;
     public static int ticksPerRevolution;
 
     // Flyboi
     public static int leftFlywheel;
     public static int rightFlywheel;
     public static int topFlyWheel;
+    
+    // THESE ARE ALL TRAJECTORY VALUES
+    // Drive Station Constants
+    public static final double kS = 0.66569;
+    public static final double kV = 0.050387;
+    public static final double kA = 0.0051628;
+    
+    public static final double kPDriveVel = 0.064039;
+    public static final double kTrack = 0.61;
+    public static final DifferentialDriveKinematics kKinematics = new DifferentialDriveKinematics(kTrack);
+    
+    public static final double kMaxSpeed = 20;
+    public static final double kMaxAcceleration = 3;
+
+    // Ramsete Controller Gains
+    public static final double kRamseteB = 2;
+    public static final double kRamseteZeta = 0.7;
 
     // Transversal - 1 neo
     public static final int transversalPort = 423;
@@ -135,7 +153,7 @@ public class RobotMap {
         rightFollower = 1;
         rightLeader = 3;
 
-        wheelDiameter = 4;
+        // wheelDiameter = 4;
         ticksPerRevolution = 2048;
 
         leftFlywheel = 422;
@@ -179,8 +197,12 @@ public class RobotMap {
         rotationCap = (newRotationCap > 1) ? 1 : newRotationCap;
     }
 
-    public static double convertToTicks(double inches) {
-        return (ticksPerRevolution / (wheelDiameter * Math.PI) * inches);
+    public static double convertToTicks(double inches, int wheelDiameter) {
+        return ( ticksPerRevolution / (wheelDiameter * Math.PI) * inches );
+    }
+
+    public static double convertTicksToMeters(double ticks, int wheelDiameter) {
+        return ( (ticks * (wheelDiameter) * Math.PI) / 104.0384 );
     }
 
     public static double cap(double value, double min, double max){
