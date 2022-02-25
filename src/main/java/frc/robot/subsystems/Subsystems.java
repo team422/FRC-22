@@ -13,7 +13,7 @@ import frc.robot.subsystems.shooters.*;
  * Contains instances of all subsystems on the robot.
  */
 public class Subsystems {
-    // public static final Intake intake = new Intake();
+    public static final Intake intake = new Intake();
     public static final Climber climber = new Climber();
     public static final DriveBase driveBase = new FalconDrive();
     public static final BaseShooter flyBoi = new FlyBoi();

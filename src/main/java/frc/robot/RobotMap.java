@@ -45,8 +45,10 @@ public class RobotMap {
 
     // Intake stuff
     // public static int lift = 11;
-    public static final int extensionInPort = 424;
-    public static final int extensionOutPort = 427;
+    public static final int leftextensionInPort = 424;
+    public static final int leftextensionOutPort = 427;
+    public static final int rightextensionInPort = 424;
+    public static final int rightextensionOutPort = 427;
     public static final int intakeMotorPort = 420;
     public static final int beamBreakPort = 429;
     
@@ -75,12 +77,12 @@ public class RobotMap {
     public static double kD = 1;
     
     //PIDFlyboi params for PIDController
-    public static double FlykP = 1;
-    public static double FlykI = 1;
-    public static double FlykD = 1;
-    public static double HoodFlykD = 1;
-    public static double HoodFlykI = 1;
-    public static double HoodFlykP = 1;
+    public static double FlykP = ShuffleboardControl.getPFly();
+    public static double FlykI = ShuffleboardControl.getIFly();
+    public static double FlykD = ShuffleboardControl.getDFly();
+    public static double HoodFlykD = ShuffleboardControl.getPHood();
+    public static double HoodFlykI = ShuffleboardControl.getIHood();
+    public static double HoodFlykP = ShuffleboardControl.getDHood();
 
     // Shooter feedforward
     public static int FlykS = 0;
