@@ -6,12 +6,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
+import frc.robot.commands.SpeedModes.*;
 import frc.robot.subsystems.*;
-// import frc.robot.commands.SpeedModes.ChangeSpeed;
-// import frc.robot.commands.SpeedModes.HoldFast;
-// import frc.robot.commands.SpeedModes.ReleaseSlow;
+import frc.robot.commands.autonomous.*;
+import frc.robot.commands.vision.*;
 // import frc.robot.userinterface.UserInterface;
 // import frc.robot.RobotMap.BotNames;
 import frc.robot.userinterface.UserInterface;
@@ -77,13 +78,23 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         // TODO
         // ShuffleboardControl.updateShuffleboard();
-        boolean isTriggerOn = UserInterface.operatorController.getRightTrigger() >= 0.4;
-        if (isTriggerOn && !oldTriggerOn) { //if trigger was just pressed
+
+        // Controls
+        UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+        UserInterface.driverController.LB.whenPressed(new HoldFast());
+        UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+
+        if(UserInterface.operatorController.getRightBumper()){
             new ShootBall().schedule();
-        } else if (!isTriggerOn && oldTriggerOn) { //if trigger was just released
+        } else if(!UserInterface.operatorController.getRightBumper()) {
+            Subsystems.transversal.stopTransversal();
+            Subsystems.intake.stopIntake();
+            Subsystems.cellStop.stopStoppiStop();
             Subsystems.flyBoi.stopShoot();
         }
-        oldTriggerOn = isTriggerOn;
+
+        //PID Stuff uncomment when testing PID
+        Subsystems.flyBoi.speedShootiShoot(ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getHoodSpeed());
     }
 
     @Override

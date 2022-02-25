@@ -40,7 +40,7 @@ public class ArcadeDrive extends CommandBase{
     public void execute(){
         speed = UserInterface.driverController.getLeftJoystickY();
         rotation = UserInterface.driverController.getRightJoystickX();
-        
+    
         // System.out.println("Speed:" + speed);
         // System.out.println("rotation: " + rotation);
         // // System.out.println("break");

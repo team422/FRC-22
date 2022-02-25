@@ -2,6 +2,7 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,15 +17,18 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Intake extends SubsystemBase{
 
-    DoubleSolenoid extension;
+    DoubleSolenoid extensionLeft;
+    DoubleSolenoid extensionRight;
     WPI_TalonSRX intakeMotor;
     DigitalInput beamBreak;
+    public boolean isIntakeDown;
 
     public Intake(){
         setSubsystem("Intake");
 
         // Creating Motors
-        this.extension = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.extensionInPort, RobotMap.extensionOutPort);
+        this.extensionLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.leftextensionInPort, RobotMap.leftextensionOutPort);
+        this.extensionRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.rightextensionInPort, RobotMap.rightextensionOutPort);
         this.intakeMotor = new WPI_TalonSRX(RobotMap.intakeMotorPort);
         this.beamBreak = new DigitalInput(RobotMap.beamBreakPort);
 
@@ -35,7 +39,9 @@ public class Intake extends SubsystemBase{
      * @param speed The speed of extension/retraction (-1,1)
      */
     public void engageExtend(){
-        extension.set(Value.kForward);
+        extensionLeft.set(Value.kForward);
+        extensionRight.set(Value.kForward);
+        isIntakeDown = false;
     }
     
     /**
@@ -50,7 +56,8 @@ public class Intake extends SubsystemBase{
      * Stops the extension motor
      */
     public void stopExtend(){
-        extension.set(Value.kOff);
+        extensionLeft.set(Value.kOff);
+        extensionRight.set(Value.kOff);
     }
     
     /**
@@ -64,7 +71,9 @@ public class Intake extends SubsystemBase{
      * Stops the extension motor
      */
     public void retractExtend(){
-        extension.set(Value.kReverse);
+        extensionLeft.set(Value.kReverse);
+        extensionRight.set(Value.kReverse);
+        isIntakeDown = true;
     }
 
     /**
@@ -78,9 +87,11 @@ public class Intake extends SubsystemBase{
      * Gets the current position of the extension motor in raw sensor units (consult documentation for conversions)
      */
     public Value getExtensionState(){
-        return extension.get();
+        return extensionLeft.get();
     }
 
+
+    //comment this out if there is no beam break on robot. Has potential to break things.
     public boolean cellTriggered(){
         return !beamBreak.get();
     }
