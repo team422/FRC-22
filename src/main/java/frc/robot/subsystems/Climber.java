@@ -4,6 +4,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.Robot;
@@ -60,15 +62,20 @@ public class Climber extends SubsystemBase {
         setSubsystem("Climber");
         this.LeftClimber = new WPI_TalonFX(RobotMap.leftClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
         this.RightClimber = new WPI_TalonFX(RobotMap.rightClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
-        this.HighClimb = new WPI_TalonFX(RobotMap.highClimber);
+        // StatorConfig ( bool - shows if the limit is on, int -- amps for limiter, int -- amps for threshold, double -- time for threshold to take effect)
+        RightClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 38, .5));
+        LeftClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 38, .5));
+        RightClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 33, 35, .5));
+        LeftClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 33, 35, .5));
+        LeftClimber.setInverted(true);
         // find speed in 2021 code and give it a real value or change it later on in the code
-        // @param speed The speed at which to extend (0 to 1).
+        // @param speed The speed at which to extend (0 to 1). 
     }
 
 
      /**
      * Extends the climber upwards. This lowers the robot if it is in the air. This is according to 2021 code. The new lifter arms may be different
-     * so we may need to make changes to this code in order for it to stay relevant. The comments may not remain accurate if the new lifter arm is diffrent
+     * so we may need to make changes to this code in order for it t stay relevant. The comments may not remain accurate if the new lifter arm is diffrent
      * from the 2021 arm
      */
      

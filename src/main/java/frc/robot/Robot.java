@@ -90,9 +90,28 @@ public class Robot extends TimedRobot {
             Subsystems.cellStop.stopStoppiStop();
             Subsystems.flyBoi.stopShoot();
         }
+        
+        if(UserInterface.operatorController.getYButton()) {
+            Subsystems.climber.climberExtendBoth();
+        }
+
+        UserInterface.operatorController.X.whenPressed(new IntakeUpDown());
+        if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
+            Subsystems.intake.engageIntake(0.8);
+            Subsystems.transversal.setTransversalSpeed(0.8);
+        } else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
+            Subsystems.intake.engageIntake(-0.8);
+            Subsystems.transversal.setTransversalSpeed(-0.8);
+        } else {
+            Subsystems.intake.stopIntake();
+            Subsystems.transversal.stopTransversal();
+        }
+        UserInterface.operatorController.LB.whenPressed(new Vomit());
+
+        
 
         //PID Stuff uncomment when testing PID
-        Subsystems.flyBoi.speedShootiShoot(ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getHoodSpeed());
+        // Subsystems.flyBoi.speedShootiShoot(ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getHoodSpeed());
     }
 
     @Override

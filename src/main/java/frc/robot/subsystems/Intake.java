@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase{
     DoubleSolenoid extensionRight;
     WPI_TalonSRX intakeMotor;
     DigitalInput beamBreak;
-    public boolean isIntakeDown;
+    public boolean isIntakeDown = true;
 
     public Intake(){
         setSubsystem("Intake");
@@ -30,7 +30,7 @@ public class Intake extends SubsystemBase{
         this.extensionLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.leftextensionInPort, RobotMap.leftextensionOutPort);
         this.extensionRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.rightextensionInPort, RobotMap.rightextensionOutPort);
         this.intakeMotor = new WPI_TalonSRX(RobotMap.intakeMotorPort);
-        this.beamBreak = new DigitalInput(RobotMap.beamBreakPort);
+        // this.beamBreak = new DigitalInput(RobotMap.beamBreakPort);
 
     }
 

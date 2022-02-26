@@ -147,13 +147,10 @@ public class RobotMap {
         // Ports probably unused
         // transversalMotor = 422;
         // succMotor = 422;
-        // upyDownyMotorRight = 422;
-        // upyDownyMotorLeft = 422;
         // feederWheel = 422;
 
-        leftClimber = 422;
-        rightClimber = 422;
-        highClimber = 422;
+        leftClimber = 15;
+        rightClimber = 16;
     }
 }
 
