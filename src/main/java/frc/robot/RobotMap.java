@@ -38,24 +38,25 @@ public class RobotMap {
     public static int topFlyWheel;
 
     // Transversal - 1 neo
-    public static final int transversalPort = 423;
+    public static final int lefttransversalPort = 20;
+    public static final int righttransversalPort = 1;
 
     // Cell Stop - 1 neo
-    public static final int cellStopPort = 1086;
+    public static final int cellStopPort = 11;
 
     // Intake stuff
     // public static int lift = 11;
-    public static final int leftextensionInPort = 424;
-    public static final int leftextensionOutPort = 427;
-    public static final int rightextensionInPort = 424;
-    public static final int rightextensionOutPort = 427;
-    public static final int intakeMotorPort = 420;
-    public static final int beamBreakPort = 429;
+    public static final int leftextensionInPort = 15;
+    public static final int leftextensionOutPort = 0;
+    public static final int rightextensionInPort = 15;
+    public static final int rightextensionOutPort = 0;
+    public static final int intakeMotorPort = 59;
+    // public static final int beamBreakPort = 429;
     
     // Shooter
-    public static final int rightFlyPort = 6;
-    public static final int leftFlyPort = 3;
-    public static final int flyRolliRoll = 0;
+    // public static final int rightFlyPort = 6;
+    // public static final int leftFlyPort = 3;
+    // public static final int flyRolliRoll = 0;
 
     // Dimensions for Vision Calculations
     public static final double ballCameraHeightMeters = 0.75;
@@ -90,12 +91,12 @@ public class RobotMap {
     public static int FlykA = 0;
 
     // Shooter Expected Velocities in ticks
-    public static double leftVelocity = 0;
-    public static double rightVelocity = 0;
-    public static double topVelocity = 0;
+    public static double leftVelocity = 2048;
+    public static double rightVelocity = 2048;
+    public static double topVelocity = 2048;
 
     //Transversal and CellStop speeds during shooter sequence
-    public static final double transversalSpeed = 0.15;
+    public static final double transversalSpeed = 0.3;
     public static final double cellStopSpeed = 0.3;
 
     //Ball Counter
@@ -132,22 +133,20 @@ public class RobotMap {
         botName = bot;
         
     if (bot == BotNames.FALCON) {
-        leftFollower = 2;
-        leftLeader = 4;
-        rightFollower = 1;
-        rightLeader = 3;
+        leftFollower = 6;
+        leftLeader = 7;
+        rightFollower = 5;
+        rightLeader = 11;
 
         wheelDiameter = 4;
         ticksPerRevolution = 2048;
 
-        leftFlywheel = 422;
-        rightFlywheel = 422;
-        topFlyWheel = 422;
+        leftFlywheel = 8;
+        rightFlywheel = 9;
+        topFlyWheel = 10;
 
         // Ports probably unused
-        // transversalMotor = 422;
-        // succMotor = 422;
-        // feederWheel = 422;
+
 
         leftClimber = 15;
         rightClimber = 16;

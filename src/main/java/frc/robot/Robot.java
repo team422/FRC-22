@@ -81,15 +81,7 @@ public class Robot extends TimedRobot {
         UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
         UserInterface.driverController.LB.whenPressed(new HoldFast());
         UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
-
-        if(UserInterface.operatorController.getRightBumper()){
-            new ShootBall().schedule();
-        } else if(!UserInterface.operatorController.getRightBumper()) {
-            Subsystems.transversal.stopTransversal();
-            Subsystems.intake.stopIntake();
-            Subsystems.cellStop.stopStoppiStop();
-            Subsystems.flyBoi.stopShoot();
-        }
+        UserInterface.operatorController.RB.whenHeld(new ShootBall());
         
         if(UserInterface.operatorController.getYButton()) {
             Subsystems.climber.climberExtendBoth();
@@ -97,11 +89,13 @@ public class Robot extends TimedRobot {
 
         UserInterface.operatorController.X.whenPressed(new IntakeUpDown());
         if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
-            Subsystems.intake.engageIntake(0.8);
-            Subsystems.transversal.setTransversalSpeed(0.8);
+            Subsystems.intake.engageIntake(0.4);
+            Subsystems.transversal.setTransversalSpeed(0.4);
+            Subsystems.cellStop.setStop(0.4);
         } else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
-            Subsystems.intake.engageIntake(-0.8);
-            Subsystems.transversal.setTransversalSpeed(-0.8);
+            Subsystems.intake.engageIntake(-0.4);
+            Subsystems.transversal.setTransversalSpeed(-0.4);
+            Subsystems.cellStop.setStop(-0.4);
         } else {
             Subsystems.intake.stopIntake();
             Subsystems.transversal.stopTransversal();

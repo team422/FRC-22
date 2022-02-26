@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.RobotMap;
+import frc.robot.userinterface.*;
 import frc.robot.subsystems.Subsystems;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -65,7 +66,7 @@ public class ShootBall extends CommandBase {
     @Override
     public boolean isFinished() {
         //if there are no balls then don't shoot.
-        if (RobotMap.ballCounter == 0){
+        if (RobotMap.ballCounter == 0 || UserInterface.operatorController.getRightBumper()){
             return true;
         } else {
             return false;

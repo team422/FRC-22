@@ -24,9 +24,9 @@ public class FlyBoi extends BaseShooter {
     
     public FlyBoi(){
         setSubsystem("FlyBoi");
-        this.leftShoot = new WPI_TalonFX(RobotMap.leftFlyPort);
-        this.rightShoot = new WPI_TalonFX(RobotMap.rightFlyPort);
-        this.topRoller = new WPI_TalonFX(RobotMap.flyRolliRoll);
+        this.leftShoot = new WPI_TalonFX(RobotMap.leftFlywheel);
+        this.rightShoot = new WPI_TalonFX(RobotMap.rightFlywheel);
+        this.topRoller = new WPI_TalonFX(RobotMap.topFlyWheel);
         this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV);
         this.leftPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
         this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);

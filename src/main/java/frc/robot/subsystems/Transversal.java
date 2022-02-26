@@ -8,7 +8,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 public class Transversal extends SubsystemBase{
-    public CANSparkMax transversalMotor;
+    public CANSparkMax lefttransversalMotor;
+    public CANSparkMax righttransversalMotor;
     
     // POSSIBLY NOT USING TALONS ON THIS PART
     // THIS COULD BE VICTORS
@@ -16,13 +17,16 @@ public class Transversal extends SubsystemBase{
     //LMAO JK ITS NEOS KILL MEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE - Aaron
     public Transversal(){
         setSubsystem("Transversal");
-        this.transversalMotor = new CANSparkMax(RobotMap.transversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        this.lefttransversalMotor = new CANSparkMax(RobotMap.lefttransversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+
     }
 
     public void setTransversalSpeed (double speed){
-        transversalMotor.set(speed);
+        lefttransversalMotor.set(speed);
+        righttransversalMotor.set(speed);
     }
     public void stopTransversal(){
-        transversalMotor.stopMotor();
+        lefttransversalMotor.stopMotor();
+        righttransversalMotor.stopMotor();
     }
 }
