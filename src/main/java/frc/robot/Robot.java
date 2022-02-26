@@ -31,11 +31,11 @@ public class Robot extends TimedRobot {
    */
   	@Override
 	public void robotInit() {    
-		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
+		// Subsystems.testing.setDefaultCommand(new ArcadeDrive());
 
-		UserInterface.driverController.R1.whenPressed(new ChangeSpeed());
-        UserInterface.driverController.L1.whenPressed(new HoldFast());
-        UserInterface.driverController.L1.whenReleased(new ReleaseSlow());
+		// UserInterface.driverController.R1.whenPressed(new ChangeSpeed());
+        // UserInterface.driverController.L1.whenPressed(new HoldFast());
+        // UserInterface.driverController.L1.whenReleased(new ReleaseSlow());
 
 		// Might need to be moved to teleopPeriodic in order to function, but it might also work here.
 		// UserInterface.driverController.A.whenPressed(new RotateToBall());

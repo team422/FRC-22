@@ -77,10 +77,10 @@ public class DriveBase extends SubsystemBase {
         // this.rightFrontMotor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
 		// this.rightBackMotor = new WPI_VictorSPX(RobotMap.rightBackFollower);
 
-		this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
-		this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
-		this.rightFront = new WPI_TalonFX(RobotMap.rightFront);
-		this.rightBack = new WPI_TalonFX(RobotMap.rightBack);
+		// this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
+		// this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
+		// this.rightFront = new WPI_TalonFX(RobotMap.rightFront);
+		// this.rightBack = new WPI_TalonFX(RobotMap.rightBack);
 		
 		// Since we use the same type of motors, both think that front is clockwise,
 		// but on the left side, the clockwise rotation causes it to move backward,
