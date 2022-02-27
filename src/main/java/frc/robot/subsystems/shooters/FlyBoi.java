@@ -28,9 +28,9 @@ public class FlyBoi extends BaseShooter {
         this.rightShoot = new WPI_TalonFX(RobotMap.rightFlywheel);
         this.topRoller = new WPI_TalonFX(RobotMap.topFlyWheel);
         this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV);
-        this.leftPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
-        this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
-        this.topPID = new PIDController(RobotMap.HoodFlykP, RobotMap.HoodFlykI, RobotMap.HoodFlykD);
+        // this.leftPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
+        // this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
+        // this.topPID = new PIDController(RobotMap.HoodFlykP, RobotMap.HoodFlykI, RobotMap.HoodFlykD);
     }
 
 

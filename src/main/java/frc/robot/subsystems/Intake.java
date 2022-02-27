@@ -28,7 +28,7 @@ public class Intake extends SubsystemBase{
 
         // Creating Motors
         this.extensionLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.leftextensionInPort, RobotMap.leftextensionOutPort);
-        this.extensionRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.rightextensionInPort, RobotMap.rightextensionOutPort);
+        // this.extensionRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.rightextensionInPort, RobotMap.rightextensionOutPort);
         this.intakeMotor = new WPI_TalonSRX(RobotMap.intakeMotorPort);
         // this.beamBreak = new DigitalInput(RobotMap.beamBreakPort);
 
