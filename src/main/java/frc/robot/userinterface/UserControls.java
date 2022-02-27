@@ -33,8 +33,8 @@ public class UserControls {
         intakeUpButton.whenPressed(new IntakeUp());
         vomitButton.whenPressed(new Vomit());
 
-        // if (UserInterface.operatorController.getYButton()) {
-        //     Subsystems.climber.climberExtendBoth();
+        // if (UserInterface.operatorController.getRightBumper()) {
+            // Subsystems.climber.climberExtendBoth();
         // }
 
         if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {

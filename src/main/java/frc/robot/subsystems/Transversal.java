@@ -17,14 +17,14 @@ public class Transversal extends SubsystemBase{
     public Transversal(){
         setSubsystem("Transversal");
         this.righttransversalMotor = new CANSparkMax(RobotMap.righttransversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-        // righttransversalMotor.setInverted(true);
+        // this.righttransversalMotor.setInverted(true);
         this.lefttransversalMotor = new CANSparkMax(RobotMap.lefttransversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     }
 
     public void setTransversalSpeed (double speed){
-        lefttransversalMotor.set(-speed);
-        righttransversalMotor.set(speed);
+        lefttransversalMotor.set(speed);
+        righttransversalMotor.set(-speed);
     }
     public void stopTransversal(){
         lefttransversalMotor.stopMotor();
