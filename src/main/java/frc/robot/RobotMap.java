@@ -43,10 +43,10 @@ public class RobotMap {
     public static int rightBackFollower = 4;
 
     // Falcon drive ports
-    public static int leftFront = 4;
-    public static int rightFront = 3;
-    public static int leftBack = 2;
-    public static int rightBack = 1;
+    public static int leftFront = 7;
+    public static int rightFront = 11;
+    public static int leftBack = 6;
+    public static int rightBack = 5;
 
     //anti mech ports
     public static int leftLeader = 3;

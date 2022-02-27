@@ -24,9 +24,6 @@ public class ArcadeDrive extends CommandBase {
         // updatedRotation = UserInterface.driverController.getRightJoystickX();
         double speed;
         double rotation;
-
-        if (ControllerSwitcher.controllertype == ControllerSwitcher.ControllerType.twoXboxControllers) {
-
             if (UserInterface.driverController.getLeftJoystickY() < -0.05) {
                 speed = -(Math.pow(UserInterface.driverController.getLeftJoystickY(), 2));
             } else if (UserInterface.driverController.getLeftJoystickY() > 0.05) {
@@ -58,39 +55,5 @@ public class ArcadeDrive extends CommandBase {
             updatedRotation = rotation;
     
             Subsystems.driveBase.tank.curvatureDrive(rotation * RobotMap.rotationCap, speed * RobotMap.speedCap, true);
-        } else if (ControllerSwitcher.controllertype == ControllerSwitcher.ControllerType.onePlaystationController) {
-            if (UserInterface.driverController.getLeftJoystickY() < -0.05) {
-                speed = -(Math.pow(UserInterface.driverController.getLeftJoystickY(), 2));
-            } else if (UserInterface.driverController.getLeftJoystickY() > 0.05) {
-                speed = (Math.pow(UserInterface.driverController.getLeftJoystickY(), 2));
-            } else {
-                speed = 0;
-            }
-            if (UserInterface.driverController.getRightJoystickX() < -0.05) {
-                rotation = (Math.pow(UserInterface.driverController.getRightJoystickX(), 5));
-            } else if (UserInterface.driverController.getRightJoystickX() > 0.05) {
-                rotation = (Math.pow(UserInterface.driverController.getRightJoystickX(), 5));
-            } else {
-                rotation = 0;
-            }
-            double speedDifference = speed - updatedSpeed;
-            if (speedDifference > maxChange) {
-                speed = updatedSpeed + maxChange;
-            } else if (speedDifference < -maxChange) {
-                speed = updatedSpeed - maxChange;
-            }
-            double rotationDifference = rotation - updatedRotation;
-            if (rotationDifference > maxChange) {
-                rotation = updatedRotation + maxChange;
-            } else if (rotationDifference < -maxChange) {
-                rotation = updatedRotation - maxChange;
-            }
-    
-            updatedSpeed = speed;
-            updatedRotation = rotation;
-    
-            Subsystems.driveBase.tank.curvatureDrive(rotation * RobotMap.rotationCap, speed * RobotMap.speedCap, true);
-        }
-        Subsystems.driveBase.tank.curvatureDrive(-updatedRotation * RobotMap.rotationCap, updatedSpeed * RobotMap.speedCap, true);
     }
 }
