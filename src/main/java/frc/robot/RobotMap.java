@@ -13,7 +13,7 @@ public class RobotMap {
 
     // The speed cap after slow mode is enabled
     public static double slowSpeedCap = 0.3;
-    public static double slowRotCap = 0.2;
+    public static double slowRotCap = 0.3;
 
     // The rotation cap after fast mode is enabled
     public static double fastSpeedCap = 0.5;
@@ -94,8 +94,8 @@ public class RobotMap {
     // public static double leftVelocity = 2048;
     // public static double rightVelocity = 2048;
     // public static double topVelocity = 2048;
-    public static double leftVelocity = 0.4;
-    public static double topVelocity = 0.4;
+    public static double leftVelocity = 0.3;
+    public static double topVelocity = 0.6;
 
     //Transversal and CellStop speeds during shooter sequence
     public static final double transversalSpeed = 0.3;

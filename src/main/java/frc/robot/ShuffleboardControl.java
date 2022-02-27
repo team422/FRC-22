@@ -61,40 +61,40 @@ public class ShuffleboardControl {
         
         kPFly = PID.add("P Constant for Fly Wheel", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 5))
+            .withProperties(Map.of("min", 0, "max", 0.1))
             .withPosition(8, 2)
             .withSize(2, 3).getEntry();
         kIFly = PID.add("I Constant for Fly Wheel", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 5))
+            .withProperties(Map.of("min", 0, "max", 0.1))
             .withPosition(8, 4)
             .withSize(2, 3).getEntry();
         kDFly = PID.add("D Constant for Fly Wheel", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 5))
+            .withProperties(Map.of("min", 0, "max", 0.1))
             .withPosition(8, 6)
             .withSize(2, 3).getEntry();
-        kPHood = PID.add("P Constant for Hood Wheel", 0)
-            .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(6, 2)
-            .withSize(2, 3).getEntry();
-        kIHood = PID.add("I Constant for Hood Wheel", 0)
-            .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(6, 4)
-            .withSize(2, 3).getEntry();
-        kDHood = PID.add("D Constant for Hood Wheel", 0)
-            .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 0.1))
-            .withPosition(6, 6)
-            .withSize(2, 3).getEntry();
+        // kPHood = PID.add("P Constant for Hood Wheel", 0)
+        //     .withWidget(BuiltInWidgets.kNumberSlider)
+        //     .withProperties(Map.of("min", 0, "max", 0.1))
+        //     .withPosition(6, 2)
+        //     .withSize(2, 3).getEntry();
+        // kIHood = PID.add("I Constant for Hood Wheel", 0)
+        //     .withWidget(BuiltInWidgets.kNumberSlider)
+        //     .withProperties(Map.of("min", 0, "max", 0.1))
+        //     .withPosition(6, 4)
+        //     .withSize(2, 3).getEntry();
+        // kDHood = PID.add("D Constant for Hood Wheel", 0)
+        //     .withWidget(BuiltInWidgets.kNumberSlider)
+        //     .withProperties(Map.of("min", 0, "max", 0.1))
+        //     .withPosition(6, 6)
+        //     .withSize(2, 3).getEntry();
         VeloGraph = shooterTab.add("Velocity Graph", 0)
             .getEntry();
         }
     
     public static void setVelocity(){
-        VeloGraph.setDouble(Subsystems.flyBoi.getLeftVelocity());
+        VeloGraph.setDouble(Subsystems.flyBoi.getAverageVelocity());
     }
 
         public static boolean getLeft() {

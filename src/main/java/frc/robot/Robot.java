@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.commands.SpeedModes.*;
 import frc.robot.subsystems.*;
+import frc.robot.userinterface.UserControls;
 // import frc.robot.userinterface.UserInterface;
 // import frc.robot.RobotMap.BotNames;
 import frc.robot.userinterface.UserInterface;
@@ -51,10 +52,11 @@ public class Robot extends TimedRobot {
 		// UserInterface.driverController.LB.whenPressed(new HoldFast());
 		// UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
 	}
-
+	
 	@Override
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
+		ShuffleboardControl.setVelocity();
 		// TODO
 	}
 
@@ -75,7 +77,13 @@ public class Robot extends TimedRobot {
 		// TODO
 
 		// PID Stuff uncomment when testing PID
-		Subsystems.flyBoi.speedShootiShoot(
+		Subsystems.flyBoi.setPID(
+			ShuffleboardControl.getPFly(),
+			ShuffleboardControl.getIFly(),
+			ShuffleboardControl.getDFly()
+		);
+
+		Subsystems.flyBoi.voltageShootiShoot(
 			ShuffleboardControl.getFlywheelSpeed(),
 			ShuffleboardControl.getFlywheelSpeed(),
 			ShuffleboardControl.getHoodSpeed()
@@ -96,45 +104,9 @@ public class Robot extends TimedRobot {
 		// Subsystems.driveBase.setMotors(0.1, 0.1);
 
 		// TODO
-		// ShuffleboardControl.updateShuffleboard();
 
 		// Controls
-		UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
-		UserInterface.driverController.LB.whenPressed(new HoldFast());
-		UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
-		// UserInterface.operatorController.RB.whenHeld(new ShootBall());
-		if (UserInterface.operatorController.getRightBumper()) {
-			Subsystems.flyBoi.setShootSpeed(RobotMap.leftVelocity, RobotMap.topVelocity);
-		} else {
-			Subsystems.flyBoi.stopShoot();
-		}
-
-		UserInterface.operatorController.Y.whenHeld(new ExtendClimber());
-		// if (UserInterface.operatorController.getYButton()) {
-		// 	Subsystems.climber.climberExtendBoth();
-		// }
-
-		if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
-			Subsystems.cellStop.setStop(0.4);
-		} else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
-			Subsystems.cellStop.setStop(-0.4);
-		} else {
-			Subsystems.cellStop.stopStoppiStop();
-		}
-
-		UserInterface.operatorController.X.whenPressed(new IntakeUpDown());
-		UserInterface.operatorController.A.whenPressed(new IntakeUp());
-		if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
-			Subsystems.intake.engageIntake(0.6);
-			Subsystems.transversal.setTransversalSpeed(0.4);
-		} else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
-			Subsystems.intake.engageIntake(-0.3);
-			Subsystems.transversal.setTransversalSpeed(-0.4);
-		} else {
-			Subsystems.intake.stopIntake();
-			Subsystems.transversal.stopTransversal();
-		}
-		UserInterface.operatorController.LB.whenPressed(new Vomit());
+		UserControls.getUserInput();
 	}
 
 	@Override

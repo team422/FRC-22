@@ -33,7 +33,7 @@ public class ShootBall extends CommandBase {
     @Override
     public void execute() {
         
-        Subsystems.flyBoi.setShootSpeeds(RobotMap.leftVelocity, RobotMap.topVelocity);
+        Subsystems.flyBoi.setShootSpeed(RobotMap.leftVelocity, RobotMap.topVelocity);
 
         double lowerBound = RobotMap.leftVelocity - RobotMap.speedCheckRange; // lower bound of speed range
         double upperBound = RobotMap.leftVelocity + RobotMap.speedCheckRange; // upper bound of speed range
@@ -63,10 +63,15 @@ public class ShootBall extends CommandBase {
         lastShooterSpeed = Subsystems.flyBoi.getLeftVelocity();
     }
 
+    public void end(){
+        Subsystems.flyBoi.stopShoot();
+    }
+    
     @Override
     public boolean isFinished() {
         //if there are no balls then don't shoot.
-        if (RobotMap.ballCounter == 0 || UserInterface.operatorController.getRightBumper()){
+        if (RobotMap.ballCounter == 0 || !UserInterface.operatorController.getRightBumper()){
+            Subsystems.flyBoi.stopShoot();
             return true;
         } else {
             return false;
