@@ -37,7 +37,7 @@ public class ShootDistance extends CommandBase{
         xPos = target.getYaw();
         yPos = target.getPitch();
         distance = PhotonUtils.calculateDistanceToTargetMeters(RobotMap.targetCameraHeightMeters, RobotMap.targetHeightMeters, Units.degreesToRadians(RobotMap.hubCameraDegreesHoriz), Units.degreesToRadians(target.getPitch()));
-        System.out.println(distance);
+        // System.out.println(distance);
 
     }
 

@@ -4,21 +4,19 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 // import frc.robot.userinterface.UserInterface;
 
-
-
-public class IntakeUpDown extends CommandBase {
+public class IntakeUp extends CommandBase {
 
     /*
     command to control the upDown motor on the intake!
     */
-    public IntakeUpDown() {
-        setName("IntakeUpDown");
+    public IntakeUp() {
+        setName("IntakeUp");
         addRequirements(Subsystems.intake);
     }
 
     //wpilib looks for initialize, execute, and end!
     public void initialize() {
-        Subsystems.intake.retractExtend();
+        Subsystems.intake.engageExtend();
         // if(Subsystems.intake.isIntakeDown) {
             //     Subsystems.intake.engageExtend();
         // } else if(!Subsystems.intake.isIntakeDown) {

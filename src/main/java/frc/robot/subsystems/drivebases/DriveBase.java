@@ -19,11 +19,11 @@ public abstract class DriveBase extends SubsystemBase {
     public DriveBase() {
         setSubsystem("DriveBase");
 
-        this.setMotors();
+        this.motorize();
         this.driveBase = new DifferentialDrive(leftSide, rightSide);
     }
 
-    public abstract void setMotors();
+    public abstract void motorize();
 
     /**
      * Sets drive train motors.

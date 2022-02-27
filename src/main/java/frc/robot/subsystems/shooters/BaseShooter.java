@@ -1,12 +1,12 @@
 package frc.robot.subsystems.shooters;
 
-import frc.robot.RobotMap;
+// import frc.robot.RobotMap;
 
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+// import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.math.controller.PIDController;
+// import edu.wpi.first.math.controller.PIDController;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+// import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public abstract class BaseShooter extends SubsystemBase{
 
@@ -32,6 +32,8 @@ public abstract class BaseShooter extends SubsystemBase{
     */
     public void stopShoot(){
     }
+
+    public abstract void setShootSpeed(double mainVelocity, double topVelocity);
     
     /**
     * Function to get speed of left Motor (-1, 1).

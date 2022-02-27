@@ -3,7 +3,7 @@ package frc.robot.subsystems.shooters;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+// import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.controller.PIDController;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -26,7 +26,9 @@ public class FlyBoi extends BaseShooter {
         setSubsystem("FlyBoi");
         this.leftShoot = new WPI_TalonFX(RobotMap.leftFlywheel);
         this.rightShoot = new WPI_TalonFX(RobotMap.rightFlywheel);
+        leftShoot.setInverted(true);
         this.topRoller = new WPI_TalonFX(RobotMap.topFlyWheel);
+        topRoller.setInverted(true);
         this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV);
         // this.leftPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
         // this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI, RobotMap.FlykD);
@@ -41,7 +43,7 @@ public class FlyBoi extends BaseShooter {
     */
     public void setShootSpeed(double mainSpeed, double topSpeed){
         leftShoot.set(mainSpeed);
-        rightShoot.set(-mainSpeed);
+        rightShoot.set(mainSpeed);
         topRoller.set(topSpeed);
     }
     

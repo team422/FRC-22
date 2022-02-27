@@ -1,5 +1,5 @@
 package frc.robot.subsystems;
-import edu.wpi.first.wpilibj.CAN;
+// import edu.wpi.first.wpilibj.CAN;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -18,15 +18,17 @@ public class Transversal extends SubsystemBase{
     public Transversal(){
         setSubsystem("Transversal");
         this.righttransversalMotor = new CANSparkMax(RobotMap.righttransversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        this.righttransversalMotor.setInverted(true);
         this.lefttransversalMotor = new CANSparkMax(RobotMap.lefttransversalPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     }
 
-    public void setTransversalSpeed (double speed){
+    public void setTransversalSpeed (double speed) {
         lefttransversalMotor.set(speed);
         righttransversalMotor.set(speed);
     }
-    public void stopTransversal(){
+    
+    public void stopTransversal() {
         lefttransversalMotor.stopMotor();
         righttransversalMotor.stopMotor();
     }

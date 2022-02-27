@@ -5,8 +5,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+// import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.*;
 import frc.robot.commands.SpeedModes.*;
@@ -19,103 +21,125 @@ import frc.robot.userinterface.UserInterface;
  * The main Robot class whence all things come.
  */
 public class Robot extends TimedRobot {
-    
-    // private boolean oldLeftTriggerOn = false;
-    // private boolean oldRightTriggerOn = false;
-    // private RobotLogger logger = new RobotLogger();
-    private boolean oldTriggerOn = false;
 
-    public Robot() {
-        super(0.06);
-    }
+	// private boolean oldLeftTriggerOn = false;
+	// private boolean oldRightTriggerOn = false;
+	// private RobotLogger logger = new RobotLogger();
+	// private boolean oldTriggerOn = false;
 
+	private Compressor compressor;
 
-    @Override
-    public void robotInit() {
-        //initializing things
-        RobotMap.setBot(RobotMap.BotNames.FALCON);
-        Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
-        
-        // Subsystems.driveBase.driveBase.setSafetyEnabled(false);
+	public Robot() {
+		super(0.06);
+	}
 
-        //driver controls (buttons)
-        // UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
-        // UserInterface.driverController.LB.whenPressed(new HoldFast());
-        // UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
-    }
+	@Override
+	public void robotInit() {
+		// initializing things
+		RobotMap.setBot(RobotMap.BotNames.FALCON);
+		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
 
-    @Override
-    public void robotPeriodic() {
-        CommandScheduler.getInstance().run();
-        //TODO
-    }
+		compressor = new Compressor(PneumaticsModuleType.REVPH);
+		compressor.enableDigital();
 
-    @Override
-    public void disabledPeriodic() {}
+		ShuffleboardControl.layoutShuffleboard();
 
-    @Override
-    public void autonomousInit() {
-        System.out.println("Autonomous Initalized");
-        CommandScheduler.getInstance().cancelAll();
-        // this.logger.logInfoMessage("Autonomous Initalized");
-        // Schedule autonomous command to run
-    }
+		// Subsystems.driveBase.driveBase.setSafetyEnabled(false);
 
-    @Override
-    public void autonomousPeriodic() {
-        // TODO
-    }
+		// driver controls (buttons)
+		// UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+		// UserInterface.driverController.LB.whenPressed(new HoldFast());
+		// UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+	}
 
-    @Override
-    public void teleopInit() { 
-        System.out.println("TeleOp Initalized");
+	@Override
+	public void robotPeriodic() {
+		CommandScheduler.getInstance().run();
+		// TODO
+	}
+
+	@Override
+	public void disabledPeriodic() {
+	}
+
+	@Override
+	public void autonomousInit() {
+		System.out.println("Autonomous Initalized");
 		CommandScheduler.getInstance().cancelAll();
-        // TODO
-        // ShuffleboardControl.layoutShuffleboard();
-    }
+		// this.logger.logInfoMessage("Autonomous Initalized");
+		// Schedule autonomous command to run
+	}
 
-    @Override
-    public void teleopPeriodic() {
+	@Override
+	public void autonomousPeriodic() {
+		// TODO
 
-        // Subsystems.driveBase.setMotors(0.1, 0.1);
+		// PID Stuff uncomment when testing PID
+		Subsystems.flyBoi.speedShootiShoot(
+			ShuffleboardControl.getFlywheelSpeed(),
+			ShuffleboardControl.getFlywheelSpeed(),
+			ShuffleboardControl.getHoodSpeed()
+		);
+	}
 
-        // TODO
-        // ShuffleboardControl.updateShuffleboard();
+	@Override
+	public void teleopInit() {
+		System.out.println("TeleOp Initalized");
+		CommandScheduler.getInstance().cancelAll();
+		// TODO
+		// ShuffleboardControl.layoutShuffleboard();
+	}
 
-        // Controls
-        UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
-        UserInterface.driverController.LB.whenPressed(new HoldFast());
-        UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
-        UserInterface.operatorController.RB.whenHeld(new ShootBall());
-        
-        if(UserInterface.operatorController.getYButton()) {
-            Subsystems.climber.climberExtendBoth();
-        }
+	@Override
+	public void teleopPeriodic() {
 
-        UserInterface.operatorController.X.whenPressed(new IntakeUpDown());
-        if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
-            Subsystems.intake.engageIntake(0.4);
-            Subsystems.transversal.setTransversalSpeed(0.4);
-            Subsystems.cellStop.setStop(0.4);
-        } else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
-            Subsystems.intake.engageIntake(-0.4);
-            Subsystems.transversal.setTransversalSpeed(-0.4);
-            Subsystems.cellStop.setStop(-0.4);
-        } else {
-            Subsystems.intake.stopIntake();
-            Subsystems.transversal.stopTransversal();
-        }
-        UserInterface.operatorController.LB.whenPressed(new Vomit());
+		// Subsystems.driveBase.setMotors(0.1, 0.1);
 
-        
+		// TODO
+		// ShuffleboardControl.updateShuffleboard();
 
-        //PID Stuff uncomment when testing PID
-        // Subsystems.flyBoi.speedShootiShoot(ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getFlywheelSpeed(), ShuffleboardControl.getHoodSpeed());
-    }
+		// Controls
+		UserInterface.driverController.RB.whenPressed(new ChangeSpeed());
+		UserInterface.driverController.LB.whenPressed(new HoldFast());
+		UserInterface.driverController.LB.whenReleased(new ReleaseSlow());
+		// UserInterface.operatorController.RB.whenHeld(new ShootBall());
+		if (UserInterface.operatorController.getRightBumper()) {
+			Subsystems.flyBoi.setShootSpeed(RobotMap.leftVelocity, RobotMap.topVelocity);
+		} else {
+			Subsystems.flyBoi.stopShoot();
+		}
 
-    @Override
+		UserInterface.operatorController.Y.whenHeld(new ExtendClimber());
+		// if (UserInterface.operatorController.getYButton()) {
+		// 	Subsystems.climber.climberExtendBoth();
+		// }
+
+		if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
+			Subsystems.cellStop.setStop(0.4);
+		} else if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
+			Subsystems.cellStop.setStop(-0.4);
+		} else {
+			Subsystems.cellStop.stopStoppiStop();
+		}
+
+		UserInterface.operatorController.X.whenPressed(new IntakeUpDown());
+		UserInterface.operatorController.A.whenPressed(new IntakeUp());
+		if (UserInterface.operatorController.getRightJoystickY() >= 0.4) {
+			Subsystems.intake.engageIntake(0.6);
+			Subsystems.transversal.setTransversalSpeed(0.4);
+		} else if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
+			Subsystems.intake.engageIntake(-0.3);
+			Subsystems.transversal.setTransversalSpeed(-0.4);
+		} else {
+			Subsystems.intake.stopIntake();
+			Subsystems.transversal.stopTransversal();
+		}
+		UserInterface.operatorController.LB.whenPressed(new Vomit());
+	}
+
+	@Override
 	public void disabledInit() {
 		System.out.println("Disabled Initialized");
-	    CommandScheduler.getInstance().cancelAll();
+		CommandScheduler.getInstance().cancelAll();
 	}
 }

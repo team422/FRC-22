@@ -2,7 +2,7 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Robot;
+// import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -40,7 +40,7 @@ public class Intake extends SubsystemBase{
      */
     public void engageExtend(){
         extensionLeft.set(Value.kForward);
-        extensionRight.set(Value.kForward);
+        // extensionRight.set(Value.kForward);
         isIntakeDown = false;
     }
     
@@ -57,7 +57,7 @@ public class Intake extends SubsystemBase{
      */
     public void stopExtend(){
         extensionLeft.set(Value.kOff);
-        extensionRight.set(Value.kOff);
+        // extensionRight.set(Value.kOff);
     }
     
     /**
@@ -72,7 +72,7 @@ public class Intake extends SubsystemBase{
      */
     public void retractExtend(){
         extensionLeft.set(Value.kReverse);
-        extensionRight.set(Value.kReverse);
+        // extensionRight.set(Value.kReverse);
         isIntakeDown = true;
     }
 

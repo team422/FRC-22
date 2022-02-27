@@ -3,12 +3,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+// import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import frc.robot.Robot;
+// import frc.robot.Robot;
 // import edu.wpi.first.wpilibj.*;
 // The above import isn't used yet. Uncomment it if you need it and delete this comment later.
 import frc.robot.RobotMap;
@@ -57,7 +57,7 @@ public class Climber extends SubsystemBase {
     public WPI_TalonFX LeftClimber;
     public WPI_TalonFX RightClimber;
     public WPI_TalonFX HighClimb;
-    public double speed = 0.8;
+    public double speed = 0.4;
     public Climber(){
         setSubsystem("Climber");
         this.LeftClimber = new WPI_TalonFX(RobotMap.leftClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
@@ -67,7 +67,7 @@ public class Climber extends SubsystemBase {
         LeftClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 38, .5));
         RightClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 33, 35, .5));
         LeftClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 33, 35, .5));
-        LeftClimber.setInverted(true);
+        // LeftClimber.setInverted(true);
         // find speed in 2021 code and give it a real value or change it later on in the code
         // @param speed The speed at which to extend (0 to 1). 
     }
@@ -88,7 +88,7 @@ public class Climber extends SubsystemBase {
     }
 
     public void climberExtendBoth(){
-        RightClimber.set(speed);
+        RightClimber.set(-speed);
         LeftClimber.set(speed);
     }
 

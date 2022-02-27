@@ -15,6 +15,9 @@ public class CellStop extends SubsystemBase {
 
     public void setStop(double speed) {
         stopBoi.set(speed);
+        if (stopBoi.get() <= 0.4) {
+            System.out.println("Not works");
+        }
     }
 
     public void stopStoppiStop() {
