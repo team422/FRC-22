@@ -50,12 +50,12 @@ public class ShuffleboardControl {
 
         flywheelSpeed = speeds.add("Flywheel(s) Speed", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 2048))
+            .withProperties(Map.of("min", 0, "max", 215040))
             .withPosition(4, 2)
             .withSize(2, 3).getEntry();
         hoodRollerSpeed = speeds.add("Hood Roller Speed", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 2048))
+            .withProperties(Map.of("min", 0, "max", 215040))
             .withPosition(4, 4)
             .withSize(2, 3).getEntry();
         
