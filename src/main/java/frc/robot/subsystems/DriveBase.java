@@ -70,36 +70,6 @@ public class DriveBase extends SubsystemBase {
 		// required for Subsystems and commands as a way to tell program who do communicate with
 		setSubsystem("DriveBase");
 
-		// For the Toaster
-
-		// Declares the instantiated variables that store the motor controller objects
-		// Setting left motors to their respective motor objects
-        // this.leftMiddleMaster = new WPI_TalonSRX(RobotMap.leftMiddleMasterPort);
-        // this.leftFrontMotor = new WPI_VictorSPX(RobotMap.leftFrontFollower);
-        // this.leftBackMotor = new WPI_VictorSPX(RobotMap.leftBackFollower);
-		
-		// // Setting right motors to their respective motor objects
-        // this.rightMiddleMaster = new WPI_TalonSRX(RobotMap.rightMiddleMasterPort);        
-        // this.rightFrontMotor = new WPI_VictorSPX(RobotMap.rightFrontFollower);
-		// this.rightBackMotor = new WPI_VictorSPX(RobotMap.rightBackFollower);
-
-		// this.leftLeader = new WPI_TalonSRX(RobotMap.leftLeader);
-		// this.leftFollower = new WPI_TalonSRX(RobotMap.leftFollower);
-		// this.rightLeader = new WPI_TalonSRX(RobotMap.rightLeader);
-		// this.rightFollower = new WPI_TalonSRX(RobotMap.rightFollower);
-		
-		// Since we use the same type of motors, both think that front is clockwise,
-		// but on the left side, the clockwise rotation causes it to move backward,
-		// thus inverting it causes both motors to move in the correct way
-		// leftMiddleMaster.setInverted(true);
-		// leftFrontMotor.setInverted(true);
-		// leftBackMotor.setInverted(true);
-        
-        // this.leftMotorGroup = new MotorControllerGroup(leftLeader, leftFollower);
-        // this.rightMotorGroup = new MotorControllerGroup(rightLeader, rightFollower);
-
-		// For Falcon
-
 		this.leftFront = new WPI_TalonFX(RobotMap.leftFront);
 		this.rightFront = new WPI_TalonFX(RobotMap.rightFront);
 		this.leftBack = new WPI_TalonFX(RobotMap.leftBack);
@@ -109,18 +79,6 @@ public class DriveBase extends SubsystemBase {
 		this.rightMotorGroup = new MotorControllerGroup(rightFront, rightBack);
 		// Building the actual robot drive train
 		this.tank = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
-		
-		// Setting up and getting the encoder values
-		// this.leftEncoderValue = leftMiddleMaster.getSelectedSensorPosition(0);
-		// this.rightEncoderValue = rightMiddleMaster.getSelectedSensorPosition(0);
-		
-		// Gyro with SPI.Port.kOnboardCS0 being the port enum that is provided by WPILib
-		// this.gyroBoi = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-		
-		// Built in check if the gyro is the correct one and it is connected
-		// System.out.println(gyroBoi.isConnected)
-		// Might not work, check when working with robot
-		// gyroBoi.calibrate();
     }
 
 	/**
