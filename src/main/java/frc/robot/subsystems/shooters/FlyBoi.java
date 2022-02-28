@@ -29,10 +29,9 @@ public class FlyBoi extends BaseShooter {
         leftShoot.setInverted(true);
         this.topRoller = new WPI_TalonFX(RobotMap.topFlyWheel);
         topRoller.setInverted(true);
-        this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV);
+        this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV, RobotMap.FlykA);
         this.leftPID = new PIDController(0,0,0);
-        // this.rightPID = new PIDController(RobotMap.FlykP, RobotMap.FlykI,
-        // RobotMap.FlykD);
+        this.rightPID = new PIDController(0,0,0);
         // this.topPID = new PIDController(RobotMap.HoodFlykP, RobotMap.HoodFlykI,
         // RobotMap.HoodFlykD);
     }
@@ -133,6 +132,7 @@ public class FlyBoi extends BaseShooter {
     public void setPID(double P, double I, double D){
         System.out.println("Setting P: " + P + " I: " + " D: " + D);
         leftPID.setPID(P, I, D);
+        rightPID.setPID(P, I, D);
     }
 
     /**

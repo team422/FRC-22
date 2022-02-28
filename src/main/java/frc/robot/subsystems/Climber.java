@@ -57,7 +57,7 @@ public class Climber extends SubsystemBase {
     public WPI_TalonFX LeftClimber;
     public WPI_TalonFX RightClimber;
     public WPI_TalonFX HighClimb;
-    public double speed = 0.4;
+    public double speed = 0.8;
     public Climber(){
         setSubsystem("Climber");
         this.LeftClimber = new WPI_TalonFX(RobotMap.leftClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
