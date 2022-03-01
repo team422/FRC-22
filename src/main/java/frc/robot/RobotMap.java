@@ -86,9 +86,9 @@ public class RobotMap {
     // public static double HoodFlykP = ShuffleboardControl.getDHood();
 
     // Shooter feedforward
-    public static int FlykS = 0;
-    public static int FlykV = 0;
-    public static int FlykA = 0;
+    public static double FlykS = 0.89402;
+    public static double FlykV = 0.34633;
+    public static double FlykA = 0.058598;
 
     // Shooter Expected Velocities in ticks
     // public static double leftVelocity = 2048;
