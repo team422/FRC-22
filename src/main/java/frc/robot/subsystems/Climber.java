@@ -57,16 +57,17 @@ public class Climber extends SubsystemBase {
     public WPI_TalonFX LeftClimber;
     public WPI_TalonFX RightClimber;
     public WPI_TalonFX HighClimb;
-    public double speed = 0.8;
+    public double speed = 1;
     public Climber(){
         setSubsystem("Climber");
         this.LeftClimber = new WPI_TalonFX(RobotMap.leftClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
         this.RightClimber = new WPI_TalonFX(RobotMap.rightClimber); // We dont know what this value will be "channel - The value will be set in Robotmap.java"
+        LeftClimber.setInverted(true);
         // StatorConfig ( bool - shows if the limit is on, int -- amps for limiter, int -- amps for threshold, double -- time for threshold to take effect)
-        RightClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 38, .5));
-        LeftClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 38, .5));
-        RightClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 33, 35, .5));
-        LeftClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 33, 35, .5));
+        RightClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 80, 80, .5));
+        LeftClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 80, 80, .5));
+        RightClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 80, 80, .5));
+        LeftClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 80, 80, .5));
         // LeftClimber.setInverted(true);
         // find speed in 2021 code and give it a real value or change it later on in the code
         // @param speed The speed at which to extend (0 to 1). 

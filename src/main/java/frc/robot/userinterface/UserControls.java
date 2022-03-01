@@ -33,9 +33,20 @@ public class UserControls {
         intakeUpButton.whenPressed(new IntakeUp());
         vomitButton.whenPressed(new Vomit());
 
-        // if (UserInterface.operatorController.getRightBumper()) {
-            // Subsystems.climber.climberExtendBoth();
+        // if (UserInterface.operatorController.getPOV()==0) {
+        //     Subsystems.climber.climberExtendBoth();
+        // } else if(UserInterface.operatorController.getPOV() ==180) {
+        //     Subsystems.climber.climberRetractBoth();
+        // } else {
+        //     Subsystems.climber.stopClimberBoth();
         // }
+
+        if(UserInterface.operatorController.LS.get()) {
+            Subsystems.climber.climberExtendLeft();
+        } 
+        if(UserInterface.operatorController.RS.get()) {
+            Subsystems.climber.climberExtendRight();
+        }
 
         if (UserInterface.operatorController.getRightJoystickY() <= -0.4) {
             Subsystems.intake.engageIntake(0.7);
