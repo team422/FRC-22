@@ -13,7 +13,7 @@ public class PIDFollowBall extends CommandBase{
     
     public void PIDRotateToBall(){
         setName("PIDRotateToBall");
-        this.pid = new PIDController(RobotMap.kP, RobotMap.kI, RobotMap.kD);
+        this.pid = new PIDController(RobotMap.flykP, RobotMap.flykI, RobotMap.fkykD);
     }
 
     @Override

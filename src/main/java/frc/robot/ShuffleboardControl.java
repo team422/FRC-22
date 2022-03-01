@@ -24,13 +24,14 @@ public class ShuffleboardControl {
     private static NetworkTableEntry kIHood;
     private static NetworkTableEntry kDHood;
     private static NetworkTableEntry VeloGraph;
+    private static NetworkTableEntry VeloGraph2;
 
     public static void layoutShuffleboard() {
         ShuffleboardTab shooterTab = Shuffleboard.getTab("Scintillating Shooting Stuff");
 
-        ShuffleboardLayout flywheelMotors =  shooterTab.getLayout("Which flywheel motors are on?", BuiltInLayouts.kList)
-            .withPosition(0, 0)
-            .withSize(2, 3);
+        // ShuffleboardLayout flywheelMotors =  shooterTab.getLayout("Which flywheel motors are on?", BuiltInLayouts.kList)
+        //     .withPosition(0, 0)
+        //     .withSize(2, 3);
         ShuffleboardLayout speeds = shooterTab.getLayout("Motor speeds", BuiltInLayouts.kList)
             .withPosition(4, 0)
             .withSize(2, 3);
@@ -39,14 +40,14 @@ public class ShuffleboardControl {
             .withPosition(8, 0)
             .withSize(2, 3);
 
-        leftFlywheel = flywheelMotors.add("Left Flywheel", false)
-            .withWidget(BuiltInWidgets.kToggleButton)
-            .withPosition(0, 2)
-            .withSize(2, 3).getEntry();
-        rightFlywheel = flywheelMotors.add("Right Flywheel", false)
-            .withWidget(BuiltInWidgets.kToggleButton)
-            .withPosition(0, 4)
-            .withSize(2, 3).getEntry();
+        // leftFlywheel = flywheelMotors.add("Left Flywheel", false)
+        //     .withWidget(BuiltInWidgets.kToggleButton)
+        //     .withPosition(0, 2)
+        //     .withSize(2, 3).getEntry();
+        // rightFlywheel = flywheelMotors.add("Right Flywheel", false)
+        //     .withWidget(BuiltInWidgets.kToggleButton)
+        //     .withPosition(0, 4)
+        //     .withSize(2, 3).getEntry();
 
         flywheelSpeed = speeds.add("Flywheel(s) Speed", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
@@ -61,17 +62,17 @@ public class ShuffleboardControl {
         
         kPFly = PID.add("P Constant for Fly Wheel", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withProperties(Map.of("min", 0, "max", 0.01))
             .withPosition(8, 2)
             .withSize(2, 3).getEntry();
         kIFly = PID.add("I Constant for Fly Wheel", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withProperties(Map.of("min", 0, "max", 0.01))
             .withPosition(8, 4)
             .withSize(2, 3).getEntry();
         kDFly = PID.add("D Constant for Fly Wheel", 0)
             .withWidget(BuiltInWidgets.kNumberSlider)
-            .withProperties(Map.of("min", 0, "max", 0.1))
+            .withProperties(Map.of("min", 0, "max", 0.01))
             .withPosition(8, 6)
             .withSize(2, 3).getEntry();
         // kPHood = PID.add("P Constant for Hood Wheel", 0)
@@ -92,12 +93,13 @@ public class ShuffleboardControl {
         VeloGraph = shooterTab.add("Velocity Graph", 0)
             .getEntry();
         }
-    
+    // 你是一个大笨蛋
+
     public static void setVelocity(){
-        VeloGraph.setDouble(Subsystems.flyBoi.getAverageVelocity());
+        VeloGraph.setDouble(Subsystems.flyBoi.getTopVelocity());
     }
 
-        public static boolean getLeft() {
+    public static boolean getLeft() {
         return leftFlywheel.getBoolean(false);
     }
 

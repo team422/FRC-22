@@ -73,27 +73,29 @@ public class RobotMap {
     public static final int redBallPipelineIndex = 1;
     
     //PIDFollowBall params for PIDController
-    public static double kP = 1;
-    public static double kI = 1;
-    public static double kD = 1;
+    public static double flykP = 1.956521739130435E-4;
+    public static double flykI = 0.007739130434782609;
+    public static double fkykD = 0.0076521739130434785;
     
     //PIDFlyboi params for PIDController
-    // public static double FlykP = ShuffleboardControl.getPFly();
-    // public static double FlykI = ShuffleboardControl.getIFly();
-    // public static double FlykD = ShuffleboardControl.getDFly();
-    // public static double HoodFlykD = ShuffleboardControl.getPHood();
-    // public static double HoodFlykI = ShuffleboardControl.getIHood();
-    // public static double HoodFlykP = ShuffleboardControl.getDHood();
+    public static double HoodFlykP = 0.008782608695652174;
+    public static double HoodFlykI = 0.0011739130434782609;
+    public static double HoodFlykD = 0.0025652173913043477;
 
     // Shooter feedforward
     public static double FlykS = 0.89402;
     public static double FlykV = 0.34633;
     public static double FlykA = 0.058598;
-
+    public static double HoodkS = 0.63145;
+    public static double HoodkV = 0.90343;
+    public static double HoodkA = 0.025781;
+    
     // Shooter Expected Velocities in ticks
     // public static double leftVelocity = 2048;
     // public static double rightVelocity = 2048;
     // public static double topVelocity = 2048;
+    // public static double leftVelocity = 0.2;
+    // public static double topVelocity = 1;
     public static double leftVelocity = 0.3;
     public static double topVelocity = 0.6;
 

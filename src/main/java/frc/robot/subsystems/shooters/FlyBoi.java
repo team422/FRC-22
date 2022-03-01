@@ -17,9 +17,9 @@ public class FlyBoi extends BaseShooter {
     WPI_TalonFX leftShoot;
     WPI_TalonFX rightShoot;
     WPI_TalonFX topRoller;
-    SimpleMotorFeedforward feedForward;
-    PIDController leftPID;
-    PIDController rightPID;
+    SimpleMotorFeedforward flyFeedForward;
+    SimpleMotorFeedforward hoodFeedForward;
+    PIDController PID;
     PIDController topPID;
 
     public FlyBoi() {
@@ -29,11 +29,10 @@ public class FlyBoi extends BaseShooter {
         leftShoot.setInverted(true);
         this.topRoller = new WPI_TalonFX(RobotMap.topFlyWheel);
         topRoller.setInverted(true);
-        this.feedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV, RobotMap.FlykA);
-        this.leftPID = new PIDController(0,0,0);
-        this.rightPID = new PIDController(0,0,0);
-        // this.topPID = new PIDController(RobotMap.HoodFlykP, RobotMap.HoodFlykI,
-        // RobotMap.HoodFlykD);
+        this.flyFeedForward = new SimpleMotorFeedforward(RobotMap.FlykS, RobotMap.FlykV, RobotMap.FlykA);
+        this.hoodFeedForward = new SimpleMotorFeedforward(RobotMap.HoodkS, RobotMap.HoodkV, RobotMap.HoodkA);
+        this.PID = new PIDController(0,0,0);
+        this.topPID = new PIDController(0, 0, 0);
     }
 
     /**
@@ -123,16 +122,20 @@ public class FlyBoi extends BaseShooter {
      */
     public void voltageShootiShoot(double leftVelocity, double rightVelocity, double topVelocity) {
         // PID Method using voltage to get to a set point.
-        System.out.println(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
-        leftShoot.setVoltage(leftPID.calculate(getLeftVelocity(), leftVelocity) + feedForward.calculate(leftVelocity));
-        // rightShoot.setVoltage(rightPID.calculate(getRightVelocity(), rightVelocity) + feedForward.calculate(rightVelocity));
-        // topRoller.setVoltage(topPID.calculate(getTopVelocity(), topVelocity) + feedForward.calculate(topVelocity));
+        System.out.println(topPID.calculate(getLeftVelocity(), topVelocity) + flyFeedForward.calculate(topVelocity));
+        leftShoot.setVoltage(PID.calculate(getLeftVelocity(), leftVelocity) + flyFeedForward.calculate(leftVelocity));
+        rightShoot.setVoltage(PID.calculate(getRightVelocity(), rightVelocity) + flyFeedForward.calculate(rightVelocity));
+        topRoller.setVoltage(topPID.calculate(getTopVelocity(), topVelocity) + hoodFeedForward.calculate(topVelocity));
     }
 
     public void setPID(double P, double I, double D){
-        System.out.println("Setting P: " + P + " I: " + " D: " + D);
-        leftPID.setPID(P, I, D);
-        rightPID.setPID(P, I, D);
+        System.out.println("Setting P: " + P + " I: " + I + " D: " + D);
+        PID.setPID(P, I, D);
+    }
+
+    public void setTopPID(double P, double I, double D){
+        System.out.println("Setting P: " + P + " I: " + I + " D: " + D);
+        topPID.setPID(P, I, D);
     }
 
     /**
@@ -147,9 +150,9 @@ public class FlyBoi extends BaseShooter {
         double rightSetpoint = setpoints[1];
         double topSetpoint = setpoints[2];
         // PID Method using velocities to get to a set point
-        System.out.println(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
-        leftShoot.set(leftPID.calculate(getLeft(), leftSetpoint) + feedForward.calculate(leftSetpoint));
-        rightShoot.set(rightPID.calculate(getRight(), rightSetpoint) + feedForward.calculate(rightSetpoint));
-        topRoller.set(topPID.calculate(getTop(), topSetpoint) + feedForward.calculate(topSetpoint));
+        System.out.println(PID.calculate(getLeft(), leftSetpoint) + flyFeedForward.calculate(leftSetpoint));
+        leftShoot.set(PID.calculate(getLeft(), leftSetpoint) + flyFeedForward.calculate(leftSetpoint));
+        rightShoot.set(PID.calculate(getRight(), rightSetpoint) + flyFeedForward.calculate(rightSetpoint));
+        topRoller.set(topPID.calculate(getTop(), topSetpoint) + flyFeedForward.calculate(topSetpoint));
     }
 }

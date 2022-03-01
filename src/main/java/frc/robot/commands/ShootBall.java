@@ -33,7 +33,7 @@ public class ShootBall extends CommandBase {
     @Override
     public void execute() {
         
-        Subsystems.flyBoi.setShootSpeed(RobotMap.leftVelocity, RobotMap.topVelocity);
+        Subsystems.flyBoi.voltageShootiShoot(RobotMap.leftVelocity, RobotMap.topVelocity);
 
         double lowerBound = RobotMap.leftVelocity - RobotMap.speedCheckRange; // lower bound of speed range
         double upperBound = RobotMap.leftVelocity + RobotMap.speedCheckRange; // upper bound of speed range

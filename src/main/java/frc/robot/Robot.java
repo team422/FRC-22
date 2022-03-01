@@ -78,11 +78,13 @@ public class Robot extends TimedRobot {
 		// TODO
 
 		// PID Stuff uncomment when testing PID
-		Subsystems.flyBoi.setPID(
+		Subsystems.flyBoi.setTopPID(
 			ShuffleboardControl.getPFly(),
 			ShuffleboardControl.getIFly(),
 			ShuffleboardControl.getDFly()
 		);
+
+		System.out.println(ShuffleboardControl.getHoodSpeed());
 
 		Subsystems.flyBoi.voltageShootiShoot(
 			ShuffleboardControl.getFlywheelSpeed(),
