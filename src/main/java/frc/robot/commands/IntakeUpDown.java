@@ -18,12 +18,11 @@ public class IntakeUpDown extends CommandBase {
 
     //wpilib looks for initialize, execute, and end!
     public void initialize() {
-        Subsystems.intake.retractExtend();
-        // if(Subsystems.intake.isIntakeDown) {
-            //     Subsystems.intake.engageExtend();
-        // } else if(!Subsystems.intake.isIntakeDown) {
-        //     Subsystems.intake.retractExtend();
-        // }
+        if(Subsystems.intake.isIntakeDown) {
+            Subsystems.intake.engageExtend();
+        } else if(!Subsystems.intake.isIntakeDown) {
+            Subsystems.intake.retractExtend();
+        }
     }
 
     public void execute() {

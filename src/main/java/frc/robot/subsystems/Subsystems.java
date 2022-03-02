@@ -9,10 +9,12 @@ package frc.robot.subsystems;
 
 import frc.robot.subsystems.drivebases.*;
 import frc.robot.subsystems.shooters.*;
+import frc.robot.subsystems.*;
 /**
  * Contains instances of all subsystems on the robot.
  */
 public class Subsystems {
+    public static final PhotonCam frontCam = new PhotonCam("Microsoft_LifeCam_HD-3000");
     public static final Intake intake = new Intake();
     public static final Climber climber = new Climber();
     public static final DriveBase driveBase = new FalconDrive();

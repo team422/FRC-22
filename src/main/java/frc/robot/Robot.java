@@ -5,13 +5,21 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.schedulers.SequentialScheduler;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 // import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.commands.SpeedModes.*;
+import frc.robot.commands.autonomous.*;
+import frc.robot.commands.autonomous.AutonomousSwitch.Autopath;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.shooters.FlyBoi;
 import frc.robot.userinterface.UserControls;
@@ -40,7 +48,6 @@ public class Robot extends TimedRobot {
 		// initializing things
 		RobotMap.setBot(RobotMap.BotNames.FALCON);
 		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
-
 		compressor = new Compressor(PneumaticsModuleType.REVPH);
 		compressor.enableDigital();
 
@@ -71,26 +78,37 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().cancelAll();
 		// this.logger.logInfoMessage("Autonomous Initalized");
 		// Schedule autonomous command to run
+        CommandScheduler.getInstance().schedule(new AutonomousSwitch(AutonomousSwitch.Autopath.Test));
+        // addCommands(new IntakeUpDown());
+        // addCommands(new IntakeIn());
+        // addCommands(new DriveStraight(-200, 0.5));
+        // addCommands(new IntakeStop());
+        // Subsystems.cellStop.setStop(-0.5);
+        // addCommands(new IntakeUpDown());
+        // addCommands(new DriveStraight(200, 0.5));
+        // addCommands(new ShootBall(0.3, 0.6));
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		// TODO
+		// TODo
+        
 
 		// PID Stuff uncomment when testing PID
-		Subsystems.flyBoi.setTopPID(
-			ShuffleboardControl.getPFly(),
-			ShuffleboardControl.getIFly(),
-			ShuffleboardControl.getDFly()
-		);
+		// Subsystems.flyBoi.setTopPID(
+		// 	ShuffleboardControl.getPFly(),
+		// 	ShuffleboardControl.getIFly(),
+		// 	ShuffleboardControl.getDFly()
+		// );
 
-		System.out.println(ShuffleboardControl.getHoodSpeed());
+		// System.out.println(ShuffleboardControl.getHoodSpeed());
 
-		Subsystems.flyBoi.voltageShootiShoot(
-			ShuffleboardControl.getFlywheelSpeed(),
-			ShuffleboardControl.getFlywheelSpeed(),
-			ShuffleboardControl.getHoodSpeed()
-		);
+		// Subsystems.flyBoi.voltageShootiShoot(
+		// 	ShuffleboardControl.getFlywheelSpeed(),
+		// 	ShuffleboardControl.getFlywheelSpeed(),
+		// 	ShuffleboardControl.getHoodSpeed()
+		// );
+
 	}
 
 	@Override

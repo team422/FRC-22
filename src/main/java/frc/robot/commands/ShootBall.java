@@ -11,7 +11,7 @@ public class ShootBall extends CommandBase {
 
     public double lastShooterSpeed;
 
-    public ShootBall(){
+    public ShootBall(double flyspeed, double hoodspeed){
         setName("ShootBall");
         addRequirements(Subsystems.flyBoi, Subsystems.cellStop, Subsystems.transversal);
     }
@@ -44,6 +44,7 @@ public class ShootBall extends CommandBase {
         if (leftVelocityInRange && topVelocityInRange){
             Subsystems.transversal.setTransversalSpeed(RobotMap.transversalSpeed);
             Subsystems.cellStop.setStop(RobotMap.cellStopSpeed);
+            Subsystems.intake.engageIntake(0.4);
         } else {
             Subsystems.transversal.stopTransversal();
             Subsystems.cellStop.stopStoppiStop();
@@ -70,7 +71,7 @@ public class ShootBall extends CommandBase {
     @Override
     public boolean isFinished() {
         //if there are no balls then don't shoot.
-        if (RobotMap.ballCounter == 0 || !UserInterface.operatorController.getRightBumper()){
+        if (RobotMap.ballCounter == 0 /*|| !UserInterface.operatorController.getRightBumper()*/){
             Subsystems.flyBoi.stopShoot();
             return true;
         } else {
