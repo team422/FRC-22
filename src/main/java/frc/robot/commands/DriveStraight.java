@@ -43,11 +43,12 @@ public class DriveStraight extends CommandBase {
         if (forward) {
             Subsystems.driveBase.setMotors(this.speed, this.speed * correction);
         } else {
-            Subsystems.driveBase.setMotors(this.speed * correction, this.speed);
+            Subsystems.driveBase.setMotors(-this.speed * correction, -this.speed);
         }
         System.out.println(this.ticks);
         System.out.println(Subsystems.driveBase.getLeftPosition());
         System.out.println(Subsystems.driveBase.getRightPosition());
+        System.out.println("This is the correction: "+ correction);
     }
 
     public boolean isFinished() {

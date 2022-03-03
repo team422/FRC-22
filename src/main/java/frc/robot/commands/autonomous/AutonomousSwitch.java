@@ -22,18 +22,27 @@ public class AutonomousSwitch extends SequentialCommandGroup{
         double FILLER_INTAKE;
         switch(path) {
             case Test:
-                // addCommands(new RotateToBall());
-                addCommands(new IntakeUpDown());
-                addCommands(new IntakeIn());
-                addCommands(new DriveStraight(87, 0.5));
-                addCommands(new IntakeStop());
-                addCommands(new RunCellStop(-0.4));
-                addCommands(new IntakeUpDown());
-                addCommands(new RunCellStop(0));
-                addCommands(new RunShooter(0.3, 0.6));
-                addCommands(new DriveStraight(-87, 0.5));
-                addCommands(new IntakeIn());
-                addCommands(new DriveStraight(100, 0.5));
+                addCommands(
+                    // addCommands(new RotateToBall());
+                    new IntakeUpDown(),
+                    new IntakeIn(),
+                    new Wait(2),
+
+                    new DriveStraight(87, 0.3),
+                    new IntakeStop(),
+                    new RunCellStop(-0.4),
+                    new IntakeUpDown(),
+                    new RunCellStop(0),
+                    new RunShooter(0.3, 0.6),
+
+                    new Wait(3),
+                    new DriveStraight(-87, 0.5),
+
+                    new Wait(3),
+                    new IntakeIn(),
+                    new DriveStraight(100, 0.5)
+                );
+                
           
             // case Topshoot2:
             //     addCommands(new IntakeUpDown());

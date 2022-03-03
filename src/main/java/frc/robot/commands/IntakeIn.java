@@ -14,14 +14,14 @@ public class IntakeIn extends CommandBase {
     public void initialize() {
         Subsystems.intake.engageIntake(0.5);
         Subsystems.transversal.setTransversalSpeed(0.5);
-        Subsystems.cellStop.setStop(0.5);
+        // Subsystems.cellStop.setStop(0.5);
     }
 
     
     public void execute() {
         Subsystems.intake.engageIntake(0.5);
         Subsystems.transversal.setTransversalSpeed(0.5);
-        Subsystems.cellStop.setStop(0.5);
+        // Subsystems.cellStop.setStop(0.5);
     }
 
     public boolean isFinished() {
