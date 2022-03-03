@@ -41,7 +41,7 @@ public class DriveStraight extends CommandBase {
         correction += 1.0;
 
         if (forward) {
-            Subsystems.driveBase.setMotors(-this.speed, -this.speed * correction);
+            Subsystems.driveBase.setMotors(this.speed, this.speed * correction);
         } else {
             Subsystems.driveBase.setMotors(this.speed * correction, this.speed);
         }

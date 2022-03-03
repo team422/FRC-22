@@ -27,15 +27,32 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 addCommands(new IntakeIn());
                 addCommands(new DriveStraight(87, 0.5));
                 addCommands(new IntakeStop());
-                addCommands(new RunCellStop());
+                addCommands(new RunCellStop(-0.4));
                 addCommands(new IntakeUpDown());
+                addCommands(new RunCellStop(0));
+                addCommands(new RunShooter(0.3, 0.6));
                 addCommands(new DriveStraight(-87, 0.5));
-                Subsystems.cellStop.stopStoppiStop();
-                addCommands(new ShootBall(0.3, 0.6));
+                addCommands(new IntakeIn());
                 addCommands(new DriveStraight(100, 0.5));
-           // case Topshoot2:
-            
+          
+            // case Topshoot2:
+            //     addCommands(new IntakeUpDown());
+            //     addCommands(new IntakeIn());
+            //     addCommands(new DriveStraight(inches, 0.5));
+            //     addCommands(new IntakeStop());
+            //     addCommands(new DriveStraight(-inches, 0.5));
+            //     addCommands(new ShootBall(0.3,0.6));
+            //     addCommands(new Turn(uTurn, 0.5));
+            //     addCommands(new IntakeIn());
+            //     addCommands(new DriveStraight(inches, 0.5));
+            //     addCommands(new IntakeStop());
+            //     addCommands(new DriveStraight(-inches, 0.5));
+            //     addCommands(new Turn(-uTurn, 0.5));
+            //     addCommands(new ShootBall(0.3,0.6));
+
             case SmallerTest:
+                addCommands(new RunShooter(0.3,0.6));
+
                 addCommands(new ShootBall(0.3, 0.6));
                 addCommands(new DriveStraight(100, 0.5));
 

@@ -31,6 +31,7 @@ public class FalconDrive extends DriveBase {
         this.rightRear = new WPI_TalonFX(rightRearPort);
 
         this.leftSide = new MotorControllerGroup(leftFront, leftRear);
+        leftSide.setInverted(true);
         this.rightSide = new MotorControllerGroup(rightFront, rightRear);
         this.gyro = new ADXRS450_Gyro(kGyroPort);
     }

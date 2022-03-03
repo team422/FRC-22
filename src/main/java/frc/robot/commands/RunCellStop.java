@@ -4,14 +4,16 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunCellStop extends CommandBase{
-    public RunCellStop() {
+    private double vel = 0;
+    public RunCellStop(double speed) {
+        this.vel = speed;
         setName("RunCellStop");
         addRequirements(Subsystems.cellStop);
     }
 
     //wpilib looks for initialize, execute, and end!
     public void initialize() {
-        Subsystems.cellStop.setStop(-0.4);
+        Subsystems.cellStop.setStop(vel);
     }
 
     public void execute() {
