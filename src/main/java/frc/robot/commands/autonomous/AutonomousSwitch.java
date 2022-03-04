@@ -12,7 +12,7 @@ import frc.robot.subsystems.Subsystems;
 public class AutonomousSwitch extends SequentialCommandGroup{
     
     public enum Autopath {
-        Top, TopMiddleOurBall, TopMiddleEnemyBall, BottomMiddle, Bottom, Test, FunTest, SmallerTest, Topshoot2
+        Top, TopMiddleOurBall, TopMiddleEnemyBall, BottomMiddle, Bottom, TwoBallAuto_Shoot, TwoBallAuto_Intake, FunTest, SmallerTest, Topshoot2
     }
     public Autopath path;
     public AutonomousSwitch(Autopath path) {
@@ -21,7 +21,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
         double FILLER_DRIVING; 
         double FILLER_INTAKE;
         switch(path) {
-            case Test:
+            case TwoBallAuto_Intake:
                 addCommands(
                     // addCommands(new RotateToBall());
                     new IntakeUpDown(),
@@ -29,8 +29,13 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                     new Wait(2),
 
                     new DriveStraight(87, 0.3),
-                    new IntakeStop(),
-                    new RunCellStop(-0.4),
+                    new IntakeStop()
+                );
+                break;
+
+            case TwoBallAuto_Shoot:
+                addCommands(
+                new RunCellStop(-0.4),
                     new IntakeUpDown(),
                     new RunCellStop(0),
                     new RunShooter(0.3, 0.6),
@@ -42,6 +47,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                     new IntakeIn(),
                     new DriveStraight(100, 0.5)
                 );
+                break;
                 
           
             // case Topshoot2:
@@ -64,6 +70,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
 
                 addCommands(new ShootBall(0.3, 0.6));
                 addCommands(new DriveStraight(100, 0.5));
+                break;
 
             case FunTest:
                 addCommands(new IntakeUpDown());
@@ -71,6 +78,8 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 addCommands(new FollowBall());
                 addCommands(new DriveStraight(-Subsystems.driveBase.getRightPosition(), 0.5));
                 addCommands(new Turn(-Subsystems.driveBase.getGyroAngle(), 0.5));
+                break;
+
             case Top:
                 // add it to the priting stuff out
                 addCommands(new DriveStraight(80,.5 ));
@@ -79,6 +88,8 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 addCommands(new DriveStraight(110,.5 ));
                 addCommands(new DriveStraight(300, .5));
                 // Shoot
+                break;
+
             case TopMiddleOurBall:
                // addCommands(new Turn(168,.5 ));  
                 addCommands(new DriveStraight(1, .5));
@@ -98,6 +109,8 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 //Turn twards Terminal
                 addCommands(new DriveStraight(1, 0.5));
                 //Drives twards Terminal
+                break;
+
             case TopMiddleEnemyBall:
                 // The first parameter of the commands below are the number of imches to move forwards or degress to turn. THESE ARE ESTIMATES TO BE CHANGED
                 // start facing towards ball(blue line)
@@ -118,6 +131,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 // turn left(yellow line) - adjusting angle when moving enemy ball to human player area
                 addCommands(new DriveStraight(81, .5));
                 // move straight (yellow line)
+                break;
 
             case BottomMiddle:
                 addCommands(new DriveStraight(1, 0.5));
@@ -128,6 +142,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 // move right (yellow line) to be in right direction to get to human player area
                 addCommands(new DriveStraight(1, 0.5));
                 // move straight (yellow line) to get to human player area
+                break;
             
             case Bottom:
                 addCommands(new DriveStraight(80, 0.5));
@@ -150,6 +165,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 //turn (tan line) so that shooter is facing terminal
                 addCommands(new DriveStraight(1, 0.5));
                 // move straight (tan line) to be in postion to shoot and then shoot
+                break;
 
 
         }

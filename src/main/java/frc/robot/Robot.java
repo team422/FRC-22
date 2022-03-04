@@ -78,7 +78,8 @@ public class Robot extends TimedRobot {
 		CommandScheduler.getInstance().cancelAll();
 		// this.logger.logInfoMessage("Autonomous Initalized");
 		// Schedule autonomous command to run
-        CommandScheduler.getInstance().schedule(new AutonomousSwitch(AutonomousSwitch.Autopath.Test));
+        CommandScheduler.getInstance().schedule(new AutonomousSwitch(AutonomousSwitch.Autopath.TwoBallAuto_Intake));
+		CommandScheduler.getInstance().schedule(new AutonomousSwitch(AutonomousSwitch.Autopath.TwoBallAuto_Shoot));
         // addCommands(new IntakeUpDown());
         // addCommands(new IntakeIn());
         // addCommands(new DriveStraight(-200, 0.5));
