@@ -15,6 +15,10 @@ public class RobotMap {
     public static double slowSpeedCap = 0.3;
     public static double slowRotCap = 0.3;
 
+    // The speed cap after slow mode is enabled
+    public static double fineTuneSpeed = 0.1;
+    public static double fineTuneRot = 0.1;
+
     // The rotation cap after fast mode is enabled
     public static double fastSpeedCap = 0.5;
     public static double fastRotCap = 0.3;
@@ -48,8 +52,8 @@ public class RobotMap {
     // public static int lift = 11;
     public static final int leftextensionInPort = 15;
     public static final int leftextensionOutPort = 0;
-    // public static final int rightextensionInPort = 15;
-    // public static final int rightextensionOutPort = 0;
+    public static final int climberPistonInPort = 14;
+    public static final int climberPistonOutPort = 1;
     public static final int intakeMotorPort = 59;
     // public static final int beamBreakPort = 429;
     
@@ -109,6 +113,7 @@ public class RobotMap {
     //Shooter Speed and offsets, as used in ShootBall.java
     public static final double speedCheckOffset = -0.5;
     public static final double speedCheckRange = 5;
+    public static boolean driveBaseBreakMode;
         
     
     public enum TeamColor{

@@ -73,6 +73,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
+		RobotMap.driveBaseBreakMode = true;
 		System.out.println("Autonomous Initalized");
 		CommandScheduler.getInstance().cancelAll();
 		// this.logger.logInfoMessage("Autonomous Initalized");
@@ -112,6 +113,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		RobotMap.driveBaseBreakMode = false;
 		System.out.println("TeleOp Initalized");
 		CommandScheduler.getInstance().cancelAll();
 		// TODO

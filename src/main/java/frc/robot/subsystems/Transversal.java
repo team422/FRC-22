@@ -24,7 +24,7 @@ public class Transversal extends SubsystemBase{
 
     public void setTransversalSpeed (double speed){
         lefttransversalMotor.set(speed);
-        righttransversalMotor.set(-speed);
+        righttransversalMotor.set(-speed/1.5);
     }
     public void stopTransversal(){
         lefttransversalMotor.stopMotor();

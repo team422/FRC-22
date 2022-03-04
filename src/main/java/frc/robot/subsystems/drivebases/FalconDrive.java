@@ -1,10 +1,13 @@
 package frc.robot.subsystems.drivebases;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class FalconDrive extends DriveBase {
     private static final int leftFrontPort = 7;
@@ -29,7 +32,17 @@ public class FalconDrive extends DriveBase {
         this.leftRear = new WPI_TalonFX(leftRearPort);
         this.rightFront = new WPI_TalonFX(rightFrontPort);
         this.rightRear = new WPI_TalonFX(rightRearPort);
-
+        if(RobotMap.driveBaseBreakMode){
+            leftFront.setNeutralMode(NeutralMode.Brake);
+            rightFront.setNeutralMode(NeutralMode.Brake);
+            leftRear.setNeutralMode(NeutralMode.Brake);
+            rightRear.setNeutralMode(NeutralMode.Brake);
+        } else {
+            leftFront.setNeutralMode(NeutralMode.Coast);
+            rightFront.setNeutralMode(NeutralMode.Coast);
+            leftRear.setNeutralMode(NeutralMode.Coast);
+            rightRear.setNeutralMode(NeutralMode.Coast);
+        }
         this.leftSide = new MotorControllerGroup(leftFront, leftRear);
         leftSide.setInverted(true);
         this.rightSide = new MotorControllerGroup(rightFront, rightRear);

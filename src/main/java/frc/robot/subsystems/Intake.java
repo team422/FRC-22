@@ -17,8 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Intake extends SubsystemBase{
 
-    DoubleSolenoid extensionLeft;
-    DoubleSolenoid extensionRight;
+    DoubleSolenoid intakeSolenoid;
     WPI_TalonSRX intakeMotor;
     DigitalInput beamBreak;
     public boolean isIntakeDown = true;
@@ -27,8 +26,7 @@ public class Intake extends SubsystemBase{
         setSubsystem("Intake");
 
         // Creating Motors
-        this.extensionLeft = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.leftextensionInPort, RobotMap.leftextensionOutPort);
-        // this.extensionRight = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.rightextensionInPort, RobotMap.rightextensionOutPort);
+        this.intakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, RobotMap.leftextensionInPort, RobotMap.leftextensionOutPort);
         this.intakeMotor = new WPI_TalonSRX(RobotMap.intakeMotorPort);
         // this.beamBreak = new DigitalInput(RobotMap.beamBreakPort);
 
@@ -39,7 +37,7 @@ public class Intake extends SubsystemBase{
      * @param speed The speed of extension/retraction (-1,1)
      */
     public void engageExtend(){
-        extensionLeft.set(Value.kForward);
+        intakeSolenoid.set(Value.kForward);
         // extensionRight.set(Value.kForward);
         isIntakeDown = false;
     }
@@ -56,7 +54,7 @@ public class Intake extends SubsystemBase{
      * Stops the extension motor
      */
     public void stopExtend(){
-        extensionLeft.set(Value.kOff);
+        intakeSolenoid.set(Value.kOff);
         // extensionRight.set(Value.kOff);
     }
     
@@ -71,7 +69,7 @@ public class Intake extends SubsystemBase{
      * Stops the extension motor
      */
     public void retractExtend(){
-        extensionLeft.set(Value.kReverse);
+        intakeSolenoid.set(Value.kReverse);
         // extensionRight.set(Value.kReverse);
         isIntakeDown = true;
     }
@@ -87,7 +85,7 @@ public class Intake extends SubsystemBase{
      * Gets the current position of the extension motor in raw sensor units (consult documentation for conversions)
      */
     public Value getExtensionState(){
-        return extensionLeft.get();
+        return intakeSolenoid.get();
     }
 
 

@@ -3,12 +3,13 @@ package frc.robot.userinterface;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.IntakeUpDown;
+import frc.robot.commands.ManualBreakToggle;
 import frc.robot.commands.ManualShoot;
 import frc.robot.commands.ManualStopShoot;
 import frc.robot.commands.Vomit;
 import frc.robot.commands.SpeedModes.ChangeSpeed;
 import frc.robot.commands.SpeedModes.HoldFast;
-import frc.robot.commands.SpeedModes.ReleaseSlow;
+import frc.robot.commands.SpeedModes.FineTuneSpeed;
 import frc.robot.subsystems.Subsystems;
 
 public class UserControls {
@@ -21,11 +22,13 @@ public class UserControls {
     public static final JoystickButton intakeUpButton = UserInterface.operatorController.Y;
     public static final JoystickButton vomitButton = UserInterface.operatorController.LB;
     public static final JoystickButton shootStopButton = UserInterface.operatorController.A;
+    public static final JoystickButton manualBreakToggle = UserInterface.operatorController.X;
 
     public static void getUserInput() {
-        changeSpeedButton.whenPressed(new ChangeSpeed());
+        changeSpeedButton.whenPressed(new FineTuneSpeed());
         slowFastButton.whenPressed(new HoldFast());
-        slowFastButton.whenReleased(new ReleaseSlow());
+        slowFastButton.whenReleased(new FineTuneSpeed());
+        manualBreakToggle.whenPressed(new ManualBreakToggle());
         
         shootSeqButton.whenHeld(new ManualShoot());
         shootStopButton.whenHeld(new ManualStopShoot());
@@ -33,13 +36,13 @@ public class UserControls {
         intakeUpButton.whenPressed(new IntakeUp());
         vomitButton.whenPressed(new Vomit());
 
-        // if (UserInterface.operatorController.getPOV()==0) {
-        //     Subsystems.climber.climberExtendBoth();
-        // } else if(UserInterface.operatorController.getPOV() ==180) {
-        //     Subsystems.climber.climberRetractBoth();
-        // } else {
-        //     Subsystems.climber.stopClimberBoth();
-        // }
+        if (UserInterface.operatorController.getPOV()==0) {
+            Subsystems.climber.climberExtendBoth();
+        } else if(UserInterface.operatorController.getPOV() ==180) {
+            Subsystems.climber.climberRetractBoth();
+        } else {
+            Subsystems.climber.stopClimberBoth();
+        }
 
         if(UserInterface.operatorController.LS.get()) {
             Subsystems.climber.climberExtendLeft();
