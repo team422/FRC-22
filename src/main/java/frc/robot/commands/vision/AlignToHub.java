@@ -44,7 +44,7 @@ public class AlignToHub extends CommandBase{
         noTargetCounter = 0;
         yPos = target.getPitch();
         xPos = target.getYaw();
-        distance = PhotonUtils.calculateDistanceToTargetMeters(RobotMap.ballCameraHeightMeters, RobotMap.ballHeightMeters, Units.degreesToRadians(RobotMap.ballCameraDegreesHoriz), Units.degreesToRadians(yPos));
+        distance = PhotonUtils.calculateDistanceToTargetMeters(RobotMap.targetCameraHeightMeters, RobotMap.targetHeightMeters, Units.degreesToRadians(RobotMap.targetCameraDegreesHoriz), Units.degreesToRadians(yPos));
         travelSpeed = Math.log1p(distance*10)*0.5;
         travelSpeed *= 0.6;
         travelSpeed = RobotMap.cap(travelSpeed, 0.3, 0.8);

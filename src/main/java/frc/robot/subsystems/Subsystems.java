@@ -21,4 +21,5 @@ public class Subsystems {
     public static final FlyBoi flyBoi = new FlyBoi();
     public static final CellStop cellStop = new CellStop();
     public static final Transversal transversal = new Transversal();
+    public static final ColourSensor colourSensor = new ColourSensor();
 } 
