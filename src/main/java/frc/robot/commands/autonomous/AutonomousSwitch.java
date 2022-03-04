@@ -12,7 +12,7 @@ import frc.robot.subsystems.Subsystems;
 public class AutonomousSwitch extends SequentialCommandGroup{
     
     public enum Autopath {
-        Top, TopMiddleOurBall, TopMiddleEnemyBall, BottomMiddle, Bottom, TwoBallAuto_Shoot, TwoBallAuto_Intake, FunTest, SmallerTest, Topshoot2
+        Top, TopMiddleOurBall, TopMiddleEnemyBall, BottomMiddle, Bottom, TwoBallAuto_Shoot, TwoBallAuto_Intake, FunTest, OneBallAuto_Shoot, SmallerTest, Topshoot2
     }
     public Autopath path;
     public AutonomousSwitch(Autopath path) {
@@ -23,8 +23,8 @@ public class AutonomousSwitch extends SequentialCommandGroup{
         switch(path) {
             case TwoBallAuto_Intake:
                 addCommands(
-                    // addCommands(new RotateToBall());
-                    new IntakeUpDown(),
+                    // new RotateToBall(),
+                    new IntakeDown(),
                     new IntakeIn(),
                     new Wait(2),
 
@@ -48,22 +48,34 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                     new DriveStraight(100, 0.5)
                 );
                 break;
+
+            case OneBallAuto_Shoot:
+            addCommands(
+                new RunCellStop(-0.4),
+                new IntakeUpDown(),
+                new RunCellStop(0),
+                new RunShooter(0.3, 0.6),
+
+                new Wait(2),
+                new DriveStraight(-87, 0.5),
+            );
+            break;
                 
           
-            // case Topshoot2:
-            //     addCommands(new IntakeUpDown());
-            //     addCommands(new IntakeIn());
-            //     addCommands(new DriveStraight(inches, 0.5));
-            //     addCommands(new IntakeStop());
-            //     addCommands(new DriveStraight(-inches, 0.5));
-            //     addCommands(new ShootBall(0.3,0.6));
-            //     addCommands(new Turn(uTurn, 0.5));
-            //     addCommands(new IntakeIn());
-            //     addCommands(new DriveStraight(inches, 0.5));
-            //     addCommands(new IntakeStop());
-            //     addCommands(new DriveStraight(-inches, 0.5));
-            //     addCommands(new Turn(-uTurn, 0.5));
-            //     addCommands(new ShootBall(0.3,0.6));
+            /* case Topshoot2:
+                 addCommands(new IntakeUpDown());
+                 addCommands(new IntakeIn());
+                 addCommands(new DriveStraight(inches, 0.5));
+                 addCommands(new IntakeStop());
+                 addCommands(new DriveStraight(-inches, 0.5));
+                 addCommands(new ShootBall(0.3,0.6));
+                 addCommands(new Turn(uTurn, 0.5));
+                 addCommands(new IntakeIn());
+                 addCommands(new DriveStraight(inches, 0.5));
+                 addCommands(new IntakeStop());
+                 addCommands(new DriveStraight(-inches, 0.5));
+                 addCommands(new Turn(-uTurn, 0.5));
+                 addCommands(new ShootBall(0.3,0.6)); */
 
             case SmallerTest:
                 addCommands(new RunShooter(0.3,0.6));
@@ -116,7 +128,10 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 // start facing towards ball(blue line)
                 addCommands(new DriveStraight(64, .5));
                 // move straight (blue line)
-                // add shooting command here
+                // add shooter commands {
+                addCommands(new RunShooter(0.3, 0.6));
+                addCommands(new ShootBall(0.3, 0.6));
+                //} the above line may be wrong. Please check -Isaiah
                 addCommands(new Turn(150, .5));
                 // turn right(blue to yellow line)
                 addCommands(new DriveStraight(81, .5));
@@ -172,3 +187,4 @@ public class AutonomousSwitch extends SequentialCommandGroup{
 
 }
 }
+//Hi. You have reached the end of this file. Have a nice day.

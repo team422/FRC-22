@@ -50,8 +50,11 @@ public class Robot extends TimedRobot {
 		Subsystems.driveBase.setDefaultCommand(new ArcadeDrive());
 		compressor = new Compressor(PneumaticsModuleType.REVPH);
 		compressor.enableDigital();
+		Subsystems.intake.retractExtend();
 
 		ShuffleboardControl.layoutShuffleboard();
+
+
 
 		// Subsystems.driveBase.driveBase.setSafetyEnabled(false);
 
