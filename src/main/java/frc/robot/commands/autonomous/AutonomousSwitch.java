@@ -35,15 +35,15 @@ public class AutonomousSwitch extends SequentialCommandGroup{
 
             case TwoBallAuto_Shoot:
                 addCommands(
-                new RunCellStop(-0.4),
+                    new RunCellStop(-0.4),
                     new IntakeUpDown(),
                     new RunCellStop(0),
                     new RunShooter(0.3, 0.6),
 
-                    new Wait(3),
+                    new Wait(2),
                     new DriveStraight(-87, 0.5),
 
-                    new Wait(3),
+                    new Wait(2),
                     new IntakeIn(),
                     new DriveStraight(100, 0.5)
                 );

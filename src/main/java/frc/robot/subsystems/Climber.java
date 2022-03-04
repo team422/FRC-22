@@ -58,7 +58,7 @@ public class Climber extends SubsystemBase {
     }
 
     public void climberExtendBoth(){
-        RightClimber.set(-speed);
+        RightClimber.set(speed);
         LeftClimber.set(speed);
         ClimberBrake.set(Value.kReverse);
     }
@@ -72,18 +72,18 @@ public class Climber extends SubsystemBase {
  
     public void climberRetractRight(){
         RightClimber.set(-speed);
-        ClimberBrake.set(Value.kReverse);
+        ClimberBrake.set(Value.kForward);
     }
      
     public void climberRetractLeft(){
         LeftClimber.set(-speed);
-        ClimberBrake.set(Value.kReverse);
+        ClimberBrake.set(Value.kForward);
     }
 
     public void climberRetractBoth(){
         RightClimber.set(-speed);
         LeftClimber.set(-speed);
-        ClimberBrake.set(Value.kReverse);
+        ClimberBrake.set(Value.kForward);
     }
 
     /**
