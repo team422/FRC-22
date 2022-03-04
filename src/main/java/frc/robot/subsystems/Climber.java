@@ -86,6 +86,12 @@ public class Climber extends SubsystemBase {
         ClimberBrake.set(Value.kForward);
     }
 
+    public void climberRetractBothNoBrakes(){
+        RightClimber.set(-speed);
+        LeftClimber.set(-speed);
+        ClimberBrake.set(Value.kReverse);
+    }
+
     /**
      * Stops the climber from moving up or down. This raises the robot if the climber is attached to something. This is according to 2021 code. The new lifter
      * arms may be different so we may need to make changes to this code in order for it to stay relevant. The comments may not remain accurate if the new 
