@@ -96,4 +96,9 @@ public abstract class DriveBase extends SubsystemBase {
      * Sets the gyro angle to zero.
      */
     public abstract void zeroGyroAngle();
+
+    /*
+    Break mode toggle method
+    */
+    public abstract void toggleBrakeMode(boolean brakeMode);
 }

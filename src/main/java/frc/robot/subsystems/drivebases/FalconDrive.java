@@ -66,6 +66,20 @@ public class FalconDrive extends DriveBase {
         rightMotorTicks = rightFront.getSelectedSensorPosition(0);
     }
 
+    public void toggleBrakeMode(boolean brakeMode){
+        if(brakeMode){
+            leftFront.setNeutralMode(NeutralMode.Brake);
+            rightFront.setNeutralMode(NeutralMode.Brake);
+            leftRear.setNeutralMode(NeutralMode.Brake);
+            rightRear.setNeutralMode(NeutralMode.Brake);
+        } else {
+            leftFront.setNeutralMode(NeutralMode.Coast);
+            rightFront.setNeutralMode(NeutralMode.Coast);
+            leftRear.setNeutralMode(NeutralMode.Coast);
+            rightRear.setNeutralMode(NeutralMode.Coast);
+        }
+    }
+
     public void zeroGyroAngle() {
         gyro.reset();
     }

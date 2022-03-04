@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.commands.*;
 import frc.robot.commands.SpeedModes.*;
 import frc.robot.commands.autonomous.*;
@@ -74,6 +75,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		RobotMap.driveBaseBreakMode = true;
+		Subsystems.driveBase.toggleBrakeMode(true);
 		System.out.println("Autonomous Initalized");
 		CommandScheduler.getInstance().cancelAll();
 		// this.logger.logInfoMessage("Autonomous Initalized");
@@ -115,6 +117,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		RobotMap.driveBaseBreakMode = false;
+		Subsystems.driveBase.toggleBrakeMode(false);
 		System.out.println("TeleOp Initalized");
 		CommandScheduler.getInstance().cancelAll();
 		// TODO
@@ -124,14 +127,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 
-		// Subsystems.driveBase.setMotors(0.1, 0.1);
-
 		// TODO
-
 		// Controls
 		UserControls.getUserInput();
-		
-
 	}
 
 	@Override
