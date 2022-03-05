@@ -79,11 +79,11 @@ public class UserControls {
         if (UserInterface.operatorController.getLeftJoystickY() <= -0.4) {
             // Subsystems.intake.engageIntake(0.4);
             // Subsystems.transversal.setTransversalSpeed(0.4);
-            Subsystems.cellStop.setStop(0.6);
+            Subsystems.cellStop.setStop(0.8);
         } else if (UserInterface.operatorController.getLeftJoystickY() >= 0.4) {
             // Subsystems.intake.engageIntake(-0.4);
             // Subsystems.transversal.setTransversalSpeed(-0.4);
-            Subsystems.cellStop.setStop(-0.6);
+            Subsystems.cellStop.setStop(-0.8);
         } else {
             Subsystems.cellStop.stopStoppiStop();
         }

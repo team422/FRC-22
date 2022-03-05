@@ -54,6 +54,7 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                 new RunShooter(0.3, 0.6),
                 new IntakeIn(),
                 new Wait(4),
+                new RunShooter(0, 0),
                 new DriveStraight(300, 0.5)
             );
             break;
