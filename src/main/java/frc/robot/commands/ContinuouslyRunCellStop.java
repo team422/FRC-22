@@ -13,7 +13,7 @@ public class ContinuouslyRunCellStop extends CommandBase{
     public void execute(){
         if(Subsystems.colourSensor.getProximity() < 160){
             Subsystems.transversal.setTransversalSpeed(0.4);
-            Subsystems.cellStop.setStop(0.15);
+            Subsystems.cellStop.setStop(0.2);
         }
     }
     public boolean isFinished(){

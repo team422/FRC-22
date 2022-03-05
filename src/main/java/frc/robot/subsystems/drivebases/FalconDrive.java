@@ -2,6 +2,8 @@ package frc.robot.subsystems.drivebases;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
@@ -43,6 +45,16 @@ public class FalconDrive extends DriveBase {
             leftRear.setNeutralMode(NeutralMode.Coast);
             rightRear.setNeutralMode(NeutralMode.Coast);
         }
+        
+        leftFront.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, .5));
+        leftFront.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, .5));
+        rightFront.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 40, .5));
+        rightFront.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 40, .5));
+        leftRear.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, .5));
+        leftRear.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 40, 40, .5));
+        rightRear.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 40, .5));
+        rightRear.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 40, .5));
+
         this.leftSide = new MotorControllerGroup(leftFront, leftRear);
         leftSide.setInverted(true);
         this.rightSide = new MotorControllerGroup(rightFront, rightRear);

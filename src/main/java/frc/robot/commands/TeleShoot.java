@@ -15,7 +15,7 @@ public class TeleShoot extends CommandBase {
     }
     public void execute(){
         Subsystems.flyBoi.setShootSpeed(RobotMap.leftVelocity, RobotMap.topVelocity);
-        Subsystems.cellStop.setStop(0.9);
+        Subsystems.cellStop.voltageStop(1.25);
         Subsystems.transversal.setTransversalSpeed(0.4);
     }
     public boolean isFinished(){
