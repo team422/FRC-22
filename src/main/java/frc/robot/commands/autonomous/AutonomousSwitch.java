@@ -28,36 +28,33 @@ public class AutonomousSwitch extends SequentialCommandGroup{
                     new IntakeIn(),
                     new Wait(2),
 
-                    new DriveStraight(87, 0.3),
+                    new DriveStraight(100, 0.3),
                     new IntakeStop()
+                    
                 );
                 break;
 
             case TwoBallAuto_Shoot:
                 addCommands(
-                    new RunCellStop(-0.4),
                     new IntakeUpDown(),
                     new RunCellStop(0),
                     new RunShooter(0.3, 0.6),
 
                     new Wait(2),
-                    new DriveStraight(-87, 0.5),
+                    new DriveStraight(-100, 0.5),
 
                     new Wait(2),
                     new IntakeIn(),
-                    new DriveStraight(100, 0.5)
+                    new DriveStraight(300, 0.5)
                 );
                 break;
-
             case OneBallAuto_Shoot:
             addCommands(
-                new RunCellStop(-0.4),
                 new IntakeUpDown(),
-                new RunCellStop(0),
                 new RunShooter(0.3, 0.6),
-
-                new Wait(2),
-                new DriveStraight(-87, 0.5)
+                new IntakeIn(),
+                new Wait(4),
+                new DriveStraight(300, 0.5)
             );
             break;
                 

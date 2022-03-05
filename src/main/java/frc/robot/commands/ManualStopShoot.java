@@ -24,7 +24,7 @@ public class ManualStopShoot extends CommandBase {
     @Override
     public void execute() {
         Subsystems.flyBoi.stopShoot();
-        
+        Subsystems.cellStop.stopStoppiStop();
     }
     
     @Override
