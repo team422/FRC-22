@@ -43,5 +43,9 @@ public class ColourSensor extends SubsystemBase {
         Color detectedColor = m_colorSensor.getColor();
         return m_colorSensor.getColor();
     }
+    public int getProximity() {
+        return m_colorSensor.getProximity();
+
+    }
 
 }
