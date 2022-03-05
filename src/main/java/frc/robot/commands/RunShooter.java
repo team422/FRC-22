@@ -19,7 +19,7 @@ public class RunShooter extends CommandBase {
 
     @Override
     public void initialize(){
-        Subsystems.flyBoi.voltageShootiShoot(RobotMap.leftVelocity, RobotMap.leftVelocity, RobotMap.topVelocity);
+        Subsystems.flyBoi.setShootSpeed(RobotMap.leftVelocity, RobotMap.topVelocity);
     }
     
     @Override

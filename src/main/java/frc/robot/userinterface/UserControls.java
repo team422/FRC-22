@@ -31,8 +31,10 @@ public class UserControls {
 
     public static void getUserInput() {
         alignToHubButton.whenPressed(new AlignToHub());
-        slowFastButton.whenHeld(new HoldFast());
+        slowFastButton.whenHeld(new FineTuneSpeed());
         slowFastButton.whenReleased(new ChangeSpeed());
+        UserInterface.driverController.LB.whenHeld(new HoldFast());
+        UserInterface.driverController.LB.whenReleased(new ChangeSpeed());
         // manualBreakToggle.whenPressed(new ManualBreakToggle());
         alignToHub.whenHeld(new AlignToHub());
         
