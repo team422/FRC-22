@@ -67,7 +67,7 @@ public class RobotMap {
     public static final double ballHeightMeters = 0.1;
     public static final double ballCameraDegreesHoriz = -25;
     
-    public static final double targetCameraHeightMeters = 0.79;
+    public static final double targetCameraHeightMeters = 0.533;
     public static final double targetHeightMeters = 2.642;
     public static final double targetCameraDegreesHoriz = 48;
 

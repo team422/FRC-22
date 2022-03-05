@@ -68,6 +68,7 @@ public class Robot extends TimedRobot {
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		ShuffleboardControl.setVelocity();
+
 		// TODO
 	}
 
@@ -123,13 +124,15 @@ public class Robot extends TimedRobot {
 		Subsystems.driveBase.toggleBrakeMode(false);
 		System.out.println("TeleOp Initalized");
 		CommandScheduler.getInstance().cancelAll();
+		Subsystems.cellStop.setDefaultCommand(new ContinuouslyRunCellStop());
+		
 		// TODO
 		// ShuffleboardControl.layoutShuffleboard();
 	}
 
 	@Override
 	public void teleopPeriodic() {
-
+		// System.out.println(Subsystems.colourSensor.getProximity());
 		// TODO
 		// Controls
 		UserControls.getUserInput();

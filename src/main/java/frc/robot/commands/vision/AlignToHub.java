@@ -46,21 +46,23 @@ public class AlignToHub extends CommandBase{
         xPos = target.getYaw();
         distance = PhotonUtils.calculateDistanceToTargetMeters(RobotMap.targetCameraHeightMeters, RobotMap.targetHeightMeters, Units.degreesToRadians(RobotMap.targetCameraDegreesHoriz), Units.degreesToRadians(yPos));
         travelSpeed = Math.log1p(distance*10)*0.5;
-        travelSpeed *= 0.6;
+        // travelSpeed *= 0.3;
         travelSpeed = RobotMap.cap(travelSpeed, 0.3, 0.8);
         
         
         turnSpeed = Math.abs(xPos)*0.02;
-        turnSpeed = RobotMap.cap(turnSpeed, 0.2, 0.8);
+        turnSpeed = RobotMap.cap(turnSpeed, 0.1, 0.8);
         turnSpeed *= Math.signum(xPos);
         // System.out.println(travelSpeed + " Travel Speed");
         // System.out.println(turnSpeed + " Turn speed");
         // System.out.println("Camera X: " + xPos);
         // System.out.println("Distance: " + distance);
-        if(Math.abs(xPos) < 5){
+        if(Math.abs(xPos) < 0.15){
             turnSpeed = 0;
         }
-        Subsystems.driveBase.curvatureDrive(0, -turnSpeed, true);
+        Subsystems.driveBase.toggleBrakeMode(true);
+        Subsystems.driveBase.curvatureDrive(0, turnSpeed, true);
+        Subsystems.driveBase.toggleBrakeMode(false);
         
     }
     
@@ -68,7 +70,10 @@ public class AlignToHub extends CommandBase{
         if (noTargetCounter > RobotMap.maxNoTargetCounter){
             return true;
         }
-        return distance < 0.1;
+        System.out.println("Xval is: "+xPos);
+        return Math.abs(xPos) < 0.5;
+        // return false;
+        
     }
     
 }
