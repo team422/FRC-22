@@ -22,13 +22,13 @@ public class UserControls {
     public static final JoystickButton intakeUpButton = UserInterface.operatorController.Y;
     public static final JoystickButton vomitButton = UserInterface.operatorController.LB;
     public static final JoystickButton shootStopButton = UserInterface.operatorController.A;
-    public static final JoystickButton manualBreakToggle = UserInterface.operatorController.X;
+    // public static final JoystickButton manualBreakToggle = UserInterface.operatorController.X;
 
     public static void getUserInput() {
         changeSpeedButton.whenPressed(new FineTuneSpeed());
         slowFastButton.whenPressed(new HoldFast());
         slowFastButton.whenReleased(new FineTuneSpeed());
-        manualBreakToggle.whenPressed(new ManualBreakToggle());
+        // manualBreakToggle.whenPressed(new ManualBreakToggle());
         
         shootSeqButton.whenHeld(new ManualShoot());
         shootStopButton.whenHeld(new ManualStopShoot());

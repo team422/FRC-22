@@ -15,7 +15,14 @@ public class ManualBreakToggle extends CommandBase {
     @Override
     public void initialize() {
 
-        Subsystems.climber.ClimberBrake.toggle();
+        // Subsystems.climber.ClimberBrake.toggle();
+        // Value value = get();
+
+        // if (value == Value.kForward) {
+        // set(Value.kReverse);
+        // } else if (value == Value.kReverse) {
+        // set(Value.kForward);
+        // }
 
     }
     //allows it to stop automatically once it is finished!
