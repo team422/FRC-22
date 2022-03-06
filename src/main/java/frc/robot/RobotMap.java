@@ -52,8 +52,8 @@ public class RobotMap {
     // public static int lift = 11;
     public static final int leftextensionInPort = 15;
     public static final int leftextensionOutPort = 0;
-    public static final int climberPistonInPort = 14;
-    public static final int climberPistonOutPort = 1;
+    public static final int climberPistonInPort = 1;
+    public static final int climberPistonOutPort = 14;
     public static final int intakeMotorPort = 59;
     // public static final int beamBreakPort = 429;
     
