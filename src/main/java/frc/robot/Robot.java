@@ -5,28 +5,20 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.schedulers.SequentialScheduler;
+import org.photonvision.PhotonCamera;
+import org.photonvision.common.hardware.VisionLEDMode;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandGroupBase;
 // import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.commands.*;
-import frc.robot.commands.SpeedModes.*;
-import frc.robot.commands.autonomous.*;
-import frc.robot.commands.autonomous.AutonomousSwitch.Autopath;
-import frc.robot.subsystems.*;
-import frc.robot.subsystems.shooters.FlyBoi;
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.ContinuouslyRunCellStop;
+import frc.robot.commands.autonomous.AutonomousSwitch;
+import frc.robot.subsystems.Subsystems;
 import frc.robot.userinterface.UserControls;
-// import frc.robot.userinterface.UserInterface;
-// import frc.robot.RobotMap.BotNames;
-import frc.robot.userinterface.UserInterface;
 /**
  * The main Robot class whence all things come.
  */
@@ -68,6 +60,7 @@ public class Robot extends TimedRobot {
 	public void robotPeriodic() {
 		CommandScheduler.getInstance().run();
 		ShuffleboardControl.setVelocity();
+
 		// TODO
 	}
 
@@ -77,14 +70,17 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void autonomousInit() {
-		RobotMap.driveBaseBreakMode = true;
-		Subsystems.driveBase.toggleBrakeMode(true);
+		Subsystems.driveBase.toggleBrakeMode(false);
 		System.out.println("Autonomous Initalized");
 		CommandScheduler.getInstance().cancelAll();
 		// this.logger.logInfoMessage("Autonomous Initalized");
 		// Schedule autonomous command to run
-        CommandScheduler.getInstance().schedule(new AutonomousSwitch(AutonomousSwitch.Autopath.TwoBallAuto_Intake));
-		CommandScheduler.getInstance().schedule(new AutonomousSwitch(AutonomousSwitch.Autopath.TwoBallAuto_Shoot));
+		Subsystems.cellStop.setDefaultCommand(new ContinuouslyRunCellStop());
+        CommandScheduler.getInstance().schedule(
+			CommandGroupBase.sequence(
+				new AutonomousSwitch(AutonomousSwitch.Autopath.OneBallAuto_Shoot)
+			)
+		);
         // addCommands(new IntakeUpDown());
         // addCommands(new IntakeIn());
         // addCommands(new DriveStraight(-200, 0.5));
@@ -119,17 +115,20 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
+		new PhotonCamera("TargetCamera").setLED(VisionLEDMode.kOn);
 		RobotMap.driveBaseBreakMode = false;
 		Subsystems.driveBase.toggleBrakeMode(false);
 		System.out.println("TeleOp Initalized");
 		CommandScheduler.getInstance().cancelAll();
+		Subsystems.cellStop.setDefaultCommand(new ContinuouslyRunCellStop());
+		
 		// TODO
 		// ShuffleboardControl.layoutShuffleboard();
 	}
 
 	@Override
 	public void teleopPeriodic() {
-
+		// System.out.println(Subsystems.colourSensor.getProximity());
 		// TODO
 		// Controls
 		UserControls.getUserInput();

@@ -20,6 +20,10 @@ public class CellStop extends SubsystemBase {
         }
     }
 
+    public void voltageStop(double Voltage) {
+        stopBoi.setVoltage(Voltage);
+    }
+
     public void stopStoppiStop() {
         stopBoi.set(0);
     }

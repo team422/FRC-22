@@ -3,6 +3,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 // import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -33,6 +35,8 @@ public class Climber extends SubsystemBase {
         LeftClimber.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 80, 80, .5));
         RightClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 80, 80, .5));
         LeftClimber.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 80, 80, .5));
+        LeftClimber.setNeutralMode(NeutralMode.Brake);
+        RightClimber.setNeutralMode(NeutralMode.Brake);
         // LeftClimber.setInverted(true);
         // find speed in 2021 code and give it a real value or change it later on in the code
         // @param speed The speed at which to extend (0 to 1). 

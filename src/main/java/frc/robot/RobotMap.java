@@ -8,7 +8,7 @@ public class RobotMap {
     // Robot settings & toggles (mutable)
 
     // The speed cap that the robot defaults
-    private static double speedCap = 0.5;
+    private static double speedCap = 0.3;
     private static double rotationCap = 0.3;
 
     // The speed cap after slow mode is enabled
@@ -17,10 +17,10 @@ public class RobotMap {
 
     // The speed cap after slow mode is enabled
     public static double fineTuneSpeed = 0.1;
-    public static double fineTuneRot = 0.1;
+    public static double fineTuneRot = 0.15;
 
     // The rotation cap after fast mode is enabled
-    public static double fastSpeedCap = 0.5;
+    public static double fastSpeedCap = 0.7;
     public static double fastRotCap = 0.3;
     
     // the speed mode
@@ -67,7 +67,7 @@ public class RobotMap {
     public static final double ballHeightMeters = 0.1;
     public static final double ballCameraDegreesHoriz = -25;
     
-    public static final double targetCameraHeightMeters = 0.79;
+    public static final double targetCameraHeightMeters = 0.533;
     public static final double targetHeightMeters = 2.642;
     public static final double targetCameraDegreesHoriz = 48;
 

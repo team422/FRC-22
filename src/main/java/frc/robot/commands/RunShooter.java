@@ -10,16 +10,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunShooter extends CommandBase {
 
+    public double flyspeed;
+    public double topspeed;
     public double lastShooterSpeed;
 
     public RunShooter(double flyspeed, double hoodspeed){
+        this.flyspeed = flyspeed;
+        this.topspeed = hoodspeed;
         setName("ShootBall");
         addRequirements(Subsystems.flyBoi, Subsystems.transversal);
     }
 
     @Override
     public void initialize(){
-        Subsystems.flyBoi.voltageShootiShoot(RobotMap.leftVelocity, RobotMap.leftVelocity, RobotMap.topVelocity);
+        Subsystems.flyBoi.setShootSpeed(flyspeed, topspeed);
     }
     
     @Override
